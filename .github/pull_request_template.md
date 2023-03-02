@@ -30,6 +30,17 @@ TODO (optional): Add screenshots of changes, and/or a Loom video demonstrating t
 ## Testing Plan
 
 TODO: Provide a systematic approach the reviewer can follow to validate your changes. It should be thorough and roughly mirror your own testing process.
+Front-end
+-Check perfect styles-
+
+- [ ] Laptop
+- [ ] Tablet
+- [ ] Smartphone
+
+Back-end
+-Check response from Database-
+
+- [ ] No error
 
 ## Checklist
 
