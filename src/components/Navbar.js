@@ -5,8 +5,10 @@ function Navbar() {
     <div className="h-14 justify-between flex bg-gray-scale-2 text-white">
       <div>Admin</div>
       <div className="flex justify-between">
-        <button>"notification"</button>
-        <button>Username</button>
+        <button className="mr-3">"鈴"</button>
+        <button>
+          <span>"人"</span>Username
+        </button>
       </div>
     </div>
   );
