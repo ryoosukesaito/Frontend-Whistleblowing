@@ -6,6 +6,8 @@ import ReportsPage from "./pages/Admin/ReportsPage";
 import AdminAccounts from "./pages/Admin/AdminAccounts";
 import UserAccounts from "./pages/Admin/UserAccounts";
 import Categories from "./pages/Admin/Categories";
+import AddNewAdmin from "./components/Admin/AddNewAdmin";
+import EditAdminAccount from "./components/Admin/EditAdminAccount";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/" element={<LoginAdmin />} />
         <Route path="/api/admin/reports" element={<ReportsPage />} />
         <Route path="/api/admin/all" element={<AdminAccounts />} />
+        <Route path="/api/admin/create/admin" element={<AddNewAdmin />} />
+        <Route path="/api/admin/edit" element={<EditAdminAccount />} />
         <Route path="/api/admin/users/all" element={<UserAccounts />} />
         <Route path="/api/admin/category/all" element={<Categories />} />
 
