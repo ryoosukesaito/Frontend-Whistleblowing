@@ -8,6 +8,7 @@ import UserAccounts from "./pages/Admin/UserAccounts";
 import Categories from "./pages/Admin/Categories";
 import AddNewAdmin from "./components/Admin/AddNewAdmin";
 import EditAdminAccount from "./components/Admin/EditAdminAccount";
+import ReportDetail from "./pages/Admin/Report";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginAdmin />} />
         <Route path="/api/admin/reports" element={<ReportsPage />} />
+        <Route path="/api/admin/reports/report" element={<ReportDetail />} />
+
         <Route path="/api/admin/all" element={<AdminAccounts />} />
         <Route path="/api/admin/create/admin" element={<AddNewAdmin />} />
         <Route path="/api/admin/edit" element={<EditAdminAccount />} />
