@@ -9,6 +9,7 @@ import Categories from "./pages/Admin/Categories";
 import AddNewAdmin from "./components/Admin/AddNewAdmin";
 import EditAdminAccount from "./components/Admin/EditAdminAccount";
 import ReportDetail from "./pages/Admin/Report";
+import ReportFilter from "./components/Admin/ReportFilter";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Route path="/api/admin/edit" element={<EditAdminAccount />} />
         <Route path="/api/admin/users/all" element={<UserAccounts />} />
         <Route path="/api/admin/category/all" element={<Categories />} />
+
+        {/* <Route path="/api/admin/filter" element={<ReportFilter />} /> */}
 
         <Route path="/signup" element={<Signup />} />
       </Routes>
