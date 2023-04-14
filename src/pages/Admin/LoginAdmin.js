@@ -1,33 +1,28 @@
 import React, { useState } from "react";
 import { SERVER_URL } from "../../constants/constants";
 import { useNavigate } from "react-router-dom";
+import { useLoginAdminMutation } from "../../services/appAPI";
 
 function LoginAdmin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [loginAdmin, { error }] = useLoginAdminMutation();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     console.log(SERVER_URL);
 
-    navigate("/api/admin/reports");
-
-    // try {
-    //   const res = await fetch(`${SERVER_URL}/auth/signin`, {
-    //     method: "POST",
-    //     body: JSON.stringify({ email, password }),
-    //   });
-
-    //   if (res.ok) {
-    //     const data = await res.json();
-    //     console.log(data);
-    //   } else {
-    //     console.error("Account not found");
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    //login Admin
+    loginAdmin({ email, password }).then(({ data }) => {
+      if (data) {
+        navigate("/api/admin/reports");
+        console.log(data);
+      }
+      if (error) {
+        console.error(error.data.error);
+      }
+    });
   };
 
   return (
@@ -45,6 +40,7 @@ function LoginAdmin() {
               setEmail(e.target.value);
             }}
             value={email}
+            required
           />
         </label>
 
@@ -58,6 +54,7 @@ function LoginAdmin() {
               setPassword(e.target.value);
             }}
             value={password}
+            required
           />
         </label>
         <button className="border rounded" type="submit">
