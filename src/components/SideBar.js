@@ -2,8 +2,8 @@ import React from "react";
 import { sidebarMenu } from "../constants/constants";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import {ChevronDownIcon} from '@heroicons/react/24/solid'
-import {ArrowRightOnRectangleIcon} from '@heroicons/react/24/solid'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid'
 
 const SideBar = () => {
   const [menubar, setMenubar] = useState(false);
