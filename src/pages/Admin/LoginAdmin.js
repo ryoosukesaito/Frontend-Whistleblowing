@@ -11,7 +11,6 @@ function LoginAdmin() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(SERVER_URL);
 
     //login Admin
     loginAdmin({ email, password }).then(({ data }) => {
