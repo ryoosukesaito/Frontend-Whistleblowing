@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { reportTableHeaders } from "../../constants/constants";
-import { reportDataExamples } from "../../data/dataExample";
+
+import { useSelector } from "react-redux";
+import { AppContext } from "../../context/appContext";
+import { SERVER_URL } from "../../constants/constants";
+
 function AdminReport() {
+  const admin = useSelector((state) => state.admin);
+
+  const { reports, setReports } = useContext(AppContext);
+
+  useEffect(() => {
+    if (admin) {
+      getReports();
+    }
+  }, []);
+
+  function getReports() {
+    fetch(`${SERVER_URL}/api/admin/reports`)
+      .then((res) => res.json())
+      .then((data) => setReports(data));
+  }
+
   return (
     <div className="h-full   flex items-start justify-center">
       <table className="w-full">
@@ -15,7 +35,7 @@ function AdminReport() {
           </tr>
         </thead>
         <tbody>
-          {reportDataExamples.map((data, idx) => (
+          {reports.map((data, idx) => (
             <tr key={idx}>
               <td className="border-b-2 border-slate-700 text-center">
                 {data.status}
