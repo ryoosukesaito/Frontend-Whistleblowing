@@ -3,7 +3,7 @@ import ReportDetails from "../../components/Admin/ReportDetails";
 import SideBar from "../../components/SideBar";
 import { pageHeight } from "../../constants/constants";
 
-function ReportDetail() {
+function Report() {
   return (
     <div className="w-screen flex items-center flex-row" style={pageHeight}>
       <div className="h-full w-1/6">
@@ -16,4 +16,4 @@ function ReportDetail() {
   );
 }
 
-export default ReportDetail;
+export default Report;
