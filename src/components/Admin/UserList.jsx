@@ -1,8 +1,21 @@
-import React from "react";
-import { usersTableHeaders } from "../../constants/constants";
-import { usersAccountsData } from "../../data/dataExample";
+import React, { useContext, useEffect } from "react";
+import { SERVER_URL, usersTableHeaders } from "../../constants/constants";
+
+import { AppContext } from "../../context/appContext";
 
 function UserList() {
+  const { users, setUsers } = useContext(AppContext);
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  function getUsers() {
+    fetch(`${SERVER_URL}/api/admin/users/all`)
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }
+
   return (
     <div className="h-full   flex items-start justify-center">
       <table className="w-full">
@@ -16,10 +29,10 @@ function UserList() {
           </tr>
         </thead>
         <tbody>
-          {usersAccountsData.map((data, idx) => (
+          {users.map((data, idx) => (
             <tr key={idx}>
               <td className="border-b-2 border-slate-700 text-center">
-                {data.id}
+                {data._id}
               </td>
               <td className="border-b-2 border-slate-700 text-center">
                 {data.email}
