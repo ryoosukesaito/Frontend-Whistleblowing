@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { SERVER_URL } from "../../constants/constants";
 import { useNavigate } from "react-router-dom";
 import { useLoginAdminMutation } from "../../services/appAPI";
 
@@ -11,7 +10,6 @@ function LoginAdmin() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(SERVER_URL);
 
     //login Admin
     loginAdmin({ email, password }).then(({ data }) => {
