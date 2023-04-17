@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { SERVER_URL } from "../../constants/constants";
 import { useNavigate } from "react-router-dom";
 import { useLoginAdminMutation } from "../../services/appAPI";
 
