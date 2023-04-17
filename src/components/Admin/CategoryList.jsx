@@ -1,19 +1,33 @@
-import React from "react";
-import { categoryData } from "../../data/dataExample";
+import React, { useContext, useEffect } from "react";
+
+import { AppContext } from "../../context/appContext";
+import { SERVER_URL } from "../../constants/constants";
 
 function CategoryList() {
+  const { categories, setCategories } = useContext(AppContext);
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  function getCategories() {
+    fetch(`${SERVER_URL}/api/admin/category/all`)
+      .then((res) => res.json())
+      .then((data) => setCategories(data));
+  }
+
   return (
     <div className="flex flex-col w-1/3">
-      {categoryData.map((data, idx) => (
+      {categories.map((data, idx) => (
         <div
           className="flex flex-row items-start justify-between my-3"
-          key={idx}
+          key={data._id}
         >
-          <div>{data}</div>
+          <div>{data.name}</div>
           <div>
             <button
               className="rounded-full bg-gray-400 text-sm w-5 h-5 px-1"
-              key={idx}
+              key={data._id}
             >
               -
             </button>

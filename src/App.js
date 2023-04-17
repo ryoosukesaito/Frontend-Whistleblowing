@@ -16,10 +16,24 @@ import { AppContext } from "./context/appContext";
 
 function App() {
   const [reports, setReports] = useState([]);
+  const [admins, setAdmins] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [categories, setCategories] = useState([]);
   const admin = useSelector((state) => state.admin);
 
   return (
-    <AppContext.Provider value={{ reports, setReports }}>
+    <AppContext.Provider
+      value={{
+        reports,
+        setReports,
+        admins,
+        setAdmins,
+        users,
+        setUsers,
+        categories,
+        setCategories,
+      }}
+    >
       <BrowserRouter>
         <Navbar />
 

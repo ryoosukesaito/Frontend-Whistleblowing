@@ -1,7 +1,21 @@
-import React from "react";
-import { adminsTableHeaders } from "../../constants/constants";
-import { adminsAccountsData } from "../../data/dataExample";
+import React, { useContext, useEffect } from "react";
+import { SERVER_URL, adminsTableHeaders } from "../../constants/constants";
+
+import { AppContext } from "../../context/appContext";
+
 function AdminList() {
+  const { admins, setAdmins } = useContext(AppContext);
+
+  useEffect(() => {
+    getAdmins();
+  }, []);
+
+  function getAdmins() {
+    fetch(`${SERVER_URL}/api/admin/all`)
+      .then((res) => res.json())
+      .then((data) => setAdmins(data));
+  }
+
   return (
     <div className="h-full   flex items-start justify-center">
       <table className="w-full">
@@ -15,10 +29,10 @@ function AdminList() {
           </tr>
         </thead>
         <tbody>
-          {adminsAccountsData.map((data, idx) => (
+          {admins.map((data, idx) => (
             <tr key={idx}>
               <td className="border-b-2 border-slate-700 text-center">
-                {data.id}
+                {data._id}
               </td>
               <td className="border-b-2 border-slate-700 text-center">
                 {data.role}
