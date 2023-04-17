@@ -5,18 +5,18 @@ import HistoriesFooter from "./HistoriesFooter";
 function Histories() {
   return (
     <>
-      <div className="rounded ">
+      <div>
         {HistoriesData.map((data, idx) => (
           <div
             key={idx}
-            className="flex flex-col bg-gray-scale-3 rounded my-3 p-2"
+            className="flex flex-col bg-gray-scale-3 my-3 p-2"
           >
             <div className="flex flex-row justify-between">
               <div className="flex flex-row">
-                <div className=" font-bold">
+                <div className="font-bold">
                   {data.replierType === "Admin" ? data.adminId : "Anonymous"}
                 </div>
-                <div>{data.file ? data.file : ""}</div>
+                <div className="text-indigo-700">{data.file ? data.file : ""}</div>
               </div>
 
               <div>{data.createdAt}</div>
@@ -25,7 +25,7 @@ function Histories() {
             <div>{data.message}</div>
           </div>
         ))}
-        <div className=" bg-gray-scale-3 rounded my-3 p-2">
+        <div className=" bg-gray-scale-3 p-2">
           <HistoriesFooter />
         </div>
       </div>
