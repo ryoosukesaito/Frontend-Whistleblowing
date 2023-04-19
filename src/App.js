@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
+import AdminAccountCreate from "./pages/Admin/AdminAccountCreate";
 import Signup from "./pages/Users/Signup";
 import Navbar from "./components/Navbar";
 import ReportsPage from "./pages/Admin/ReportsPage";
@@ -16,6 +17,7 @@ import { AppContext } from "./context/appContext";
 
 function App() {
   const [reports, setReports] = useState([]);
+  const [reportDetail, setReportDetail] = useState(null);
   const [admins, setAdmins] = useState([]);
   const [users, setUsers] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -26,6 +28,8 @@ function App() {
       value={{
         reports,
         setReports,
+        reportDetail,
+        setReportDetail,
         admins,
         setAdmins,
         users,
@@ -39,12 +43,13 @@ function App() {
 
         <Routes>
           <Route path="/" element={<LoginAdmin />} />
+          <Route path="/api/admin/signup" element={<AdminAccountCreate />} />
           {admin && (
             <>
               <Route path="/api/admin/reports" element={<ReportsPage />} />
             </>
           )}
-          <Route path="/api/admin/reports/report" element={<Report />} />
+          <Route path="/api/admin/reports/:id" element={<Report />} />
           <Route path="/api/admin/all" element={<AdminAccounts />} />
           <Route path="/api/admin/create/admin" element={<AddNewAdmin />} />
           <Route path="/api/admin/edit" element={<EditAdminAccount />} />
