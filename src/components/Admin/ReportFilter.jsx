@@ -13,24 +13,24 @@ const ReportFilter = () => {
           {/* <input className="rounded border" /> */}
           <div>
           <div className='flex flex-wrap grid-rows-2'>
-            <div class="flex items-center">
+            <div className="flex items-center">
                 <input type="checkbox" value="" className='w-4 h-4 mr-3'/>
-                <label for="checked-checkbox">Not started</label>
+                <label htmlFor="checked-checkbox">Not started</label>
               </div>
 
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <input type="checkbox" value="" className='w-4 h-4 mr-3 ml-4'/>
-                <label for="checked-checkbox">In Progress</label>
+                <label htmlFor="checked-checkbox">In Progress</label>
               </div>
 
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <input type="checkbox" value="" className='w-4 h-4 mr-3 ml-4'/>
-                <label for="checked-checkbox">Completed</label>
+                <label htmlFor="checked-checkbox">Completed</label>
               </div>
 
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <input type="checkbox" value="" className='w-4 h-4 mr-3'/>
-                <label for="checked-checkbox">Updated</label>
+                <label htmlFor="checked-checkbox">Updated</label>
               </div>
                 {/* <div className='text-xs text-red-600' >*In Progress item which has not checked last update</div> */}
           </div>
@@ -40,7 +40,7 @@ const ReportFilter = () => {
 
         <div className="flex flex-col">
           <div className='text-lg mb-2 mt-2'>Subtitle </div>
-          <input className="rounded border h-20" />
+          <textarea className="rounded border h-20"></textarea>
         </div>
 
         <div className="flex flex-col ">
