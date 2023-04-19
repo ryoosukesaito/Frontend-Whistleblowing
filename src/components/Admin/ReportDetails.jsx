@@ -1,13 +1,50 @@
-import React from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { reportDataExamples } from "../../data/dataExample";
+
+import { useSelector } from "react-redux";
+import { AppContext } from "../../context/appContext";
+import { SERVER_URL } from "../../constants/constants";
+
 import Histories from "./Histories";
+import { useParams } from "react-router-dom";
 
 function ReportDetails() {
+  const admin = useSelector((state) => state.admin);
+  const { id } = useParams();
+  const fetchURL = `${SERVER_URL}/api/admin/reports/${id}`;
+  const dataFetchedRef = useRef(false);
+
+  const { reportDetail, setReportDetail } = useContext(AppContext);
+
+  useEffect(() => {
+    if (admin) {
+      if (dataFetchedRef.current) return;
+      dataFetchedRef.current = true;
+      getReportDetail();
+      console.log(reportDetail);
+    }
+  }, [reportDetail]);
+
+  async function getReportDetail() {
+    await fetch(fetchURL)
+      .then((res) => res.json())
+      .then((data) => {
+        setReportDetail(data);
+      });
+  }
+
+  if (!reportDetail)
+    return (
+      <>
+        <div>Nothing</div>
+      </>
+    );
+
   return (
     <>
       <div>
-        {reportDataExamples.map((data, idx) => (
-          <div key={idx}>
+        {reportDataExamples.map((data) => (
+          <div key={data._id}>
             <div className="flex mb-3">
               <table className="w-1/2">
                 <tbody>
