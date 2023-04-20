@@ -4,16 +4,44 @@ import { AppContext } from "../../context/appContext";
 import { SERVER_URL } from "../../constants/constants";
 
 function CategoryList() {
-  const { categories, setCategories } = useContext(AppContext);
+  const { categories, setCategories, newCategory, setNewCategory } =
+    useContext(AppContext);
 
   useEffect(() => {
     getCategories();
-  }, []);
+  }, [deleteCategory, handleAddCategory]);
 
   function getCategories() {
     fetch(`${SERVER_URL}/api/admin/category/all`)
       .then((res) => res.json())
       .then((data) => setCategories(data));
+  }
+
+  function deleteCategory(e) {
+    const categoryId = e.target.value;
+    fetch(`${SERVER_URL}/api/admin/category/delete/:id`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        _id: categoryId,
+      }),
+    })
+      .then((res) => res.json())
+      .catch((err) => console.error(err));
+  }
+
+  function handleAddCategory(e) {
+    e.preventDefault();
+    fetch(`${SERVER_URL}/api/admin/create/category`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: newCategory,
+      }),
+    })
+      .then((res) => res.json())
+      .catch((err) => console.error(err));
+    setNewCategory("");
   }
 
   return (
@@ -27,7 +55,8 @@ function CategoryList() {
           <div>
             <button
               className="rounded-full bg-gray-400 text-sm w-5 h-5 px-1"
-              key={data._id}
+              value={data._id}
+              onClick={deleteCategory}
             >
               -
             </button>
@@ -35,12 +64,21 @@ function CategoryList() {
         </div>
       ))}
       <div>
-        <input
-          type="text"
-          className="border rounded  text-gray-700 pl-2"
-          placeholder="New Category"
-        />
-        <button className="rounded border ml-2 px-2 bg-neutral-400">+</button>
+        <form onSubmit={handleAddCategory}>
+          <input
+            type="text"
+            className="border rounded  text-gray-700 pl-2"
+            placeholder="New Category"
+            onChange={(e) => setNewCategory(e.target.value)}
+            value={newCategory}
+          />
+          <button
+            className="rounded border ml-2 px-2 bg-neutral-400"
+            type="submit"
+          >
+            +
+          </button>
+        </form>
       </div>
     </div>
   );

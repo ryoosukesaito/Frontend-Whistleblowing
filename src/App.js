@@ -21,6 +21,7 @@ function App() {
   const [admins, setAdmins] = useState([]);
   const [users, setUsers] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [newCategory, setNewCategory] = useState([]);
   const admin = useSelector((state) => state.admin);
 
   return (
@@ -36,6 +37,8 @@ function App() {
         setUsers,
         categories,
         setCategories,
+        newCategory,
+        setNewCategory,
       }}
     >
       <BrowserRouter>
