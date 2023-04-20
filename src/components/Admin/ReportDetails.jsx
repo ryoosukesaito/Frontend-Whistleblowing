@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { reportDataExamples } from "../../data/dataExample";
 
 import { useSelector } from "react-redux";
 import { AppContext } from "../../context/appContext";
@@ -20,13 +19,16 @@ function ReportDetails() {
     if (admin) {
       if (dataFetchedRef.current) return;
       dataFetchedRef.current = true;
-      getReportDetail();
       console.log(reportDetail);
-    }
-  }, [reportDetail]);
 
-  async function getReportDetail() {
-    await fetch(fetchURL)
+      if (!reportDetail) {
+        getReportDetail();
+      }
+    }
+  }, []);
+
+  function getReportDetail() {
+    fetch(fetchURL)
       .then((res) => res.json())
       .then((data) => {
         setReportDetail(data);
@@ -36,68 +38,66 @@ function ReportDetails() {
   if (!reportDetail)
     return (
       <>
-        <div>Nothing</div>
+        <div>Loading...</div>
       </>
     );
 
   return (
     <>
       <div>
-        {reportDataExamples.map((data) => (
-          <div key={data._id}>
-            <div className="flex mb-3">
-              <table className="w-1/2">
-                <tbody>
-                  <tr>
-                    <td className="py-2">Report ID</td>
-                    <td className="py-2">: {data._id}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2">Post Date</td>
-                    <td className="py-2">: {data.createdAt}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2">Update Date</td>
-                    <td className="py-2">: {data.updatedAt}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2">Your Name</td>
-                    <td className="py-2">: {data.userName}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2">Your Department</td>
-                    <td className="py-2"> : {data.userDepartment}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <table className="w-1/2">
-                <tbody>
-                  <tr>
-                    <td>Category</td>
-                    <td>: {data.category_id}</td>
-                  </tr>
-                  <tr>
-                    <td>Subject</td>
-                    <td>: {data.subject}</td>
-                  </tr>
-                  <tr>
-                    <td>File</td>
-                    <td className="text-indigo-700">: img-file.jpeg</td>
-                  </tr>
-                  <tr>
-                    <td>Your Agent</td>
-                    <td>: Name</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div className="my-3">
-              <span className="text-lg">Description</span>
-              <div className="border p-2">{data.description}</div>
-            </div>
+        <div key={reportDetail._id}>
+          <div className="flex mb-3">
+            <table className="w-1/2">
+              <tbody>
+                <tr>
+                  <td className="py-2">Report ID</td>
+                  <td className="py-2">: {reportDetail._id}</td>
+                </tr>
+                <tr>
+                  <td className="py-2">Post Date</td>
+                  <td className="py-2">: {reportDetail.createdAt}</td>
+                </tr>
+                <tr>
+                  <td className="py-2">Update Date</td>
+                  <td className="py-2">: {reportDetail.updatedAt}</td>
+                </tr>
+                <tr>
+                  <td className="py-2">Your Name</td>
+                  <td className="py-2">: {reportDetail.userName}</td>
+                </tr>
+                <tr>
+                  <td className="py-2">Your Department</td>
+                  <td className="py-2"> : {reportDetail.userDepartment}</td>
+                </tr>
+              </tbody>
+            </table>
+            <table className="w-1/2">
+              <tbody>
+                <tr>
+                  <td>Category</td>
+                  <td>: {reportDetail.category_id}</td>
+                </tr>
+                <tr>
+                  <td>Subject</td>
+                  <td>: {reportDetail.subject}</td>
+                </tr>
+                <tr>
+                  <td>File</td>
+                  <td className="text-indigo-700">: img-file.jpeg</td>
+                </tr>
+                <tr>
+                  <td>Your Agent</td>
+                  <td>: Name</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        ))}
+
+          <div className="my-3">
+            <span className="text-lg">Description</span>
+            <div className="border p-2">{reportDetail.description}</div>
+          </div>
+        </div>
       </div>
 
       <div className="border bg-gray-scale-4 p-2">

@@ -17,7 +17,7 @@ import { AppContext } from "./context/appContext";
 
 function App() {
   const [reports, setReports] = useState([]);
-  const [reportDetail, setReportDetail] = useState(null);
+  const [reportDetail, setReportDetail] = useState([]);
   const [admins, setAdmins] = useState([]);
   const [users, setUsers] = useState([]);
   const [categories, setCategories] = useState([]);
