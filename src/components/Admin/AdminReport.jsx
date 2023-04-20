@@ -10,7 +10,8 @@ function AdminReport() {
   const admin = useSelector((state) => state.admin);
   const navigate = useNavigate();
 
-  const { reports, setReports } = useContext(AppContext);
+  const { reports, setReports, reportDetail, setReportDetail } =
+    useContext(AppContext);
 
   useEffect(() => {
     if (admin) {
@@ -27,10 +28,12 @@ function AdminReport() {
   async function handleClick(event) {
     const id = event.target.dataset.value;
     const reportDetailUrl = `/api/admin/reports/${id}`;
-    // await fetch(`${SERVER_URL}${reportDetailUrl}`)
-    //   .then((res) => res.json())
-    //   .then((data) => setReportDetail(data));
-    navigate(reportDetailUrl);
+    await fetch(`${SERVER_URL}${reportDetailUrl}`)
+      .then((res) => res.json())
+      .then((data) => setReportDetail(data));
+    if (reportDetail) {
+      navigate(reportDetailUrl);
+    }
   }
 
   return (
