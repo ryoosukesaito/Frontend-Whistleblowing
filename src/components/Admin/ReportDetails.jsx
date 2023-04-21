@@ -5,6 +5,7 @@ import { AppContext } from "../../context/appContext";
 import { SERVER_URL } from "../../constants/constants";
 
 import Histories from "./Histories";
+import HistoriesFooter from "./HistoriesFooter";
 import { useParams } from "react-router-dom";
 
 function ReportDetails() {
@@ -13,19 +14,20 @@ function ReportDetails() {
   const fetchURL = `${SERVER_URL}/api/admin/reports/${id}`;
   const dataFetchedRef = useRef(false);
 
-  const { reportDetail, setReportDetail } = useContext(AppContext);
+  const { reportDetail, setReportDetail, histories, setHistories } =
+    useContext(AppContext);
 
   useEffect(() => {
     if (admin) {
       if (dataFetchedRef.current) return;
       dataFetchedRef.current = true;
-      console.log(reportDetail);
 
-      if (!reportDetail) {
+      if (reportDetail.length === 0) {
         getReportDetail();
       }
     }
-  }, []);
+    getHistoryByReportId();
+  }, [histories]);
 
   function getReportDetail() {
     fetch(fetchURL)
@@ -35,7 +37,13 @@ function ReportDetails() {
       });
   }
 
-  if (!reportDetail)
+  function getHistoryByReportId() {
+    fetch(`${SERVER_URL}/api/admin/history/${id}`)
+      .then((res) => res.json())
+      .then((data) => setHistories(data.histories));
+  }
+
+  if (reportDetail.length === 0)
     return (
       <>
         <div>Loading...</div>
@@ -100,11 +108,14 @@ function ReportDetails() {
         </div>
       </div>
 
-      <div className="border bg-gray-scale-4 p-2">
+      <div className="h-full border bg-gray-scale-4 p-2 overflow-auto">
         <div className="text-lg border-b-2 border-gray-scale-1">
           Contact Record
         </div>
-        <Histories />
+        <div className="">
+          <Histories />
+        </div>
+        <HistoriesFooter />
       </div>
     </>
   );

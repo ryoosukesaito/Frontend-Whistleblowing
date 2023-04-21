@@ -9,7 +9,7 @@ function CategoryList() {
 
   useEffect(() => {
     getCategories();
-  }, [deleteCategory, handleAddCategory]);
+  }, []);
 
   function getCategories() {
     fetch(`${SERVER_URL}/api/admin/category/all`)
@@ -28,6 +28,7 @@ function CategoryList() {
     })
       .then((res) => res.json())
       .catch((err) => console.error(err));
+    getCategories();
   }
 
   function handleAddCategory(e) {
@@ -41,6 +42,7 @@ function CategoryList() {
     })
       .then((res) => res.json())
       .catch((err) => console.error(err));
+    getCategories();
     setNewCategory("");
   }
 
