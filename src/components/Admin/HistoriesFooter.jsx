@@ -1,25 +1,68 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { DocumentArrowDownIcon } from "@heroicons/react/24/outline";
+import { useSelector } from "react-redux";
+import { AppContext } from "../../context/appContext";
+import { SERVER_URL } from "../../constants/constants";
 
 function HistoriesFooter() {
-  function handleSubmit(e) {
+  const [message, setMessage] = useState("");
+  const admin = useSelector((state) => state.admin);
+  const { reportDetail } = useContext(AppContext);
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log("submit");
+    const reportId = reportDetail._id;
+    const userId = reportDetail.userId._id;
+    const adminId = admin.adminId;
+    const msg = message;
+    const name = admin.name;
+    const replierType = "admin";
+    // if (admin) {
+    // } else {
+    //   const name = "Anonymous";
+    //   const replierType = "user";
+    // }
+
+    if (!message) return;
+    await fetch(`${SERVER_URL}/api/history`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        reportId: reportId,
+        userId: userId,
+        adminId: adminId,
+        name: name,
+        message: msg,
+        replierType: replierType,
+      }),
+    })
+      .then((res) => res.json())
+      .catch((err) => console.error(err));
+    window.location.reload();
+    setMessage("");
   }
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex flex-col">
-        <input type="text" className="h-full w-full mt-2 my-3" />
-        <div className="flex flex-row justify-between">
-          <button className="cursor-pointe flex text-indigo-700">
-            <DocumentArrowDownIcon className="h-6 w-6 mr-1 " />
-            Upload File
-          </button>
-          <button className="px-4 py-1 mb-1 rounded cursor-pointe bg-gray-scale-2 hover:bg-gray-100 text-white">
-            Submit
-          </button>
-        </div>
-      </form>
+      <div className=" bg-gray-scale-3 p-2">
+        <form onSubmit={handleSubmit} className="flex flex-col">
+          <input
+            type="text"
+            className="h-full w-full mt-2 my-3"
+            rows={3}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <div className="flex flex-row justify-between">
+            <button className="cursor-pointe flex text-indigo-700">
+              <DocumentArrowDownIcon className="h-6 w-6 mr-1 " />
+              Upload File
+            </button>
+            <button className="px-4 py-1 mb-1 rounded cursor-pointe bg-gray-scale-2 hover:bg-gray-100 text-white">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 }

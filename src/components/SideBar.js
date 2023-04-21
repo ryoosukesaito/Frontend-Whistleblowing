@@ -4,18 +4,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
-import { useLogoutAccountMutation } from "../services/appAPI";
+import { useLogoutAdminMutation } from "../services/appAPI";
 import { useSelector } from "react-redux";
 
 const SideBar = () => {
   const admin = useSelector((state) => state.admin);
   const navigate = useNavigate();
   const [menubar, setMenubar] = useState(false);
-  const [logoutAccount] = useLogoutAccountMutation();
+  const [logoutAdmin] = useLogoutAdminMutation();
   async function handleLogout(e) {
     e.preventDefault();
-    await logoutAccount(admin);
-    console.log(admin);
+    await logoutAdmin(admin);
     navigate("/");
     window.location.reload();
   }

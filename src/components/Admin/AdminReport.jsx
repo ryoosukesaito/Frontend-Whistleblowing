@@ -10,7 +10,7 @@ function AdminReport() {
   const admin = useSelector((state) => state.admin);
   const navigate = useNavigate();
 
-  const { reports, setReports, reportDetail, setReportDetail } =
+  const { reports, setReports, reportDetail, setReportDetail, setHistories } =
     useContext(AppContext);
 
   useEffect(() => {
@@ -32,8 +32,15 @@ function AdminReport() {
       .then((res) => res.json())
       .then((data) => setReportDetail(data));
     if (reportDetail) {
+      getHistoryByReportId(id);
       navigate(reportDetailUrl);
     }
+  }
+
+  async function getHistoryByReportId(id) {
+    await fetch(`${SERVER_URL}/api/admin/history/${id}`)
+      .then((res) => res.json())
+      .then((data) => setHistories(data.histories));
   }
 
   return (

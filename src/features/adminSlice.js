@@ -20,10 +20,7 @@ export const adminSlice = createSlice({
       (state, { payload }) => payload
     );
 
-    builder.addMatcher(
-      appApi.endpoints.logoutAccount.matchFulfilled,
-      () => null
-    );
+    builder.addMatcher(appApi.endpoints.logoutAdmin.matchFulfilled, () => null);
   },
 });
 

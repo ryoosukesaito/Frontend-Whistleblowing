@@ -22,6 +22,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState([]);
+  const [histories, setHistories] = useState([]);
   const admin = useSelector((state) => state.admin);
 
   return (
@@ -39,10 +40,16 @@ function App() {
         setCategories,
         newCategory,
         setNewCategory,
+        histories,
+        setHistories,
       }}
     >
       <BrowserRouter>
-        <Navbar />
+        {admin && (
+          <>
+            <Navbar />
+          </>
+        )}
 
         <Routes>
           <Route path="/" element={<LoginAdmin />} />
@@ -50,14 +57,15 @@ function App() {
           {admin && (
             <>
               <Route path="/api/admin/reports" element={<ReportsPage />} />
+
+              <Route path="/api/admin/reports/:id" element={<Report />} />
+              <Route path="/api/admin/all" element={<AdminAccounts />} />
+              <Route path="/api/admin/create/admin" element={<AddNewAdmin />} />
+              <Route path="/api/admin/edit" element={<EditAdminAccount />} />
+              <Route path="/api/admin/users/all" element={<UserAccounts />} />
+              <Route path="/api/admin/category/all" element={<Categories />} />
             </>
           )}
-          <Route path="/api/admin/reports/:id" element={<Report />} />
-          <Route path="/api/admin/all" element={<AdminAccounts />} />
-          <Route path="/api/admin/create/admin" element={<AddNewAdmin />} />
-          <Route path="/api/admin/edit" element={<EditAdminAccount />} />
-          <Route path="/api/admin/users/all" element={<UserAccounts />} />
-          <Route path="/api/admin/category/all" element={<Categories />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>
