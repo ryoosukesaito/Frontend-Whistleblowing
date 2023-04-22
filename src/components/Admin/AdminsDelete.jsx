@@ -28,7 +28,7 @@ const AdminsDelete = () => {
       <div className='flex flex-row justify-center m-4 text-sm'>
           <button className='bg-gray-scale-3 w-20 h-6 m-8'>Cancel</button>
           <button className='bg-delete w-20 h-6 m-8'>Delete</button>
-        </div>
+      </div>
       </div>
       </div>
   )

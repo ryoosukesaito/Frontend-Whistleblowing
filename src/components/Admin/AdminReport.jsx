@@ -4,14 +4,19 @@ import { reportTableHeaders } from "../../constants/constants";
 import { useSelector } from "react-redux";
 import { AppContext } from "../../context/appContext";
 import { SERVER_URL } from "../../constants/constants";
+import { useNavigate } from "react-router-dom";
+
+import { funnel, FunnelIcon } from "@heroicons/react/24/solid";
 
 import ReportFilter from "../Admin/ReportFilter";
 
 
 function AdminReport() {
   const admin = useSelector((state) => state.admin);
+  const navigate = useNavigate();
 
-  const { reports, setReports } = useContext(AppContext);
+  const { reports, setReports, reportDetail, setReportDetail, setHistories } =
+    useContext(AppContext);
 
   useEffect(() => {
     if (admin) {
@@ -25,14 +30,33 @@ function AdminReport() {
       .then((data) => setReports(data));
   }
 
+  async function handleClick(event) {
+    const id = event.target.dataset.value;
+    const reportDetailUrl = `/api/admin/reports/${id}`;
+    await fetch(`${SERVER_URL}${reportDetailUrl}`)
+      .then((res) => res.json())
+      .then((data) => setReportDetail(data));
+    if (reportDetail) {
+      getHistoryByReportId(id);
+      navigate(reportDetailUrl);
+    }
+  }
+
+  async function getHistoryByReportId(id) {
+    await fetch(`${SERVER_URL}/api/admin/history/${id}`)
+      .then((res) => res.json())
+      .then((data) => setHistories(data.histories));
+  }
+
   return (
-    <div className="m-10">
-      <div className="h-7 float-right">
-        <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 cursor-pointer">
+    <div className="">
+      <div className="flex justify-end">
+        <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 mr-10 cursor-pointer">
+          <FunnelIcon className="h-4 w-4 mr-1.5"/>
           Filter
         </button>
       </div>
-      <div className="h-full mt-20  flex items-start justify-center">
+      <div className="h-full mt-5 flex items-start justify-center">
       <table className="w-full">
         <thead>
           <tr>
@@ -45,22 +69,43 @@ function AdminReport() {
         </thead>
         <tbody>
           {reports.map((data, idx) => (
-            <tr key={idx}>
-              <td className="border-b-2 border-slate-700 text-center ">
-                <div className="my-3 flex justify-center items-center h-8 bg-not-started rounded-full">
+
+            <tr
+              key={data._id}
+              className=" cursor-pointer  hover:bg-gray-scale-3"
+              onClick={handleClick}
+            >
+              <td
+                className="border-b-2 border-slate-700 text-center"
+                data-value={data._id}
+              >
+
+             <div className="my-1 flex justify-center items-center bg-not-started rounded-full">
                 {data.status}
-                </div>
+            </div>
               </td>
-              <td className="border-b-2 border-slate-700 text-center">
+              <td
+                className="border-b-2 border-slate-700 text-center"
+                data-value={data._id}
+              >
                 {data.subject}
               </td>
-              <td className="border-b-2 border-slate-700 text-center">
+              <td
+                className="border-b-2 border-slate-700 text-center"
+                data-value={data._id}
+              >
                 {data.adminId}
               </td>
-              <td className="border-b-2 border-slate-700 text-center">
+              <td
+                className="border-b-2 border-slate-700 text-center"
+                data-value={data._id}
+              >
                 {data.createdAt}
               </td>
-              <td className="border-b-2 border-slate-700 text-center">
+              <td
+                className="border-b-2 border-slate-700 text-center"
+                data-value={data._id}
+              >
                 {data.updatedAt}
               </td>
             </tr>
@@ -69,10 +114,10 @@ function AdminReport() {
       </table>
       </div>
 
-      <div className="flex justify-center ">
+      {/* <div className="flex justify-center "> */}
         
        <div>
-        <div>
+        {/* <div>
           <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
             <a
               href="#"
@@ -122,10 +167,10 @@ function AdminReport() {
               →
             </a>
             </nav>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
       </div>
-        <ReportFilter />
+        {/* <ReportFilter /> */}
     </div>
   );
 }

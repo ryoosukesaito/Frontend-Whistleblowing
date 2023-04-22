@@ -5,7 +5,7 @@ import { pageHeight } from "../../constants/constants";
 
 function Report() {
   return (
-    <div className="w-screen flex items-center flex-row" style={pageHeight}>
+    <div className="w-full flex items-center flex-row" style={pageHeight}>
       <div className="h-full w-1/6">
         <SideBar />
       </div>

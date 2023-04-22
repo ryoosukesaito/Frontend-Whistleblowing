@@ -17,7 +17,13 @@ function AdminList() {
   }
 
   return (
-    <div className="h-full   flex items-start justify-center">
+    <div>
+      <div className="flex justify-end">
+        <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 cursor-pointer m-10">
+          Create
+        </button>
+      </div>
+      <div className="h-full flex items-start justify-center">
       <table className="w-full">
         <thead>
           <tr>
@@ -30,9 +36,17 @@ function AdminList() {
         </thead>
         <tbody>
           {admins.map((data, idx) => (
-            <tr key={idx}>
-              <td className="border-b-2 border-slate-700 text-center">
+            <tr 
+              key={idx}
+              className=" cursor-pointer hover:bg-gray-scale-3"
+
+            >
+              <td className="border-b-2 border-slate-700 text-center"
+              data-value={data._id}
+              >
+              <div className="my-3">
                 {data._id}
+              </div>
               </td>
               <td className="border-b-2 border-slate-700 text-center">
                 {data.role}
@@ -47,6 +61,7 @@ function AdminList() {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }

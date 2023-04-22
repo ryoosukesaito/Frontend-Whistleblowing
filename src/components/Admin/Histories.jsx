@@ -1,22 +1,33 @@
-import React from "react";
-import { HistoriesData } from "../../data/dataExample";
-import HistoriesFooter from "./HistoriesFooter";
+import React, { useContext, useEffect, useRef } from "react";
+import { AppContext } from "../../context/appContext";
 
 function Histories() {
+  const { histories } = useContext(AppContext);
+
+  const commentEndRef = useRef(null);
+  useEffect(() => {
+    scrollToBottom();
+  }, [histories]);
+
+  function scrollToBottom() {
+    commentEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }
+
   return (
-    <>
-      <div>
-        {HistoriesData.map((data, idx) => (
-          <div
-            key={idx}
-            className="flex flex-col bg-gray-scale-3 my-3 p-2"
-          >
+    <div className="bg-gray-scale-4">
+      <div className="h-full w-full flex flex-col">
+        {histories.map((data, idx) => (
+          <div key={idx} className="flex flex-col bg-gray-scale-3 my-3 p-2">
             <div className="flex flex-row justify-between">
               <div className="flex flex-row">
                 <div className="font-bold">
-                  {data.replierType === "Admin" ? data.adminId : "Anonymous"}
+                  {data.replierType === "admin"
+                    ? `${data.name} (Admin)`
+                    : "Anonymous"}
                 </div>
-                <div className="text-indigo-700">{data.file ? data.file : ""}</div>
+                <div className="text-indigo-700">
+                  {data.file ? data.file : ""}
+                </div>
               </div>
 
               <div>{data.createdAt}</div>
@@ -25,11 +36,9 @@ function Histories() {
             <div>{data.message}</div>
           </div>
         ))}
-        <div className=" bg-gray-scale-3 p-2">
-          <HistoriesFooter />
-        </div>
+        <div ref={commentEndRef} />
       </div>
-    </>
+    </div>
   );
 }
 
