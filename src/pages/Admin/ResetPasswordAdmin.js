@@ -5,7 +5,6 @@ import { EyeIcon } from "@heroicons/react/24/solid";
 import { SERVER_URL } from "../../constants/constants";
 
 function ResetPasswordAdmin() {
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [token, setToken] = useState(null);
@@ -32,9 +31,20 @@ function ResetPasswordAdmin() {
         password: password,
       }),
     })
-      .then((res) => console.log(res.json()))
+      .then((res) => res.json())
       .catch((err) => console.error(err));
+    navigate("/");
   };
+
+  //Icon trigger js
+  const [pwStyle, setPwStyle] = useState({
+    type: "password",
+  });
+  function showTypeHandler() {
+    pwStyle.type === "password"
+      ? setPwStyle({ type: "text" })
+      : setPwStyle({ type: "password" });
+  }
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -58,7 +68,7 @@ function ResetPasswordAdmin() {
             Password
             <input
               className="border w-full py-3 px-3 mb-3"
-              type="password"
+              type={pwStyle.type}
               placeholder="Password"
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -66,8 +76,15 @@ function ResetPasswordAdmin() {
               value={password}
               required
             />
-            <div className="w-full  flex justify-end pb-3 -mr-8 opacity-25 cursor-pointer ">
-              <EyeSlashIcon className="h-8 w-8" />
+            <div
+              className="w-full  flex justify-end pb-3 -mr-8 opacity-25 cursor-pointer "
+              onClick={showTypeHandler}
+            >
+              {pwStyle.type === "password" ? (
+                <EyeSlashIcon className="h-8 w-8" />
+              ) : (
+                <EyeIcon className="h-8 w-8" />
+              )}
             </div>
           </label>
           <label htmlFor="password">
