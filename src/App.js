@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
+import RequestResetPassword from "./pages/Admin/RequestResetPassword";
+import ResetPasswordAdmin from "./pages/Admin/ResetPasswordAdmin";
 import AdminAccountCreate from "./pages/Admin/AdminAccountCreate";
 import Signup from "./pages/Users/Signup";
 import Navbar from "./components/Navbar";
@@ -26,6 +28,7 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState([]);
   const [histories, setHistories] = useState([]);
+  const [adminDetail, setAdminDetail] = useState([]);
   const admin = useSelector((state) => state.admin);
 
   return (
@@ -45,6 +48,8 @@ function App() {
         setNewCategory,
         histories,
         setHistories,
+        adminDetail,
+        setAdminDetail,
       }}
     >
       <BrowserRouter>
@@ -57,6 +62,14 @@ function App() {
 
         <Routes>
           <Route path="/" element={<LoginAdmin />} />
+          <Route
+            path="/auth/requestResetPassword"
+            element={<RequestResetPassword />}
+          />
+          <Route
+            path="/api/auth/passwordReset"
+            element={<ResetPasswordAdmin />}
+          />
           <Route path="/api/admin/signup" element={<AdminAccountCreate />} />
           {admin && (
             <>
@@ -70,6 +83,10 @@ function App() {
               <Route path="/api/admin/category/all" element={<Categories />} />
             </>
           )}
+
+          <Route path="/api/admin/:id" element={<AdminsDetail />} />
+          <Route path="/api/admin/delete/:id" element={<AdminsDelete />} />
+
           <Route path="/signup" element={<Signup />} />
 
           <Route path="/api/admin/admins/adminsdetail" element={<AdminsDetail />} />

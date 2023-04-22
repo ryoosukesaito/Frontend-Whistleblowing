@@ -1,6 +1,35 @@
-import React from 'react'
+
+import React, { useContext, useEffect } from "react";
+import { AppContext } from "../../context/appContext";
+import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { SERVER_URL } from "../../constants/constants";
 
 const AdminsDetail = () => {
+  const admin = useSelector((state) => state.admin);
+  const { id } = useParams();
+  const navigation = useNavigate();
+  const { adminDetail, setAdminDetail } = useContext(AppContext);
+
+  useEffect(() => {
+    if (admin) {
+      if (!adminDetail) {
+        getAdminDetail();
+      }
+    }
+  }, []);
+
+  async function getAdminDetail() {
+    const getAdminDetailUrl = `/api/admin/${id}`;
+    await fetch(`${SERVER_URL}${getAdminDetailUrl}`)
+      .then((res) => res.json())
+      .then((data) => setAdminDetail(data));
+  }
+
+  function deleteHandler() {
+    navigation(`/api/admin/delete/${id}`);
+  }
+  
   return (
     <div>
       <div className='flex justify-center mt-20'>
@@ -20,16 +49,16 @@ const AdminsDetail = () => {
       </ul>
       <ul className='flex items-start flex-col w-2/5'>
        <li className='flex flex-row m-6'>
-          <div>000</div>
+          <div>{adminDetail._id}</div>
         </li>
         <li className='flex flex-row basis-2 m-6'>
-          <div>Admin</div>
+          <div>{adminDetail.role}</div>
         </li>
         <li className='flex flex-row m-6'>
-          <div>aki</div>
+          <div>{adminDetail.name}</div>
         </li>
         <li className='flex flex-row m-6'> 
-          <div>aki@gmail.com</div>
+          <div>{adminDetail.email}</div>
         </li>
       </ul>
       </div>
@@ -50,3 +79,4 @@ const AdminsDetail = () => {
 }
 
 export default AdminsDetail
+

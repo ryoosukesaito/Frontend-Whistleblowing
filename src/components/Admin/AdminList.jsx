@@ -2,18 +2,35 @@ import React, { useContext, useEffect } from "react";
 import { SERVER_URL, adminsTableHeaders } from "../../constants/constants";
 
 import { AppContext } from "../../context/appContext";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function AdminList() {
-  const { admins, setAdmins } = useContext(AppContext);
+  const admin = useSelector((state) => state.admin);
+  const navigation = useNavigate();
+
+  const { admins, setAdmins, adminDetail, setAdminDetail } =
+    useContext(AppContext);
 
   useEffect(() => {
-    getAdmins();
+    if (admin) {
+      getAdmins();
+    }
   }, []);
 
   function getAdmins() {
     fetch(`${SERVER_URL}/api/admin/all`)
       .then((res) => res.json())
       .then((data) => setAdmins(data));
+  }
+
+  async function handleClick(e) {
+    const id = e.target.dataset.value;
+    const getAdminDetailUrl = `/api/admin/${id}`;
+    await fetch(`${SERVER_URL}${getAdminDetailUrl}`)
+      .then((res) => res.json())
+      .then((data) => setAdminDetail(data));
+    if (adminDetail) navigation(getAdminDetailUrl);
   }
 
   return (
@@ -37,9 +54,9 @@ function AdminList() {
         <tbody>
           {admins.map((data, idx) => (
             <tr 
-              key={idx}
+              key={data._id}
               className=" cursor-pointer hover:bg-gray-scale-3"
-
+              onClick={handleClick}
             >
               <td className="border-b-2 border-slate-700 text-center"
               data-value={data._id}
@@ -48,13 +65,22 @@ function AdminList() {
                 {data._id}
               </div>
               </td>
-              <td className="border-b-2 border-slate-700 text-center">
+              <td
+                className="border-b-2 border-slate-700 text-center"
+                data-value={data._id}
+              >
                 {data.role}
               </td>
-              <td className="border-b-2 border-slate-700 text-center">
+              <td
+                className="border-b-2 border-slate-700 text-center"
+                data-value={data._id}
+              >
                 {data.name}
               </td>
-              <td className="border-b-2 border-slate-700 text-center">
+              <td
+                className="border-b-2 border-slate-700 text-center"
+                data-value={data._id}
+              >
                 {data.createdAt}
               </td>
             </tr>
