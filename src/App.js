@@ -59,6 +59,7 @@ function App() {
           </>
         )}
 
+
         <Routes>
           <Route path="/" element={<LoginAdmin />} />
           <Route
@@ -87,6 +88,9 @@ function App() {
           <Route path="/api/admin/delete/:id" element={<AdminsDelete />} />
 
           <Route path="/signup" element={<Signup />} />
+
+          <Route path="/api/admin/admins/adminsdetail" element={<AdminsDetail />} />
+          <Route path="/api/admin/admins/adminsdelete" element={<AdminsDelete />} />
         </Routes>
       </BrowserRouter>
     </AppContext.Provider>

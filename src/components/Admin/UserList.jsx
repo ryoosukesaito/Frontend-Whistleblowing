@@ -17,7 +17,7 @@ function UserList() {
   }
 
   return (
-    <div className="h-full   flex items-start justify-center">
+    <div className="h-full flex items-start justify-center">
       <table className="w-full">
         <thead>
           <tr>
@@ -32,7 +32,9 @@ function UserList() {
           {users.map((data, idx) => (
             <tr key={idx}>
               <td className="border-b-2 border-slate-700 text-center">
-                {data._id}
+                <div className="my-3">
+                  {data._id}
+                </div>
               </td>
               <td className="border-b-2 border-slate-700 text-center">
                 {data.email}
