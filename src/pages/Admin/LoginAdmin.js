@@ -64,6 +64,7 @@ function LoginAdmin() {
               required
             />
           </label>
+
           <div className="mb-8 text-right underline underline-offset-auto">
             <button
               onClick={() => navigate("/auth/requestResetPassword")}
@@ -71,6 +72,9 @@ function LoginAdmin() {
             >
               Forgot password?
             </button>
+          </div>
+          <div className="text-center mb-5 text-red-600">
+            error message
           </div>
           <div className="text-center">
             <button

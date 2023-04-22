@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 function Navbar() {
   const admin = useSelector((state) => state.admin);
   const [navbar, setNavbar] = useState(false);
+  const [notification, setNotification] = useState(false);
+
   return (
     <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-gray-scale-2 text-white">
       <div className="w-full mx-2 flex flex-wrap items-center justify-between">
@@ -35,24 +37,40 @@ function Navbar() {
         {admin && (
           <div
             className={
-              "lg:flex flex-grow items-center text-sm" +
+              "lg:flex flex-grow items-center text-sm relative ml-32"+
               (navbar ? " flex" : " hidden")
             }
           >
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               <li className="nav-item">
-                <a
-                  className="px-3 py-2 flex items-center leading-snug hover:opacity-75"
-                  href="#"
+                <button
+                  className="px-3 py-2 mr-32 flex items-center leading-snug hover:opacity-75"
+                  type="button"
+                  onClick={() => setNotification(!notification)}
                 >
                   <BellIcon className="h-8 w-8 mr-1.5" />
                   <p className="lg:hidden">Alert</p>
-                </a>
+                </button>
+                {admin && (
+                  <div
+                    className={
+                      "absolute bg-gray-scale-3 p-4 shadow top-12" +
+                      (notification ? " flex" : " hidden")
+                    }
+                  >
+                    <div className="text-gray-scale-1 text-center">
+                      <p className="text-lg mb-1 ">Report Subject</p> 
+                      <p className="text-sm mb-2">New Message From User!</p> 
+                      <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
+                      <p className="text-lg mb-1">Report Subject</p> 
+                      <p className="text-sm mb-2">New Message From User!</p>
+                    </div>
+                  </div>
+                )}
               </li>
               <li className="nav-item">
                 <a
-                  className="px-3 py-2 flex items-center leading-snug hover:opacity-75"
-                  href="#"
+                  className="mr-10 px-3 py-2 flex items-center leading-snug hover:opacity-75"
                 >
                   <UserCircleIcon className="h-8 w-8 mr-1.5" />
                   <p>{admin.name}</p>
@@ -61,6 +79,7 @@ function Navbar() {
             </ul>
           </div>
         )}
+        
       </div>
     </nav>
   );
