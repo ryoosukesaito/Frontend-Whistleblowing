@@ -2,31 +2,31 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginAdminMutation } from "../../services/appAPI";
 
-function LoginAdmin() {
+import { SERVER_URL } from "../../constants/constants";
+
+function RequestResetPassword() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [loginAdmin, { error }] = useLoginAdminMutation();
 
-  const handleLogin = async (e) => {
+  const RequestSendHandler = async (e) => {
     e.preventDefault();
 
-    //login Admin
-    loginAdmin({ email, password }).then(({ data }) => {
-      if (data) {
-        navigate("/api/admin/reports");
-        console.log(data);
-      }
-      if (error) {
-        console.error(error.data.error);
-      }
-    });
+    await fetch(`${SERVER_URL}/auth/requestResetPassword`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email,
+      }),
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="flex justify-center items-center bg-gray-scale-4 m-auto p-10">
-        <form onSubmit={handleLogin} id="login" className="">
+        <form onSubmit={RequestSendHandler} id="login" className="">
           <div className="text-4xl flex justify-center items-center mb-24">
             <img
               src={`${process.env.PUBLIC_URL}/favicon.ico`}
@@ -41,7 +41,7 @@ function LoginAdmin() {
           <label htmlFor="email">
             Email
             <input
-              className="border w-full py-3 px-3 mb-3"
+              className="border w-full py-3 px-3 mb-10"
               type="email"
               placeholder="Email"
               onChange={(e) => {
@@ -51,37 +51,17 @@ function LoginAdmin() {
               required
             />
           </label>
-          <label htmlFor="password">
-            Password
-            <input
-              className="border rounded w-full py-3 px-3 mb-5"
-              type="password"
-              placeholder="Password"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              value={password}
-              required
-            />
-          </label>
-          <div className="mb-8 text-right underline underline-offset-auto">
-            <button
-              onClick={() => navigate("/auth/requestResetPassword")}
-              className="underline"
-            >
-              Forgot password?
-            </button>
-          </div>
+
           <div className="text-center">
             <button
-              className="px-6 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-100 text-white"
+              className="px-6 py-2 mb-6 cursor-pointer bg-main-color-1 hover:bg-gray-100 text-white"
               type="submit"
             >
-              Login
+              Submit Request
             </button>
           </div>
           <div className="text-main-color-1 text-center underline underline-offset-auto">
-            <a href="/api/admin/signup">Sign up</a>
+            <a href="/">Login</a>
           </div>
         </form>
       </div>
@@ -89,4 +69,4 @@ function LoginAdmin() {
   );
 }
 
-export default LoginAdmin;
+export default RequestResetPassword;
