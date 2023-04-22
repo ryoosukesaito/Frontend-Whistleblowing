@@ -1,0 +1,103 @@
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { EyeSlashIcon } from "@heroicons/react/24/solid";
+import { EyeIcon } from "@heroicons/react/24/solid";
+import { SERVER_URL } from "../../constants/constants";
+
+function ResetPasswordAdmin() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [token, setToken] = useState(null);
+  const [id, setId] = useState(null);
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    setToken(searchParams.get("token"));
+    setId(searchParams.get("id"));
+  }, [location.search]);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (password !== password2) throw new Error("Password doesn't match.");
+    await fetch(`${SERVER_URL}/auth/resetPassword`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        adminId: id,
+        token: token,
+        password: password,
+      }),
+    })
+      .then((res) => console.log(res.json()))
+      .catch((err) => console.error(err));
+  };
+
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center bg-gray-scale-4 m-auto p-10">
+        <form onSubmit={handleLogin} id="login" className="">
+          <div className="text-4xl flex justify-center items-center mb-24">
+            <img
+              src={`${process.env.PUBLIC_URL}/favicon.ico`}
+              alt="Logo"
+              className="h-10 w-10 mr-1.5"
+            />
+            <h1 className="">Whistleblowing</h1>
+          </div>
+          <h1 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
+            Admin
+          </h1>
+          <h2 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
+            Reset Password
+          </h2>
+          <label htmlFor="email">
+            Password
+            <input
+              className="border w-full py-3 px-3 mb-3"
+              type="password"
+              placeholder="Password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              value={password}
+              required
+            />
+            <div className="w-full  flex justify-end pb-3 -mr-8 opacity-25 cursor-pointer ">
+              <EyeSlashIcon className="h-8 w-8" />
+            </div>
+          </label>
+          <label htmlFor="password">
+            Confirm Password
+            <input
+              className="border rounded w-full py-3 px-3 mb-5"
+              type="password"
+              placeholder="Confirm New Password"
+              onChange={(e) => {
+                setPassword2(e.target.value);
+              }}
+              value={password2}
+              required
+            />
+          </label>
+          <div className="text-center">
+            <button
+              className="px-6 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-100 text-white"
+              type="submit"
+            >
+              Reset Password
+            </button>
+          </div>
+          <div className="text-main-color-1 text-center underline underline-offset-auto">
+            <a href="/">Login</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+export default ResetPasswordAdmin;
