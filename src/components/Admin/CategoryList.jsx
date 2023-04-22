@@ -9,7 +9,7 @@ function CategoryList() {
 
   useEffect(() => {
     getCategories();
-  }, []);
+  }, [categories]);
 
   function getCategories() {
     fetch(`${SERVER_URL}/api/admin/category/all`)
