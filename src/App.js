@@ -53,12 +53,11 @@ function App() {
       }}
     >
       <BrowserRouter>
-        {admin && (
+        {/* {admin && (
           <>
             <Navbar />
           </>
-        )}
-
+        )} */}
 
         <Routes>
           <Route path="/" element={<LoginAdmin />} />
@@ -89,8 +88,14 @@ function App() {
 
           <Route path="/signup" element={<Signup />} />
 
-          <Route path="/api/admin/admins/adminsdetail" element={<AdminsDetail />} />
-          <Route path="/api/admin/admins/adminsdelete" element={<AdminsDelete />} />
+          <Route
+            path="/api/admin/admins/adminsdetail"
+            element={<AdminsDetail />}
+          />
+          <Route
+            path="/api/admin/admins/adminsdelete"
+            element={<AdminsDelete />}
+          />
         </Routes>
       </BrowserRouter>
     </AppContext.Provider>

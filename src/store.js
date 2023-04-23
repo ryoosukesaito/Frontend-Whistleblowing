@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import adminSlice from "./features/adminSlice";
+import userSlice from "./features/userSlice";
 import appApi from "./services/appAPI";
 
 import storage from "redux-persist/lib/storage";
@@ -10,13 +11,14 @@ import thunk from "redux-thunk";
 //reducers
 const reducer = combineReducers({
   admin: adminSlice,
+  user: userSlice,
   [appApi.reducerPath]: appApi.reducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  blackList: [appApi.reducerPath],
+  blacklist: [appApi.reducerPath, "user"],
 };
 
 //persist store
