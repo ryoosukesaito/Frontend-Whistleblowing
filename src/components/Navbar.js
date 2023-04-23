@@ -16,7 +16,7 @@ function Navbar() {
         <div className="w-full relative flex justify-between lg:w-auto lg:static">
           <a
             className="text-xl flex leading-snug px-3  py-2 items-center"
-            href="#"
+            href="/api/admin/reports"
           >
             <img
               src={`${process.env.PUBLIC_URL}/favicon.ico`}
