@@ -54,13 +54,13 @@ function RequestResetPassword() {
 
           <div className="text-center">
             <button
-              className="rounded px-8 py-2 mb-6 cursor-pointer bg-main-color-1 hover:bg-gray-100 text-white"
+              className="rounded px-8 py-2 mb-6 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
               type="submit"
             >
               Submit request
             </button>
           </div>
-          <div className="text-main-color-1 text-center underline underline-offset-auto">
+          <div className="text-main-color-1 text-center underline underline-offset-auto hover:opacity-50">
             <a href="/">Login</a>
           </div>
         </form>

@@ -11,7 +11,7 @@ function AdminAccountCreate() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="justify-center items-center bg-gray-scale-4 my-20 p-10 lg:w-1/2 ">
+      <div className="justify-center items-center bg-gray-scale-4 my-20 p-10 w-1/3 ">
         <form onSubmit={handleSignIn} id="login" className="">
           <div className="text-4xl flex justify-center items-center mb-20">
             <img
@@ -99,7 +99,7 @@ function AdminAccountCreate() {
           </label>
           <div className="text-center">
             <button
-              className="px-6 py-2 cursor-pointer bg-gray-scale-2 hover:bg-gray-100 text-white"
+              className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
               type="submit"
             >
               Register

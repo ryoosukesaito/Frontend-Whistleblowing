@@ -68,7 +68,7 @@ function LoginAdmin() {
           <div className="mb-8 text-right underline underline-offset-auto">
             <button
               onClick={() => navigate("/auth/requestResetPassword")}
-              className="underline"
+              className="underline hover:opacity-50"
             >
               Forgot password?
             </button>
@@ -78,13 +78,13 @@ function LoginAdmin() {
           </div>
           <div className="text-center">
             <button
-              className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-100 text-white"
+              className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
               type="submit"
             >
               Login
             </button>
           </div>
-          <div className="text-main-color-1 text-center underline underline-offset-auto">
+          <div className="text-main-color-1 text-center underline underline-offset-auto hover:opacity-50">
             <a href="/api/admin/signup">Sign up</a>
           </div>
         </form>

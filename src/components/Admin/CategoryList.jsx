@@ -60,7 +60,7 @@ function CategoryList() {
             value={data._id}
             onClick={deleteCategory}
           >
-            <MinusCircleIcon className="w-8 h-8 text-gray-scale-1"/>
+            <MinusCircleIcon className="w-8 h-8 text-gray-scale-1 hover:opacity-50"/>
           </button>
           <div className="">{data.name}</div>
           
@@ -74,7 +74,7 @@ function CategoryList() {
             className="items-center mr-6"
             type="submit"
           >
-            <PlusCircleIcon className="w-8 h-8 text-gray-scale-2"/>
+            <PlusCircleIcon className="w-8 h-8 text-gray-scale-2 hover:opacity-50"/>
           </button>
           <input
             type="text"

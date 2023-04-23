@@ -22,13 +22,13 @@ const SideBar = () => {
     <div className="h-full w-full flex flex-col pl-10 pr-3 py-4 overflow-y-auto bg-gray-scale-4 text-2xl">
       <div className="items-start">
         <div className="my-4">
-          <Link to="/api/admin/reports" className="py-4">
+          <Link to="/api/admin/reports" className="py-4 hover:opacity-50">
             Reports
           </Link>
         </div>
         <div>
           <button
-            className="flex items-center cursor-pointer py-4"
+            className="flex items-center cursor-pointer py-4 hover:opacity-50"
             type="button"
             onClick={() => setMenubar(!menubar)}
           >
@@ -40,7 +40,7 @@ const SideBar = () => {
             className={"pb-4 text-xl" + (menubar ? " block" : " hidden")}
           >
             {sidebarMenu.map((menu, idx) => (
-              <li className="py-4" key={idx}>
+              <li className="py-4 hover:opacity-50" key={idx}>
                 <a href={menu.href}>{menu.name}</a>
               </li>
             ))}
@@ -50,7 +50,7 @@ const SideBar = () => {
 
       <div className="border-t border-t-gray-scale-3 w-32 my-4 pt-4">
         <button
-          className="flex items-center text-center cursor-pointer"
+          className="flex items-center text-center cursor-pointer hover:opacity-50"
           onClick={handleLogout}
           method="delete"
         >
