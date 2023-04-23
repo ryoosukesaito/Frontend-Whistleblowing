@@ -55,7 +55,7 @@ function Navbar() {
         {admin && (
           <div
             className={
-              "lg:flex flex-grow items-center text-sm relative ml-32"+
+              "lg:flex flex-grow items-center text-sm relative ml-32" +
               (navbar ? " flex" : " hidden")
             }
           >
@@ -109,9 +109,7 @@ function Navbar() {
                 )}
               </li>
               <li className="nav-item">
-                <a
-                  className="mr-10 px-3 py-2 flex items-center leading-snug hover:opacity-75"
-                >
+                <a className="mr-10 px-3 py-2 flex items-center leading-snug hover:opacity-75">
                   <UserCircleIcon className="h-8 w-8 mr-1.5" />
                   <p>{admin.name}</p>
                 </a>
@@ -119,7 +117,6 @@ function Navbar() {
             </ul>
           </div>
         )}
-        
       </div>
     </nav>
   );

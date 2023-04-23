@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { reportTableHeaders } from "../../constants/constants";
 
 import { useSelector } from "react-redux";
@@ -10,8 +10,8 @@ import { funnel, FunnelIcon } from "@heroicons/react/24/solid";
 
 import ReportFilter from "../Admin/ReportFilter";
 
-
 function AdminReport() {
+  const dataFetchedRef = useRef(false);
   const admin = useSelector((state) => state.admin);
   const navigate = useNavigate();
 
@@ -19,13 +19,16 @@ function AdminReport() {
     useContext(AppContext);
 
   useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
+
     if (admin) {
       getReports();
     }
   }, []);
 
-  function getReports() {
-    fetch(`${SERVER_URL}/api/admin/reports`)
+  async function getReports() {
+    await fetch(`${SERVER_URL}/api/admin/reports`)
       .then((res) => res.json())
       .then((data) => setReports(data));
   }
@@ -48,11 +51,18 @@ function AdminReport() {
       .then((data) => setHistories(data.histories));
   }
 
+  if (!reports)
+    return (
+      <>
+        <div>Loading....</div>
+      </>
+    );
+
   return (
     <div className="">
       <div className="flex justify-end">
         <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 mr-10 cursor-pointer">
-          <FunnelIcon className="h-4 w-4 mr-1.5"/>
+          <FunnelIcon className="h-4 w-4 mr-1.5" />
           Filter
         </button>
       </div>
@@ -118,8 +128,8 @@ function AdminReport() {
       </div>
 
       {/* <div className="flex justify-center "> */}
-        
-       <div>
+
+      <div>
         {/* <div>
           <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
             <a
@@ -173,7 +183,7 @@ function AdminReport() {
           </div> */}
         {/* </div> */}
       </div>
-        {/* <ReportFilter /> */}
+      {/* <ReportFilter /> */}
     </div>
   );
 }
