@@ -30,7 +30,10 @@ function UserList() {
         </thead>
         <tbody>
           {users.map((data, idx) => (
-            <tr key={idx}>
+            <tr 
+              key={idx}
+              className="hover:bg-gray-scale-3 cursor-pointer"
+            >
               <td className="border-b-2 border-slate-700 text-center">
                 <div className="my-3">
                   {data._id}

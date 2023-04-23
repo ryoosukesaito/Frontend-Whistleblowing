@@ -15,6 +15,7 @@ import Report from "./pages/Admin/Report";
 
 import AdminsDetail from "./components/Admin/AdminsDetail";
 import AdminsDelete from "./components/Admin/AdminsDelete";
+import UserDetail from "./components/Admin/UserDetail";
 
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -84,8 +85,10 @@ function App() {
             </>
           )}
 
+          <Route path="/api/admin/userlist/userdetail" element={<UserDetail />} />
           <Route path="/api/admin/:id" element={<AdminsDetail />} />
           <Route path="/api/admin/delete/:id" element={<AdminsDelete />} />
+
 
           <Route path="/signup" element={<Signup />} />
 
