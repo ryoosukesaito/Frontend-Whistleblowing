@@ -18,7 +18,7 @@ const AdminsDelete = () => {
   return (
     <div className="flex justify-center">
       <div className="bg-white w-3/6 border-2">
-        <h1 className="text-center mt-10 font-semibold">
+        <h1 className="text-center mt-10 font-semibold text-2xl mb-8">
           Are you sure to delete this user?
         </h1>
         <div className="flex justify-center">
@@ -37,14 +37,17 @@ const AdminsDelete = () => {
             </li>
           </ul>
         </div>
-        <div className="flex flex-row justify-center m-4 text-sm">
-          <button
-            className="bg-gray-scale-3 w-20 h-6 m-8"
-            onClick={cancelHandler}
+        <div className='flex flex-row justify-center mt-20 mb-10'>
+          <button 
+            className="rounded text-enter px-8 py-2 bg-gray-scale-3 cursor-pointer mr-32"
           >
-            Cancel
+            Update
           </button>
-          <button className="bg-delete w-20 h-6 m-8">Delete</button>
+          <button 
+            className=" rounded text-center px-8 py-2 bg-delete cursor-pointer"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>

@@ -51,11 +51,13 @@ function AdminReport() {
   return (
     <div className="">
       <div className="flex justify-end">
-        <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 mr-10 cursor-pointer">
-          <FunnelIcon className="h-4 w-4 mr-1.5"/>
+      <button className="flex px-8 py-2 items-center cursor-pointer bg-gray-scale-3 mr-10">
+          <FunnelIcon className="h-4 w-4 mr-2"/>
           Filter
         </button>
       </div>
+        
+      
       <div className="h-full mt-5 flex items-start justify-center">
       <table className="w-full">
         <thead>

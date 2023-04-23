@@ -36,13 +36,13 @@ function AdminList() {
   return (
     <div>
       <div className="flex justify-end">
-        <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 cursor-pointer m-10">
+        <button className="flex rounded px-8 py-2 items-center cursor-pointer bg-gray-scale-3 mr-10 ">
           Create
         </button>
       </div>
-      <div className="h-full flex items-start justify-center">
+      <div className="h-full mt-5 flex items-start justify-center">
       <table className="w-full">
-        <thead>
+        <thead className="text-lg">
           <tr>
             {adminsTableHeaders.map((header, idx) => (
               <th key={idx} className="border-b-4 border-slate-600">

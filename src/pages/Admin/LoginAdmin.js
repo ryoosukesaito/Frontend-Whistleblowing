@@ -25,7 +25,7 @@ function LoginAdmin() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="flex justify-center items-center bg-gray-scale-4 m-auto p-10">
+      <div className="justify-center items-center bg-gray-scale-4 m-auto p-10 w-1/3 min-w-fit">
         <form onSubmit={handleLogin} id="login" className="">
           <div className="text-4xl flex justify-center items-center mb-24">
             <img
@@ -54,7 +54,7 @@ function LoginAdmin() {
           <label htmlFor="password">
             Password
             <input
-              className="border rounded w-full py-3 px-3 mb-5"
+              className="border w-full py-3 px-3 mb-5"
               type="password"
               placeholder="Password"
               onChange={(e) => {
@@ -78,7 +78,7 @@ function LoginAdmin() {
           </div>
           <div className="text-center">
             <button
-              className="px-6 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-100 text-white"
+              className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-100 text-white"
               type="submit"
             >
               Login

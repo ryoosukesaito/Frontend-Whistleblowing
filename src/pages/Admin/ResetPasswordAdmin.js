@@ -48,7 +48,7 @@ function ResetPasswordAdmin() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="flex justify-center items-center bg-gray-scale-4 m-auto p-10">
+      <div className="justify-center items-center bg-gray-scale-4 m-20 p-10 w-1/3 min-w-fit">
         <form onSubmit={handleLogin} id="login" className="">
           <div className="text-4xl flex justify-center items-center mb-24">
             <img
@@ -61,36 +61,40 @@ function ResetPasswordAdmin() {
           <h1 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
             Admin
           </h1>
-          <h2 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
+          <h2 className=" text-main-color-1 text-2xl font-normal text-center mb-8">
             Reset Password
           </h2>
           <label htmlFor="email">
             Password
-            <input
-              className="border w-full py-3 px-3 mb-3"
-              type={pwStyle.type}
-              placeholder="Password"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              value={password}
-              required
-            />
-            <div
-              className="w-full  flex justify-end pb-3 -mr-8 opacity-25 cursor-pointer "
-              onClick={showTypeHandler}
-            >
-              {pwStyle.type === "password" ? (
-                <EyeSlashIcon className="h-8 w-8" />
-              ) : (
-                <EyeIcon className="h-8 w-8" />
-              )}
+            <div className="flex items-center mb-4">
+              <input
+                className="border w-full py-3 px-3 mr-2"
+                type={pwStyle.type}
+                placeholder="Password"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                value={password}
+                required
+              />
+              <div
+                className="w-8 h-8 opacity-25 cursor-pointer "
+                onClick={showTypeHandler}
+              >
+                {pwStyle.type === "password" ? (
+                  <EyeSlashIcon className="h-8 w-8" />
+                ) : (
+                  <EyeIcon className="h-8 w-8" />
+                )}
+              </div>
             </div>
+            
           </label>
           <label htmlFor="password">
             Confirm Password
+            <div className="flex items-center mb-4">
             <input
-              className="border rounded w-full py-3 px-3 mb-5"
+              className="border w-full py-3 px-3 mb-5 mr-10"
               type="password"
               placeholder="Confirm New Password"
               onChange={(e) => {
@@ -99,10 +103,13 @@ function ResetPasswordAdmin() {
               value={password2}
               required
             />
+            
+            </div>
+            
           </label>
-          <div className="text-center">
+          <div className="text-center mt-8">
             <button
-              className="px-6 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-100 text-white"
+              className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-100 text-white"
               type="submit"
             >
               Reset Password
