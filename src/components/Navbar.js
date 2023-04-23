@@ -37,7 +37,7 @@ function Navbar() {
         {admin && (
           <div
             className={
-              "lg:flex flex-grow items-center text-sm relative ml-32"+
+              "lg:flex flex-grow items-center text-sm relative ml-32" +
               (navbar ? " flex" : " hidden")
             }
           >
@@ -79,7 +79,6 @@ function Navbar() {
             </ul>
           </div>
         )}
-        
       </div>
     </nav>
   );
