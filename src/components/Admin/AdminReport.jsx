@@ -19,10 +19,10 @@ function AdminReport() {
     useContext(AppContext);
 
   useEffect(() => {
-    if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
-
     if (admin) {
+      if (dataFetchedRef.current) return;
+      dataFetchedRef.current = true;
+
       if (reports.length === 0) getReports();
     }
   }, []);
