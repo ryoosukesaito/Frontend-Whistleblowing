@@ -19,11 +19,11 @@ function AdminReport() {
     useContext(AppContext);
 
   useEffect(() => {
-    if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
-
     if (admin) {
-      getReports();
+      if (dataFetchedRef.current) return;
+      dataFetchedRef.current = true;
+
+      if (reports.length === 0) getReports();
     }
   }, []);
 
@@ -51,7 +51,7 @@ function AdminReport() {
       .then((data) => setHistories(data.histories));
   }
 
-  if (!reports)
+  if (reports.length === 0)
     return (
       <>
         <div>Loading....</div>
