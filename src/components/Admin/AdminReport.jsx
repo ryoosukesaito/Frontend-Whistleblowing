@@ -31,7 +31,6 @@ function AdminReport() {
     await fetch(`${SERVER_URL}/api/admin/reports`)
       .then((res) => res.json())
       .then((data) => setReports(data));
-    console.log("getReports", reports);
   }
 
   async function handleClick(event) {
@@ -52,81 +51,81 @@ function AdminReport() {
       .then((data) => setHistories(data.histories));
   }
 
-  if (reports.length === 0) {
+  if (reports.length === 0)
     return (
       <>
         <div>Loading....</div>
       </>
     );
-  } else {
-    return (
-      <div className="">
-        <div className="flex justify-end">
-          <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 mr-10 cursor-pointer">
-            <FunnelIcon className="h-4 w-4 mr-1.5" />
-            Filter
-          </button>
-        </div>
-        <div className="h-full mt-5 flex items-start justify-center">
-          <table className="w-full">
-            <thead>
-              <tr>
-                {reportTableHeaders.map((header, idx) => (
-                  <th key={idx} className="border-b-4 border-slate-600">
-                    {header}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {reports.map((data, idx) => (
-                <tr
-                  key={data._id}
-                  className=" cursor-pointer  hover:bg-gray-scale-3"
-                  onClick={handleClick}
-                >
-                  <td
-                    className="border-b-2 border-slate-700 text-center"
-                    data-value={data._id}
-                  >
-                    <div className="my-1 flex justify-center items-center bg-not-started rounded-full">
-                      {data.status}
-                    </div>
-                  </td>
-                  <td
-                    className="border-b-2 border-slate-700 text-center"
-                    data-value={data._id}
-                  >
-                    {data.subject}
-                  </td>
-                  <td
-                    className="border-b-2 border-slate-700 text-center"
-                    data-value={data._id}
-                  >
-                    {data.adminId}
-                  </td>
-                  <td
-                    className="border-b-2 border-slate-700 text-center"
-                    data-value={data._id}
-                  >
-                    {data.createdAt}
-                  </td>
-                  <td
-                    className="border-b-2 border-slate-700 text-center"
-                    data-value={data._id}
-                  >
-                    {data.updatedAt}
-                  </td>
-                </tr>
+
+  return (
+    <div className="">
+      <div className="flex justify-end">
+        <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 mr-10 cursor-pointer">
+          <FunnelIcon className="h-4 w-4 mr-1.5" />
+          Filter
+        </button>
+      </div>
+      <div className="h-full mt-5 flex items-start justify-center">
+        <table className="w-full">
+          <thead>
+            <tr>
+              {reportTableHeaders.map((header, idx) => (
+                <th key={idx} className="border-b-4 border-slate-600">
+                  {header}
+                </th>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </tr>
+          </thead>
+          <tbody>
+            {reports.map((data, idx) => (
+              <tr
+                key={data._id}
+                className=" cursor-pointer  hover:bg-gray-scale-3"
+                onClick={handleClick}
+              >
+                <td
+                  className="border-b-2 border-slate-700 text-center"
+                  data-value={data._id}
+                >
+                  <div className="my-1 flex justify-center items-center bg-not-started rounded-full">
+                    {data.status}
+                  </div>
+                </td>
+                <td
+                  className="border-b-2 border-slate-700 text-center"
+                  data-value={data._id}
+                >
+                  {data.subject}
+                </td>
+                <td
+                  className="border-b-2 border-slate-700 text-center"
+                  data-value={data._id}
+                >
+                  {data.adminId}
+                </td>
+                <td
+                  className="border-b-2 border-slate-700 text-center"
+                  data-value={data._id}
+                >
+                  {data.createdAt}
+                </td>
+                <td
+                  className="border-b-2 border-slate-700 text-center"
+                  data-value={data._id}
+                >
+                  {data.updatedAt}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-        {/* <div className="flex justify-center "> */}
+      {/* <div className="flex justify-center "> */}
 
-        <div>
-          {/* <div>
+      <div>
+        {/* <div>
           <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
             <a
               href="#"
@@ -177,12 +176,11 @@ function AdminReport() {
             </a>
             </nav>
           </div> */}
-          {/* </div> */}
-        </div>
-        {/* <ReportFilter /> */}
+        {/* </div> */}
       </div>
-    );
-  }
+      {/* <ReportFilter /> */}
+    </div>
+  );
 }
 
 export default AdminReport;
