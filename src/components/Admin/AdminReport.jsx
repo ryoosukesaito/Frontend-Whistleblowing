@@ -88,9 +88,21 @@ function AdminReport() {
                   className="border-b-2 border-slate-700 text-center"
                   data-value={data._id}
                 >
-                  <div className="my-1 flex justify-center items-center bg-not-started rounded-full">
-                    {data.status}
-                  </div>
+
+                  {data.status === "Not started" ? (
+                    <div className="my-1 flex justify-center items-center bg-not-started rounded-full">
+                      {data.status}
+                    </div>
+                  ) : data.status === "Completed" ? (
+                    <div className="my-1 flex justify-center items-center bg-completed rounded-full">
+                      {data.status}
+                    </div>
+                  ) : (
+                    <div className="my-1 justify-center items-center bg-in-progress rounded-full">
+                      {data.status}
+                    </div>
+                  )
+                  }
                 </td>
                 <td
                   className="border-b-2 border-slate-700 text-center"
@@ -121,7 +133,7 @@ function AdminReport() {
           </tbody>
         </table>
       </div>
-        {/* <ReportFilter /> */}
+      {/* <ReportFilter /> */}
     </div>
   );
 }
