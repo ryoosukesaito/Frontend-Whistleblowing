@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { BellIcon } from "@heroicons/react/24/solid";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
+import { SERVER_URL } from "../constants/constants";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const admin = useSelector((state) => state.admin);
+  const navigate=useNavigate();
   const [navbar, setNavbar] = useState(false);
   const [notification, setNotification] = useState(false);
+  const [notices, setNotices] = useState([]);
+
+
+  // 画面読み込み時にnoticesを取りに行く
+  useEffect(() => {
+    getNotices()
+  }, [])
+  
+
+  const getNotices = async()=>{
+    await fetch(`${SERVER_URL}/api/admin/notices`,{headers:{'x-auth-token':admin.token}})
+    .then((res) => res.json())
+    .then((data) => setNotices(data));
+  }
+
 
   return (
     <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-gray-scale-2 text-white">
@@ -59,11 +77,33 @@ function Navbar() {
                     }
                   >
                     <div className="text-gray-scale-1 text-center">
-                      <p className="text-lg mb-1 ">Report Subject</p> 
+                      {notices?
+                        notices.map((notice)=>{
+                          return(
+                            <div id={notice.id} onClick={async ()=>{
+                              setNotification(false)
+                              await fetch(`${SERVER_URL}/api/admin/notices/`+ notice.id,{
+                                method:'DELETE',
+                                headers:{'x-auth-token':admin.token
+                              }})
+                              await getNotices()
+                              navigate("/api/admin/reports/"+notice.reportId)
+                              
+                            }}>
+                              <p className="text-lg mb-1 ">{notice.subject}</p> 
+                              <p className="text-sm mb-2">New Message From User!</p>
+                              <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
+                            </div>
+                          )
+                        })
+                        :
+                        <></>
+                      }
+                      {/* <p className="text-lg mb-1 ">Report Subject</p> 
                       <p className="text-sm mb-2">New Message From User!</p> 
                       <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
                       <p className="text-lg mb-1">Report Subject</p> 
-                      <p className="text-sm mb-2">New Message From User!</p>
+                      <p className="text-sm mb-2">New Message From User!</p> */}
                     </div>
                   </div>
                 )}

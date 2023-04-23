@@ -68,48 +68,51 @@ function AdminReport() {
           </tr>
         </thead>
         <tbody>
-          {reports.map((data, idx) => (
+          {reports?
+            reports.map((data, idx) => (
 
-            <tr
-              key={data._id}
-              className=" cursor-pointer  hover:bg-gray-scale-3"
-              onClick={handleClick}
-            >
-              <td
-                className="border-b-2 border-slate-700 text-center"
-                data-value={data._id}
+              <tr
+                key={data._id}
+                className=" cursor-pointer  hover:bg-gray-scale-3"
+                onClick={handleClick}
               >
+                <td
+                  className="border-b-2 border-slate-700 text-center"
+                  data-value={data._id}
+                >
 
-             <div className="my-1 flex justify-center items-center bg-not-started rounded-full">
-                {data.status}
-            </div>
-              </td>
-              <td
-                className="border-b-2 border-slate-700 text-center"
-                data-value={data._id}
-              >
-                {data.subject}
-              </td>
-              <td
-                className="border-b-2 border-slate-700 text-center"
-                data-value={data._id}
-              >
-                {data.adminId}
-              </td>
-              <td
-                className="border-b-2 border-slate-700 text-center"
-                data-value={data._id}
-              >
-                {data.createdAt}
-              </td>
-              <td
-                className="border-b-2 border-slate-700 text-center"
-                data-value={data._id}
-              >
-                {data.updatedAt}
+              <div className="my-1 flex justify-center items-center bg-not-started rounded-full">
+                  {data.status}
+              </div>
+                </td>
+                <td
+                  className="border-b-2 border-slate-700 text-center"
+                  data-value={data._id}
+                >
+                  {data.subject}
+                </td>
+                <td
+                  className="border-b-2 border-slate-700 text-center"
+                  data-value={data._id}
+                >
+                  {data.adminId}
+                </td>
+                <td
+                  className="border-b-2 border-slate-700 text-center"
+                  data-value={data._id}
+                >
+                  {data.createdAt}
+                </td>
+                <td
+                  className="border-b-2 border-slate-700 text-center"
+                  data-value={data._id}
+                >
+                  {data.updatedAt}
               </td>
             </tr>
-          ))}
+          ))
+              :<></>
+        }
         </tbody>
       </table>
       </div>
