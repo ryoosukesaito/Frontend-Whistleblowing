@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../context/appContext";
 import { SERVER_URL } from "../../constants/constants";
 
+
 function CategoryList() {
   const { categories, setCategories, newCategory, setNewCategory } =
     useContext(AppContext);
@@ -56,7 +57,7 @@ function CategoryList() {
           <div>{data.name}</div>
           <div>
             <button
-              className="rounded-full bg-gray-400 text-sm w-5 h-5 px-1"
+              className="rounded-full bg-gray-scale-3 text-sm w-5 h-5 px-1"
               value={data._id}
               onClick={deleteCategory}
             >
@@ -75,7 +76,7 @@ function CategoryList() {
             value={newCategory}
           />
           <button
-            className="rounded border ml-2 px-2 bg-neutral-400"
+            className="rounded-full bg-gray-scale-3 text-sm w-5 h-5 px-1"
             type="submit"
           >
             +
