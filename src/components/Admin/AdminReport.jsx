@@ -19,11 +19,11 @@ function AdminReport() {
     useContext(AppContext);
 
   useEffect(() => {
-    if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
-
     if (admin) {
-      getReports();
+      if (dataFetchedRef.current) return;
+      dataFetchedRef.current = true;
+
+      if (reports.length === 0) getReports();
     }
   }, []);
 
@@ -51,7 +51,7 @@ function AdminReport() {
       .then((data) => setHistories(data.histories));
   }
 
-  if (!reports)
+  if (reports.length === 0)
     return (
       <>
         <div>Loading....</div>
@@ -67,20 +67,18 @@ function AdminReport() {
         </button>
       </div>
       <div className="h-full mt-5 flex items-start justify-center">
-      <table className="w-full">
-        <thead>
-          <tr>
-            {reportTableHeaders.map((header, idx) => (
-              <th key={idx} className="border-b-4 border-slate-600">
-                {header}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {reports?
-            reports.map((data, idx) => (
-
+        <table className="w-full">
+          <thead>
+            <tr>
+              {reportTableHeaders.map((header, idx) => (
+                <th key={idx} className="border-b-4 border-slate-600">
+                  {header}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {reports.map((data, idx) => (
               <tr
                 key={data._id}
                 className=" cursor-pointer  hover:bg-gray-scale-3"
@@ -90,10 +88,9 @@ function AdminReport() {
                   className="border-b-2 border-slate-700 text-center"
                   data-value={data._id}
                 >
-
-              <div className="my-1 flex justify-center items-center bg-not-started rounded-full">
-                  {data.status}
-              </div>
+                  <div className="my-1 flex justify-center items-center bg-not-started rounded-full">
+                    {data.status}
+                  </div>
                 </td>
                 <td
                   className="border-b-2 border-slate-700 text-center"
@@ -118,13 +115,11 @@ function AdminReport() {
                   data-value={data._id}
                 >
                   {data.updatedAt}
-              </td>
-            </tr>
-          ))
-              :<></>
-        }
-        </tbody>
-      </table>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       {/* <div className="flex justify-center "> */}
