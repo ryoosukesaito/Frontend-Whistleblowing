@@ -13,7 +13,7 @@ import ReportFilter from "../Admin/ReportFilter";
 
 function UserReport() {
   const dataFetchedRef = useRef(false);
-  const admin = useSelector((state) => state.admin);
+  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   const { reports, setReports, reportDetail, setReportDetail, setHistories } =
@@ -22,29 +22,31 @@ function UserReport() {
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
-    if (admin) {
-      // if (reports.length === 0) getReports();
+    if (user) {
+      if (reports.length === 0) getReports();
     }
   }, []);
 
   async function getReports() {
-    await fetch(`${SERVER_URL}/api/admin/reports`)
+    await fetch(`${SERVER_URL}/api/user/reports`,{
+      headers: { "x-auth-token": user.token },
+    })
       .then((res) => res.json())
       .then((data) => setReports(data));
     console.log("reports:  ", reports);
   }
 
   async function handleClick(event) {
-    // const id = event.target.dataset.value;
-    // const reportDetailUrl = `/api/admin/reports/${id}`;
+    const id = event.target.dataset.value;
+    const reportDetailUrl = `/api/user/reports/${id}`;
     // await fetch(`${SERVER_URL}${reportDetailUrl}`)
     //   .then((res) => res.json())
     //   .then((data) => setReportDetail(data));
     // if (reportDetail) {
-    //   getHistoryByReportId(id);
-    //   navigate(reportDetailUrl);
+      // getHistoryByReportId(id);
+      navigate(reportDetailUrl);
     // }
-    navigate("/api/user/reports/id");
+    // navigate(`/api/user/reports/${id}`);
   }
 
   async function getHistoryByReportId(id) {
@@ -73,7 +75,7 @@ function UserReport() {
             </tr>
           </thead>
           <tbody>
-            {reportDataExamples.map((data, idx) => (
+            {reports.map((data, idx) => (
               <tr
                 key={data._id}
                 className=" cursor-pointer  hover:bg-gray-scale-3"
