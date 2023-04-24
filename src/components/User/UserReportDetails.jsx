@@ -7,56 +7,47 @@ import { SERVER_URL } from "../../constants/constants";
 import Histories from "./Histories";
 import HistoriesFooter from "./HistoriesFooter";
 import { useParams } from "react-router-dom";
-// import { report } from "../../../../../Backend-whistleblowing/src/routes";
 
-function ReportDetails() {
-  const admin = useSelector((state) => state.admin);
+//data Examples
+import { reportDetail } from "../../data/dataExample";
+
+function UserReportDetails() {
+  const user = useSelector((state) => state.user);
   const { id } = useParams();
-  const fetchURL = `${SERVER_URL}/api/admin/reports/${id}`;
+  const fetchURL = `${SERVER_URL}/api/user/reports/${id}`;
   const dataFetchedRef = useRef(false);
-
-  const statusOptions = ["Not started","onGoing","Closed"]
 
   const { reportDetail, setReportDetail, histories, setHistories } =
     useContext(AppContext);
 
   useEffect(() => {
-    if (admin) {
+    if (user) {
       if (dataFetchedRef.current) return;
       dataFetchedRef.current = true;
 
-      if (reportDetail.length === 0) {
-        getReportDetail();
-      }
+       getReportDetail();
     }
-    getHistoryByReportId();
-  }, [histories]);
+    // getHistoryByReportId();
+  }, []);
 
-  function getReportDetail() {
-    fetch(fetchURL)
+  const getReportDetail= async () =>{
+    await fetch(fetchURL, {
+      headers: { "x-auth-token": user.token },
+    })
       .then((res) => res.json())
       .then((data) => {
-        setReportDetail(data);
+        console.log(data);
+        setReportDetail(data.report);
+        setHistories(data.histories)
       });
   }
 
-  function getHistoryByReportId() {
-    fetch(`${SERVER_URL}/api/admin/history/${id}`)
-      .then((res) => res.json())
-      .then((data) => setHistories(data.histories));
-      getReportDetail()
-  }
-  const changeReportStatus = async(e)=>{
-    await fetch(fetchURL,{
-      method: 'PUT',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status:e.target.value})
-    })
-    .then((res) => res.json())
-    .catch((err) => console.error(err));
-    getReportDetail()
-    console.log("histories:   ", histories);
-  }
+  // function getHistoryByReportId() {
+  //   fetch(`${SERVER_URL}/api/admin/history/${id}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setHistories(data.histories));
+  //   console.log("histories:   ", histories);
+  // }
 
   if (reportDetail.length === 0)
     return (
@@ -68,23 +59,7 @@ function ReportDetails() {
   return (
     <>
       <div>
-      <div className="text-gray-scale-2 font-bold text-xl mb-3">
-        Report detail
-      </div>
         <div key={reportDetail._id}>
-          <div key="report-status">
-            <select id="status"
-              value={reportDetail.status}
-              onChange={changeReportStatus}
-            >
-              {statusOptions.map((option,index)=>{
-                return <option key={index}>
-                  {option}
-                </option>
-              })
-              }
-            </select>
-          </div>
           <div className="flex mb-3">
             <table className="w-1/2">
               <tbody>
@@ -106,7 +81,10 @@ function ReportDetails() {
                 </tr>
                 <tr>
                   <td className="py-2">Your Department</td>
-                  <td className="py-2"> : {reportDetail.userDepartment}</td>
+                  <td className="py-2">
+                    {" "}
+                    : {reportDetail.userDepartment}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -144,12 +122,15 @@ function ReportDetails() {
           Contact Record
         </div>
         <div className="">
-          <Histories />
+          {histories?
+            <Histories />
+            :<></>
+        }
         </div>
-        <HistoriesFooter />
+          <HistoriesFooter />
       </div>
     </>
   );
 }
 
-export default ReportDetails;
+export default UserReportDetails;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function AdminAccountCreate() {
+function SignupUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -12,9 +12,9 @@ function AdminAccountCreate() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="justify-center items-center bg-gray-scale-4 m-auto px-10 pt-10 w-1/2 ">
+      <div className="flex justify-center items-center bg-gray-scale-4 w-1/3 my-auto p-10">
         <form onSubmit={handleSignIn} id="login" className="">
-          <div className="text-4xl flex justify-center items-center mb-10">
+          <div className="text-4xl flex justify-center items-center mb-20">
             <img
               src={`${process.env.PUBLIC_URL}/favicon.ico`}
               alt="Logo"
@@ -23,7 +23,7 @@ function AdminAccountCreate() {
             <h1 className="">Whistleblowing</h1>
           </div>
           <h1 className=" text-main-color-1 text-3xl font-normal text-center mb-5">
-            Invite new admin/staff
+            Register account
           </h1>
           <div className="text-sm text-center mb-10">
             <p>
@@ -100,7 +100,7 @@ function AdminAccountCreate() {
           </label>
           <div className="text-center">
             <button
-              className="rounded px-8 py-2 mb-8 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
+              className="px-6 py-2 cursor-pointer bg-gray-scale-2 hover:bg-gray-100 text-white"
               type="submit"
             >
               Register
@@ -112,4 +112,4 @@ function AdminAccountCreate() {
   );
 }
 
-export default AdminAccountCreate;
+export default SignupUser;
