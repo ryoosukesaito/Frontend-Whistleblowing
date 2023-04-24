@@ -4,18 +4,15 @@ import { useSelector } from "react-redux";
 import { AppContext } from "../../context/appContext";
 import { SERVER_URL } from "../../constants/constants";
 
-import Histories from "./Histories";
-import HistoriesFooter from "./HistoriesFooter";
+import Histories from "../Admin/Histories";
+import HistoriesFooter from "../Admin/HistoriesFooter";
 import { useParams } from "react-router-dom";
-// import { report } from "../../../../../Backend-whistleblowing/src/routes";
 
-function ReportDetails() {
+function UserReportDetails() {
   const admin = useSelector((state) => state.admin);
   const { id } = useParams();
   const fetchURL = `${SERVER_URL}/api/admin/reports/${id}`;
   const dataFetchedRef = useRef(false);
-
-  const statusOptions = ["Not started","onGoing","Closed"]
 
   const { reportDetail, setReportDetail, histories, setHistories } =
     useContext(AppContext);
@@ -44,17 +41,6 @@ function ReportDetails() {
     fetch(`${SERVER_URL}/api/admin/history/${id}`)
       .then((res) => res.json())
       .then((data) => setHistories(data.histories));
-      getReportDetail()
-  }
-  const changeReportStatus = async(e)=>{
-    await fetch(fetchURL,{
-      method: 'PUT',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status:e.target.value})
-    })
-    .then((res) => res.json())
-    .catch((err) => console.error(err));
-    getReportDetail()
     console.log("histories:   ", histories);
   }
 
@@ -69,19 +55,6 @@ function ReportDetails() {
     <>
       <div>
         <div key={reportDetail._id}>
-          <div key="report-status">
-            <select id="status"
-              value={reportDetail.status}
-              onChange={changeReportStatus}
-            >
-              {statusOptions.map((option,index)=>{
-                return <option key={index}>
-                  {option}
-                </option>
-              })
-              }
-            </select>
-          </div>
           <div className="flex mb-3">
             <table className="w-1/2">
               <tbody>
@@ -149,4 +122,4 @@ function ReportDetails() {
   );
 }
 
-export default ReportDetails;
+export default UserReportDetails;

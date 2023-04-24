@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLoginAdminMutation } from "../../services/appAPI";
+import { useLoginUserMutation } from "../../services/appAPI";
 
-function LoginAdmin() {
+function LoginUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [loginAdmin, { error }] = useLoginAdminMutation();
+  const [loginUser, { error }] = useLoginUserMutation();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     //login Admin
-    loginAdmin({ email, password }).then(({ data }) => {
+    loginUser({ email, password }).then(({ data }) => {
       if (data) {
-        navigate("/api/admin/reports");
-        console.log(data);
+        navigate("/api/user/reports");
       }
       if (error) {
         console.error(error.data.error);
@@ -36,7 +35,7 @@ function LoginAdmin() {
             <h1 className="">Whistleblowing</h1>
           </div>
           <h1 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
-            Admin
+            USER
           </h1>
           <label htmlFor="email">
             Email
@@ -87,7 +86,7 @@ function LoginAdmin() {
             </button>
           </div>
           <div className="text-main-color-1 text-center underline underline-offset-auto">
-            <a href="/api/admin/signup">Sign up</a>
+            <a href="api/user/register">Sign up</a>
           </div>
         </form>
       </div>
@@ -95,4 +94,4 @@ function LoginAdmin() {
   );
 }
 
-export default LoginAdmin;
+export default LoginUser;
