@@ -76,7 +76,7 @@ function App() {
           <Route path="/api/user/register" element={<Signup />} />
           {/* user router after logging in */}
           <Route path="/api/user/reports" element={<UserReportsPage />} />
-          <Route path="/api/user/reports/id" element={<UserReport />} />
+          <Route path="/api/user/reports/:id" element={<UserReport />} />
 
           {/* admin authentication route before logging in*/}
           <Route path="/" element={<LoginAdmin />} />

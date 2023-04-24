@@ -4,12 +4,12 @@ import { useSelector } from "react-redux";
 import { AppContext } from "../../context/appContext";
 import { SERVER_URL } from "../../constants/constants";
 
-import Histories from "../Admin/Histories";
-import HistoriesFooter from "../Admin/HistoriesFooter";
+import Histories from "./Histories";
+import HistoriesFooter from "./HistoriesFooter";
 import { useParams } from "react-router-dom";
 
 //data Examples
-import { reportDataExamples } from "../../data/dataExample";
+import { reportDetail } from "../../data/dataExample";
 
 function UserReportDetails() {
   const user = useSelector((state) => state.user);
@@ -25,63 +25,65 @@ function UserReportDetails() {
       if (dataFetchedRef.current) return;
       dataFetchedRef.current = true;
 
-      // if (reportDetail.length === 0) {
-      //   getReportDetail();
-      // }
+       getReportDetail();
     }
     // getHistoryByReportId();
-  }, [histories]);
+  }, []);
 
-  function getReportDetail() {
-    fetch(fetchURL)
+  const getReportDetail= async () =>{
+    await fetch(fetchURL, {
+      headers: { "x-auth-token": user.token },
+    })
       .then((res) => res.json())
       .then((data) => {
-        setReportDetail(data);
+        console.log(data);
+        setReportDetail(data.report);
+        setHistories(data.histories)
       });
   }
 
-  function getHistoryByReportId() {
-    fetch(`${SERVER_URL}/api/admin/history/${id}`)
-      .then((res) => res.json())
-      .then((data) => setHistories(data.histories));
-    console.log("histories:   ", histories);
-  }
+  // function getHistoryByReportId() {
+  //   fetch(`${SERVER_URL}/api/admin/history/${id}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setHistories(data.histories));
+  //   console.log("histories:   ", histories);
+  // }
 
-  // if (reportDetail.length === 0)
-  //   return (
-  //     <>
-  //       <div>Loading...</div>
-  //     </>
-  //   );
+  if (reportDetail.length === 0)
+    return (
+      <>
+        <div>Loading...</div>
+      </>
+    );
 
   return (
     <>
       <div>
-        <div key={reportDataExamples._id}>
+        <div key={reportDetail._id}>
           <div className="flex mb-3">
             <table className="w-1/2">
               <tbody>
                 <tr>
                   <td className="py-2">Report ID</td>
-                  <td className="py-2">: {reportDataExamples._id}</td>
+                  <td className="py-2">: {reportDetail._id}</td>
                 </tr>
                 <tr>
                   <td className="py-2">Post Date</td>
-                  <td className="py-2">: {reportDataExamples.createdAt}</td>
+                  <td className="py-2">: {reportDetail.createdAt}</td>
                 </tr>
                 <tr>
                   <td className="py-2">Update Date</td>
-                  <td className="py-2">: {reportDataExamples.updatedAt}</td>
+                  <td className="py-2">: {reportDetail.updatedAt}</td>
                 </tr>
                 <tr>
                   <td className="py-2">Your Name</td>
-                  <td className="py-2">: {reportDataExamples.userName}</td>
+                  <td className="py-2">: {reportDetail.userName}</td>
                 </tr>
                 <tr>
                   <td className="py-2">Your Department</td>
                   <td className="py-2">
                     {" "}
-                    : {reportDataExamples.userDepartment}
+                    : {reportDetail.userDepartment}
                   </td>
                 </tr>
               </tbody>
@@ -90,11 +92,11 @@ function UserReportDetails() {
               <tbody>
                 <tr>
                   <td>Category</td>
-                  <td>: {reportDataExamples.category_id}</td>
+                  <td>: {reportDetail.category_id}</td>
                 </tr>
                 <tr>
                   <td>Subject</td>
-                  <td>: {reportDataExamples.subject}</td>
+                  <td>: {reportDetail.subject}</td>
                 </tr>
                 <tr>
                   <td>File</td>
@@ -110,7 +112,7 @@ function UserReportDetails() {
 
           <div className="my-3">
             <span className="text-lg">Description</span>
-            <div className="border p-2">{reportDataExamples.description}</div>
+            <div className="border p-2">{reportDetail.description}</div>
           </div>
         </div>
       </div>
@@ -120,9 +122,12 @@ function UserReportDetails() {
           Contact Record
         </div>
         <div className="">
-          <Histories />
+          {histories?
+            <Histories />
+            :<></>
+        }
         </div>
-        <HistoriesFooter />
+          <HistoriesFooter />
       </div>
     </>
   );
