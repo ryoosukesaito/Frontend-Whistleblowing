@@ -87,7 +87,7 @@ function Navbar() {
                         notices.map((notice) => {
                           return (
                             <div
-                              id={notice.id}
+                              id={notice.id} key={notice.id}
                               onClick={async () => {
                                 setNotification(false);
                                 await fetch(
