@@ -1,5 +1,5 @@
 import React from "react";
-import UserReportDetails from "../../components/User/UserReportDetails";
+import UserReport from "../../components/User/UserReport";
 import SideBar from "../../components/SideBar";
 import { pageHeight } from "../../constants/constants";
 import { useSelector } from "react-redux";
@@ -13,8 +13,7 @@ function UserReportsPage() {
         <SideBar />
       </div>
       <div className="h-full w-5/6 flex flex-col mt-3 px-3 py-4">
-        {/* <UserReportDetails /> */}
-        UserPages!!
+        <UserReport />
       </div>
     </div>
   );
