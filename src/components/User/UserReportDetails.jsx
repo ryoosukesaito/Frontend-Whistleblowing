@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 import { AppContext } from "../../context/appContext";
 import { SERVER_URL } from "../../constants/constants";
 
-import Histories from "./Histories";
-import HistoriesFooter from "./HistoriesFooter";
+import Histories from "../Admin/Histories";
+import HistoriesFooter from "../Admin/HistoriesFooter";
 import { useParams } from "react-router-dom";
 
-function ReportDetails() {
+function UserReportDetails() {
   const admin = useSelector((state) => state.admin);
   const { id } = useParams();
   const fetchURL = `${SERVER_URL}/api/admin/reports/${id}`;
@@ -122,4 +122,4 @@ function ReportDetails() {
   );
 }
 
-export default ReportDetails;
+export default UserReportDetails;

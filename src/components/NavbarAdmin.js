@@ -7,8 +7,8 @@ import { useSelector } from "react-redux";
 import { SERVER_URL } from "../constants/constants";
 import { useNavigate } from "react-router-dom";
 
-function Navbar() {
-  const user = useSelector((state) => state.user);
+function NavbarUser() {
+  const admin = useSelector((state) => state.admin);
   const navigate = useNavigate();
   const [navbar, setNavbar] = useState(false);
   const [notification, setNotification] = useState(false);
@@ -20,8 +20,8 @@ function Navbar() {
   }, []);
 
   const getNotices = async () => {
-    await fetch(`${SERVER_URL}/api/user/notices`, {
-      headers: { "x-auth-token": user.token },
+    await fetch(`${SERVER_URL}/api/admin/notices`, {
+      headers: { "x-auth-token": admin.token },
     })
       .then((res) => res.json())
       .then((data) => setNotices([data]));
@@ -40,7 +40,7 @@ function Navbar() {
               alt="Logo"
               className="h-7 w-7 mr-1.5"
             />
-            Whistleblowing User
+            Whistleblowing Admin
           </a>
 
           <button
@@ -51,7 +51,7 @@ function Navbar() {
             <Bars3Icon className="h-8 w-8" />
           </button>
         </div>
-        {user && (
+        {admin && (
           <div
             className={
               "lg:flex flex-grow items-center text-sm relative ml-32" +
@@ -68,7 +68,7 @@ function Navbar() {
                   <BellIcon className="h-8 w-8 mr-1.5" />
                   <p className="lg:hidden">Alert</p>
                 </button>
-                {user && (
+                {admin && (
                   <div
                     className={
                       "absolute bg-gray-scale-3 p-4 shadow top-12" +
@@ -84,15 +84,16 @@ function Navbar() {
                               onClick={async () => {
                                 setNotification(false);
                                 await fetch(
-                                  `${SERVER_URL}/api/user/notices/` + notice.id,
+                                  `${SERVER_URL}/api/admin/notices/` +
+                                    notice.id,
                                   {
                                     method: "DELETE",
-                                    headers: { "x-auth-token": user.token },
+                                    headers: { "x-auth-token": admin.token },
                                   }
                                 );
                                 await getNotices();
                                 navigate(
-                                  "/api/user/reports/" + notice.reportId
+                                  "/api/admin/reports/" + notice.reportId
                                 );
                               }}
                             >
@@ -119,7 +120,7 @@ function Navbar() {
               <li className="nav-item">
                 <a className="mr-10 px-3 py-2 flex items-center leading-snug hover:opacity-75">
                   <UserCircleIcon className="h-8 w-8 mr-1.5" />
-                  <p>{user.name}</p>
+                  <p>{admin.name}</p>
                 </a>
               </li>
             </ul>
@@ -130,4 +131,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavbarUser;

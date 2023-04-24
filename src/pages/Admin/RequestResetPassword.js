@@ -19,8 +19,8 @@ function RequestResetPassword() {
         email: email,
       }),
     })
-      .then((res) => console.log(res))
-      .catch((err) => console.error(err));
+      .then((res) => res.json())
+      .catch((err) => console.log(err));
   };
 
   return (
