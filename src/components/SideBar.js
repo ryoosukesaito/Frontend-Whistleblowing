@@ -33,16 +33,16 @@ const SideBar = () => {
 
   if (admin)
     return (
-      <div className="h-full w-full flex flex-col px-3 py-4 overflow-y-auto bg-gray-scale-4">
+      <div className="h-full w-full flex flex-col pl-10 pr-3 py-4 overflow-y-auto bg-gray-scale-4 text-2xl">
         <div className="items-start">
           <div className="my-4">
-            <Link to="/api/admin/reports" className="text-lg py-4">
+            <Link to="/api/admin/reports" className="py-4 hover:opacity-50">
               Reports
             </Link>
           </div>
           <div>
             <button
-              className="text-lg flex items-center cursor-pointer py-4"
+              className="flex items-center cursor-pointer py-4 hover:opacity-50"
               type="button"
               onClick={() => setMenubar(!menubar)}
             >
@@ -51,10 +51,10 @@ const SideBar = () => {
             </button>
             <ul
               id="managements-menu"
-              className={"pb-4" + (menubar ? " block" : " hidden")}
+              className={"pb-4 text-xl" + (menubar ? " block" : " hidden")}
             >
               {sidebarMenu.map((menu, idx) => (
-                <li className="py-4" key={idx}>
+                <li className="py-4 hover:opacity-50" key={idx}>
                   <a href={menu.href}>{menu.name}</a>
                 </li>
               ))}
@@ -62,15 +62,16 @@ const SideBar = () => {
           </div>
         </div>
 
-        <div className="border-t border-t-gray-scale-3  my-4 pt-4 text-lg">
+        <div className="border-t border-t-gray-scale-3 w-32 my-4 pt-4">
           <button
             key="signout"
             className="flex items-center text-center cursor-pointer"
+            className="flex items-center text-center cursor-pointer hover:opacity-50"
             onClick={handleLogout}
             method="delete"
           >
             Sign out
-            <ArrowRightOnRectangleIcon className="h-7 w-7 ml-3" />
+            <ArrowRightOnRectangleIcon className="h-6 w-6 mt-1 ml-3" />
           </button>
         </div>
       </div>
@@ -108,7 +109,7 @@ const SideBar = () => {
           </div>
         </div>
 
-        <div className="border-t border-t-gray-scale-3  my-4 pt-4 text-lg">
+        <div className="border-t border-t-gray-scale-3 my-4 pt-4 text-lg">
           <button
             key="signout"
             className="flex items-center text-center cursor-pointer"
