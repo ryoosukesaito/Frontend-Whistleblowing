@@ -17,7 +17,7 @@ function AdminReport() {
   const navigate = useNavigate();
   const [show,setShow] = useState(false);
 
-  const { reports, setReports, reportDetail, setReportDetail, setHistories } =
+  const { reports, setReports, reportDetail, setReportDetail,setHistories,filteredReports,setFilteredReports, } =
     useContext(AppContext);
 
   useEffect(() => {
@@ -32,7 +32,11 @@ function AdminReport() {
   async function getReports() {
     await fetch(`${SERVER_URL}/api/admin/reports`)
       .then((res) => res.json())
-      .then((data) => setReports(data));
+      .then((data) => {
+        setReports(data)
+        setFilteredReports(data)
+        
+      });
     console.log("reports:  ", reports);
   }
 
@@ -96,7 +100,8 @@ function AdminReport() {
             </tr>
           </thead>
           <tbody>
-            {reports.map((data, idx) => (
+            {filteredReports?
+            filteredReports.map((data, idx) => (
               <tr
                 key={data._id}
                 className=" cursor-pointer  hover:bg-gray-scale-3"
@@ -108,15 +113,15 @@ function AdminReport() {
                 >
 
                   {data.status === "Not started" ? (
-                    <div className="my-1 flex justify-center items-center bg-not-started rounded-full">
+                    <div key={data.status} className="my-1 flex justify-center items-center bg-not-started rounded-full">
                       {data.status}
                     </div>
-                  ) : data.status === "Completed" ? (
-                    <div className="my-1 flex justify-center items-center bg-completed rounded-full">
+                  ) : data.status === "Closed" ? (
+                    <div key={data.status} className="my-1 flex justify-center items-center bg-completed rounded-full">
                       {data.status}
                     </div>
                   ) : (
-                    <div className="my-1 justify-center items-center bg-in-progress rounded-full">
+                    <div key={data.status} className="my-1 justify-center items-center bg-in-progress rounded-full">
                       {data.status}
                     </div>
                   )
@@ -147,7 +152,9 @@ function AdminReport() {
                   {data.updatedAt}
                 </td>
               </tr>
-            ))}
+            ))
+            :<></>
+          }
           </tbody>
         </table>
       </div>

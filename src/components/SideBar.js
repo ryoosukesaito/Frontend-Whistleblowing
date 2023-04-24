@@ -64,6 +64,8 @@ const SideBar = () => {
 
         <div className="border-t border-t-gray-scale-3 w-32 my-4 pt-4">
           <button
+            key="signout"
+            className="flex items-center text-center cursor-pointer"
             className="flex items-center text-center cursor-pointer hover:opacity-50"
             onClick={handleLogout}
             method="delete"
@@ -86,6 +88,7 @@ const SideBar = () => {
           </div>
           <div>
             <button
+              key="addreport"
               className="text-lg flex items-center cursor-pointer py-4"
               type="button"
               onClick={() => setMenubar(!menubar)}
@@ -108,6 +111,7 @@ const SideBar = () => {
 
         <div className="border-t border-t-gray-scale-3 my-4 pt-4 text-lg">
           <button
+            key="signout"
             className="flex items-center text-center cursor-pointer"
             onClick={handleLogout}
             method="delete"

@@ -59,7 +59,7 @@ function AdminList() {
         <tbody>
           {admins.map((data, idx) => (
             <tr 
-              key={data._id}
+              key={idx}
               className=" cursor-pointer hover:bg-gray-scale-3"
               onClick={handleClick}
             >

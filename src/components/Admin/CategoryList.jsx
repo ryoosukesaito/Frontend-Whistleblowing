@@ -57,8 +57,8 @@ function CategoryList() {
       
       {categories.map((data, idx) => (
         <div
-          className="flex flex-row items-center mb-7 text-xl"
-          key={data._id}
+          className="flex flex-row items-start justify-between my-3"
+          key={idx}
         >
           <button
             className="items-center mr-6"

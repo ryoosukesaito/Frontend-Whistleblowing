@@ -27,7 +27,20 @@ import { useState } from "react";
 import { AppContext } from "./context/appContext";
 
 function App() {
+  // フィルタ初期値
+  const filterVal ={
+      id:"",
+      statusNotStarted:false,
+      statusInProgress:false,
+      statusClosed:false,
+      subject:"",
+      createdAtFrom:'',
+      createdAtTo:'',
+      updatedAtFrom:'',
+      updatedAtTo:''
+    }
   const [reports, setReports] = useState([]);
+  const [filteredReports, setFilteredReports] = useState([]);
   const [reportDetail, setReportDetail] = useState([]);
   const [admins, setAdmins] = useState([]);
   const [users, setUsers] = useState([]);
@@ -35,6 +48,7 @@ function App() {
   const [newCategory, setNewCategory] = useState([]);
   const [histories, setHistories] = useState([]);
   const [adminDetail, setAdminDetail] = useState([]);
+  const [reportFilter, setReportFilter] = useState(filterVal);
   const admin = useSelector((state) => state.admin);
   const user = useSelector((state) => state.user);
 
@@ -57,6 +71,10 @@ function App() {
         setHistories,
         adminDetail,
         setAdminDetail,
+        reportFilter,
+        setReportFilter,
+        filteredReports,
+        setFilteredReports
       }}
     >
       <BrowserRouter>
