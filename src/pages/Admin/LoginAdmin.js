@@ -11,6 +11,7 @@ function LoginAdmin() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+
     //login Admin
     loginAdmin({ email, password }).then(({ data }) => {
       if (data) {
@@ -22,6 +23,12 @@ function LoginAdmin() {
       }
     });
   };
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      handleLogin(e);
+    }
+  };
+
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -48,6 +55,7 @@ function LoginAdmin() {
                 setEmail(e.target.value);
               }}
               value={email}
+              onKeyDown={handleEnter}
               required
             />
           </label>
@@ -61,6 +69,7 @@ function LoginAdmin() {
                 setPassword(e.target.value);
               }}
               value={password}
+              onKeyDown={handleEnter}
               required
             />
           </label>

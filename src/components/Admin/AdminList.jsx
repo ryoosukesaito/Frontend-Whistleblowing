@@ -33,10 +33,15 @@ function AdminList() {
     if (adminDetail) navigation(getAdminDetailUrl);
   }
 
+  
+
   return (
     <div>
       <div className="flex justify-end">
-        <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 cursor-pointer m-10">
+        <button 
+          className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 cursor-pointer m-10"
+         
+        >
           Create
         </button>
       </div>

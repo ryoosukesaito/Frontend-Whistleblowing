@@ -11,8 +11,9 @@ import Categories from "./pages/Admin/Categories";
 import AddNewAdmin from "./components/Admin/AddNewAdmin";
 import EditAdminAccount from "./components/Admin/EditAdminAccount";
 import Report from "./pages/Admin/Report";
-import AdminsDetail from "./components/Admin/AdminsDetail";
+import AdminsDetail from "./pages/Admin/AdminDetail";
 import AdminsDelete from "./components/Admin/AdminsDelete";
+import UserDetail from "./components/Admin/UserDetail";
 
 //Users router
 import Signup from "./pages/User/SignupUser";
@@ -105,8 +106,10 @@ function App() {
             </>
           )}
 
+          <Route path="/api/admin/userlist/userdetail" element={<UserDetail />} />
           <Route path="/api/admin/:id" element={<AdminsDetail />} />
           <Route path="/api/admin/delete/:id" element={<AdminsDelete />} />
+
 
           <Route
             path="/api/admin/admins/adminsdetail"
