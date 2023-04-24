@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function AdminAccountCreate() {
+function SignupUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function AdminAccountCreate() {
             <h1 className="">Whistleblowing</h1>
           </div>
           <h1 className=" text-main-color-1 text-3xl font-normal text-center mb-5">
-            Invite new admin/staff
+            Register account
           </h1>
           <div className="text-sm text-center mb-10">
             <p>
@@ -112,4 +112,4 @@ function AdminAccountCreate() {
   );
 }
 
-export default AdminAccountCreate;
+export default SignupUser;

@@ -31,6 +31,7 @@ function AdminReport() {
     await fetch(`${SERVER_URL}/api/admin/reports`)
       .then((res) => res.json())
       .then((data) => setReports(data));
+    console.log("reports:  ", reports);
   }
 
   async function handleClick(event) {

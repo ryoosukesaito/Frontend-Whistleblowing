@@ -35,6 +35,24 @@ const appApi = createApi({
         body: payload,
       }),
     }),
+
+    //register a new user
+    signupUser: builder.mutation({
+      query: (user) => ({
+        url: "/api/user/register",
+        method: "POST",
+        body: user,
+      }),
+    }),
+
+    // login User
+    loginUser: builder.mutation({
+      query: (user) => ({
+        url: "/api/user/login",
+        method: "POST",
+        body: user,
+      }),
+    }),
   }),
 });
 
@@ -42,6 +60,7 @@ export const {
   useSignupAdminMutation,
   useLoginAdminMutation,
   useLogoutAdminMutation,
+  useLoginUserMutation,
 } = appApi;
 
 export default appApi;
