@@ -16,7 +16,7 @@ const AdminsDelete = () => {
   }
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center mt-28">
       <div className="bg-white w-3/6 border-2">
         <h1 className="text-center mt-10 font-semibold">
           Are you sure to delete this user?

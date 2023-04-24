@@ -77,7 +77,7 @@ function Navbar() {
                     }
                   >
                     <div className="text-gray-scale-1 text-center">
-                      {notices?
+                      {notices === 0 ? 
                         notices.map((notice)=>{
                           return(
                             <div id={notice.id} onClick={async ()=>{

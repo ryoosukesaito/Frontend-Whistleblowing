@@ -49,16 +49,33 @@ const AdminsDetail = () => {
       </ul>
       <ul className='flex items-start flex-col w-2/5'>
        <li className='flex flex-row m-6'>
-          <div>{adminDetail._id}</div>
+          <input
+            placeholder={adminDetail._id}
+            type="text"
+            className="border w-56"
+          />
         </li>
         <li className='flex flex-row basis-2 m-6'>
-          <div>{adminDetail.role}</div>
+          <input 
+            placeholder={adminDetail.role}
+            type='text'
+            className="border w-56"
+          />
         </li>
         <li className='flex flex-row m-6'>
-          <div>{adminDetail.name}</div>
+          <input
+            placeholder={adminDetail.name}
+            type='text'
+            className="border w-56"
+          />
         </li>
         <li className='flex flex-row m-6'> 
-          <div>{adminDetail.email}</div>
+          <input
+            placeholder={adminDetail.email}
+            type="text"
+            className="border w-56"
+          />
+          
         </li>
       </ul>
       </div>
@@ -68,10 +85,10 @@ const AdminsDetail = () => {
             
             >
               Update</button>
-              <button 
+          <button 
             className="flex justify-center items-center w-20 h-6 bg-delete cursor-pointer m-20"
-            
-            >
+            onClick={deleteHandler}
+          >
               Delete</button>
         </div>
     </div>
