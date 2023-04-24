@@ -80,7 +80,7 @@ function Navbar() {
                       {notices?
                         notices.map((notice)=>{
                           return(
-                            <div id={notice.id} onClick={async ()=>{
+                            <div id={notice.id} key={notice.id} onClick={async ()=>{
                               setNotification(false)
                               await fetch(`${SERVER_URL}/api/admin/notices/`+ notice.id,{
                                 method:'DELETE',
@@ -92,7 +92,7 @@ function Navbar() {
                             }}>
                               <p className="text-lg mb-1 ">{notice.subject}</p> 
                               <p className="text-sm mb-2">New Message From User!</p>
-                              <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
+                              <hr className="h-px mb-2 bg-gray-scale-1 border-0"></hr>
                             </div>
                           )
                         })
