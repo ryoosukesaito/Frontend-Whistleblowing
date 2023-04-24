@@ -4,32 +4,32 @@ import { useSelector } from "react-redux";
 import { AppContext } from "../../context/appContext";
 import { SERVER_URL } from "../../constants/constants";
 
-import Histories from "./Histories";
-import HistoriesFooter from "./HistoriesFooter";
+import Histories from "../Admin/Histories";
+import HistoriesFooter from "../Admin/HistoriesFooter";
 import { useParams } from "react-router-dom";
-// import { report } from "../../../../../Backend-whistleblowing/src/routes";
 
-function ReportDetails() {
-  const admin = useSelector((state) => state.admin);
+//data Examples
+import { reportDataExamples } from "../../data/dataExample";
+
+function UserReportDetails() {
+  const user = useSelector((state) => state.user);
   const { id } = useParams();
-  const fetchURL = `${SERVER_URL}/api/admin/reports/${id}`;
+  const fetchURL = `${SERVER_URL}/api/user/reports/${id}`;
   const dataFetchedRef = useRef(false);
-
-  const statusOptions = ["Not started","onGoing","Closed"]
 
   const { reportDetail, setReportDetail, histories, setHistories } =
     useContext(AppContext);
 
   useEffect(() => {
-    if (admin) {
+    if (user) {
       if (dataFetchedRef.current) return;
       dataFetchedRef.current = true;
 
-      if (reportDetail.length === 0) {
-        getReportDetail();
-      }
+      // if (reportDetail.length === 0) {
+      //   getReportDetail();
+      // }
     }
-    getHistoryByReportId();
+    // getHistoryByReportId();
   }, [histories]);
 
   function getReportDetail() {
@@ -44,66 +44,45 @@ function ReportDetails() {
     fetch(`${SERVER_URL}/api/admin/history/${id}`)
       .then((res) => res.json())
       .then((data) => setHistories(data.histories));
-      getReportDetail()
-  }
-  const changeReportStatus = async(e)=>{
-    await fetch(fetchURL,{
-      method: 'PUT',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status:e.target.value})
-    })
-    .then((res) => res.json())
-    .catch((err) => console.error(err));
-    getReportDetail()
     console.log("histories:   ", histories);
   }
 
-  if (reportDetail.length === 0)
-    return (
-      <>
-        <div>Loading...</div>
-      </>
-    );
+  // if (reportDetail.length === 0)
+  //   return (
+  //     <>
+  //       <div>Loading...</div>
+  //     </>
+  //   );
 
   return (
     <>
       <div>
-        <div key={reportDetail._id}>
-          <div key="report-status">
-            <select id="status"
-              value={reportDetail.status}
-              onChange={changeReportStatus}
-            >
-              {statusOptions.map((option,index)=>{
-                return <option key={index}>
-                  {option}
-                </option>
-              })
-              }
-            </select>
-          </div>
+        <div key={reportDataExamples._id}>
           <div className="flex mb-3">
             <table className="w-1/2">
               <tbody>
                 <tr>
                   <td className="py-2">Report ID</td>
-                  <td className="py-2">: {reportDetail._id}</td>
+                  <td className="py-2">: {reportDataExamples._id}</td>
                 </tr>
                 <tr>
                   <td className="py-2">Post Date</td>
-                  <td className="py-2">: {reportDetail.createdAt}</td>
+                  <td className="py-2">: {reportDataExamples.createdAt}</td>
                 </tr>
                 <tr>
                   <td className="py-2">Update Date</td>
-                  <td className="py-2">: {reportDetail.updatedAt}</td>
+                  <td className="py-2">: {reportDataExamples.updatedAt}</td>
                 </tr>
                 <tr>
                   <td className="py-2">Your Name</td>
-                  <td className="py-2">: {reportDetail.userName}</td>
+                  <td className="py-2">: {reportDataExamples.userName}</td>
                 </tr>
                 <tr>
                   <td className="py-2">Your Department</td>
-                  <td className="py-2"> : {reportDetail.userDepartment}</td>
+                  <td className="py-2">
+                    {" "}
+                    : {reportDataExamples.userDepartment}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -111,11 +90,11 @@ function ReportDetails() {
               <tbody>
                 <tr>
                   <td>Category</td>
-                  <td>: {reportDetail.category_id}</td>
+                  <td>: {reportDataExamples.category_id}</td>
                 </tr>
                 <tr>
                   <td>Subject</td>
-                  <td>: {reportDetail.subject}</td>
+                  <td>: {reportDataExamples.subject}</td>
                 </tr>
                 <tr>
                   <td>File</td>
@@ -131,7 +110,7 @@ function ReportDetails() {
 
           <div className="my-3">
             <span className="text-lg">Description</span>
-            <div className="border p-2">{reportDetail.description}</div>
+            <div className="border p-2">{reportDataExamples.description}</div>
           </div>
         </div>
       </div>
@@ -149,4 +128,4 @@ function ReportDetails() {
   );
 }
 
-export default ReportDetails;
+export default UserReportDetails;

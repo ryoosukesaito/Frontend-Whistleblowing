@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../context/appContext";
 import { useSelector } from "react-redux";
@@ -24,12 +23,13 @@ const AdminsDetail = () => {
     await fetch(`${SERVER_URL}${getAdminDetailUrl}`)
       .then((res) => res.json())
       .then((data) => setAdminDetail(data));
+    console.log(adminDetail);
   }
 
   function deleteHandler() {
     navigation(`/api/admin/delete/${id}`);
   }
-  
+
   return (
     <div>
       <div className='flex justify-center mt-20'>
@@ -92,8 +92,7 @@ const AdminsDetail = () => {
               Delete</button>
         </div>
     </div>
-  )
-}
+  );
+};
 
-export default AdminsDetail
-
+export default AdminsDetail;
