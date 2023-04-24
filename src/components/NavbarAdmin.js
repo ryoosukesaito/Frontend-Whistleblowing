@@ -36,12 +36,12 @@ function NavbarUser() {
         <div className="w-full relative flex justify-between lg:w-auto lg:static">
           <a
             className="text-xl flex leading-snug px-3  py-2 items-center"
-            href="#"
+            href="/api/admin/reports/"
           >
             <img
               src={`${process.env.PUBLIC_URL}/favicon.ico`}
               alt="Logo"
-              className="h-7 w-7 mr-1.5"
+              className="h-7 w-7 mr-1.5 mb-1"
             />
             Whistleblowing Admin
           </a>
@@ -74,7 +74,7 @@ function NavbarUser() {
                 {admin && (
                   <div
                     className={
-                      "absolute bg-gray-scale-3 p-4 shadow top-12" +
+                      "rounded absolute bg-gray-scale-4 p-4 shadow top-12" +
                       (notification ? " flex" : " hidden")
                     }
                   >
@@ -121,7 +121,7 @@ function NavbarUser() {
                 )}
               </li>
               <li className="nav-item">
-                <a className="mr-10 px-3 py-2 flex items-center leading-snug hover:opacity-75">
+                <a className="mr-12 px-3 py-2 flex items-center leading-snug hover:opacity-75">
                   <UserCircleIcon className="h-8 w-8 mr-1.5" />
                   <p>{admin.name}</p>
                 </a>
