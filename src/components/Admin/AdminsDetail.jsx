@@ -49,11 +49,7 @@ const AdminsDetail = () => {
       </ul>
       <ul className='flex items-start flex-col w-2/5'>
        <li className='flex flex-row m-6'>
-          <input
-            placeholder={adminDetail._id}
-            type="text"
-            className="border w-56"
-          />
+          <div>{adminDetail._id}</div>
         </li>
         <li className='flex flex-row basis-2 m-6'>
           <input 

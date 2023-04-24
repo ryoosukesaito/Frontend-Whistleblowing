@@ -110,13 +110,12 @@ function App() {
           <Route path="/api/admin/:id" element={<AdminsDetail />} />
           <Route path="/api/admin/delete/:id" element={<AdminsDelete />} />
 
-<<<<<<< HEAD
 
-          <Route path="/signup" element={<Signup />} />
+
 
           <Route path="/api/admin/admins/adminsdetail" element={<AdminsDetail />} />
           <Route path="/api/admin/admins/adminsdelete" element={<AdminsDelete />} />
-=======
+
           <Route
             path="/api/admin/admins/adminsdetail"
             element={<AdminsDetail />}
@@ -125,7 +124,7 @@ function App() {
             path="/api/admin/admins/adminsdelete"
             element={<AdminsDelete />}
           />
->>>>>>> f23d842fa4c65b14f3827e6723c5b1a8d87bfc7a
+
         </Routes>
       </BrowserRouter>
     </AppContext.Provider>

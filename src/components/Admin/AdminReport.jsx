@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef,useState } from "react";
 import { reportTableHeaders } from "../../constants/constants";
 
 import { useSelector } from "react-redux";
@@ -9,11 +9,13 @@ import { useNavigate } from "react-router-dom";
 import { FunnelIcon } from "@heroicons/react/24/solid";
 
 import ReportFilter from "../Admin/ReportFilter";
+import { current } from "@reduxjs/toolkit";
 
 function AdminReport() {
   const dataFetchedRef = useRef(false);
   const admin = useSelector((state) => state.admin);
   const navigate = useNavigate();
+  const [show,setShow] = useState(false);
 
   const { reports, setReports, reportDetail, setReportDetail, setHistories } =
     useContext(AppContext);
@@ -59,14 +61,26 @@ function AdminReport() {
       </>
     );
 
+    const handleFilter = e => {
+      setShow(current => !current);
+    }
+
+    
+
   return (
     <div className="">
       <div className="flex justify-end">
-        <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 mr-10 cursor-pointer">
+        <button 
+          className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 mr-10 cursor-pointer"
+          onClick={handleFilter}
+        >
           <FunnelIcon className="h-4 w-4 mr-1.5" />
           Filter
         </button>
       </div>
+      {show && (
+        <ReportFilter />
+      )}
       <div className="h-full mt-5 flex items-start justify-center">
         <table className="w-full">
           <thead>
@@ -134,7 +148,6 @@ function AdminReport() {
           </tbody>
         </table>
       </div>
-      {/* <ReportFilter /> */}
     </div>
   );
 }
