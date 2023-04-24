@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { BellIcon } from "@heroicons/react/24/solid";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const user = useSelector((state) => state.user);
+  const dataFetchedRef = useRef(false);
   const navigate = useNavigate();
   const [navbar, setNavbar] = useState(false);
   const [notification, setNotification] = useState(false);
@@ -16,7 +17,13 @@ function Navbar() {
 
   // 画面読み込み時にnoticesを取りに行く
   useEffect(() => {
-    getNotices();
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
+    if (notices.length !== 0) {
+      getNotices();
+    } else {
+      return;
+    }
   }, []);
 
   const getNotices = async () => {
@@ -24,7 +31,7 @@ function Navbar() {
       headers: { "x-auth-token": user.token },
     })
       .then((res) => res.json())
-      .then((data) => setNotices([data]));
+      .then((data) => setNotices(data));
   };
 
   return (
@@ -76,7 +83,7 @@ function Navbar() {
                     }
                   >
                     <div className="text-gray-scale-1 text-center">
-                      {notices === 0 ? (
+                      {notices !== 0 ? (
                         notices.map((notice) => {
                           return (
                             <div

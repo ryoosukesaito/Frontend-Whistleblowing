@@ -4,7 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
-import { useLogoutAdminMutation } from "../services/appAPI";
+import {
+  useLogoutAdminMutation,
+  useLogoutUserMutation,
+} from "../services/appAPI";
 import { useSelector } from "react-redux";
 
 const SideBar = () => {
@@ -13,6 +16,7 @@ const SideBar = () => {
   const navigate = useNavigate();
   const [menubar, setMenubar] = useState(false);
   const [logoutAdmin] = useLogoutAdminMutation();
+  const [logoutUser] = useLogoutUserMutation();
   async function handleLogout(e) {
     e.preventDefault();
     if (admin) {
@@ -21,6 +25,7 @@ const SideBar = () => {
     }
     if (user) {
       console.log("Plz delete 'root' in Application inspect(検証)");
+      await logoutUser(user);
       navigate("/user");
     }
     window.location.reload();
@@ -75,7 +80,7 @@ const SideBar = () => {
       <div className="h-full w-full flex flex-col px-3 py-4 overflow-y-auto bg-gray-scale-4">
         <div className="items-start">
           <div className="my-4">
-            <Link to="#" className="text-lg py-4">
+            <Link to="/api/user/reports" className="text-lg py-4">
               History
             </Link>
           </div>

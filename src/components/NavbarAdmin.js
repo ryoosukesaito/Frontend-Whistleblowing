@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { BellIcon } from "@heroicons/react/24/solid";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function NavbarUser() {
   const admin = useSelector((state) => state.admin);
+  const dataFetchedRef = useRef(false);
   const navigate = useNavigate();
   const [navbar, setNavbar] = useState(false);
   const [notification, setNotification] = useState(false);
@@ -16,6 +17,8 @@ function NavbarUser() {
 
   // 画面読み込み時にnoticesを取りに行く
   useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     getNotices();
   }, []);
 
@@ -76,7 +79,7 @@ function NavbarUser() {
                     }
                   >
                     <div className="text-gray-scale-1 text-center">
-                      {notices === 0 ? (
+                      {notices !== 0 ? (
                         notices.map((notice) => {
                           return (
                             <div

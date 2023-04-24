@@ -3,11 +3,8 @@ import LoginAdmin from "./pages/Admin/LoginAdmin";
 import RequestResetPassword from "./pages/Admin/RequestResetPassword";
 import ResetPasswordAdmin from "./pages/Admin/ResetPasswordAdmin";
 import AdminAccountCreate from "./pages/Admin/AdminAccountCreate";
-import Signup from "./pages/Users/SignupUser";
-import Navbar from "./components/Navbar";
 import NavbarAdmin from "./components/NavbarAdmin";
 import ReportsPage from "./pages/Admin/ReportsPage";
-import UserReportsPage from "./pages/Users/UserReportsPage";
 import AdminAccounts from "./pages/Admin/AdminAccounts";
 import UserAccounts from "./pages/Admin/UserAccounts";
 import Categories from "./pages/Admin/Categories";
@@ -17,7 +14,12 @@ import Report from "./pages/Admin/Report";
 import AdminsDetail from "./components/Admin/AdminsDetail";
 import AdminsDelete from "./components/Admin/AdminsDelete";
 
-import LoginUser from "./pages/Users/LoginUser";
+//Users router
+import Signup from "./pages/User/SignupUser";
+import LoginUser from "./pages/User/LoginUser";
+import Navbar from "./components/Navbar";
+import UserReportsPage from "./pages/User/UserReportsPage";
+import UserReport from "./pages/User/UserReport";
 
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -74,6 +76,7 @@ function App() {
           <Route path="/api/user/register" element={<Signup />} />
           {/* user router after logging in */}
           <Route path="/api/user/reports" element={<UserReportsPage />} />
+          <Route path="/api/user/reports/id" element={<UserReport />} />
 
           {/* admin authentication route before logging in*/}
           <Route path="/" element={<LoginAdmin />} />
@@ -93,6 +96,7 @@ function App() {
               <Route path="/api/admin/reports" element={<ReportsPage />} />
 
               <Route path="/api/admin/reports/:id" element={<Report />} />
+
               <Route path="/api/admin/all" element={<AdminAccounts />} />
               <Route path="/api/admin/create/admin" element={<AddNewAdmin />} />
               <Route path="/api/admin/edit" element={<EditAdminAccount />} />
