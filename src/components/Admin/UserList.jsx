@@ -17,7 +17,11 @@ function UserList() {
   }
 
   return (
-    <div className="h-full mt-5 flex items-start justify-center">
+    <div>
+      <div className="text-gray-scale-2 font-bold text-2xl pl-3">
+        User list
+      </div>
+      <div className="h-full mt-5 flex items-start justify-center">
       <table className="w-full">
         <thead className="text-lg">
           <tr>
@@ -50,6 +54,8 @@ function UserList() {
         </tbody>
       </table>
     </div>
+    </div>
+    
   );
 }
 

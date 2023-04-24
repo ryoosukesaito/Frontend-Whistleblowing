@@ -41,7 +41,7 @@ function RequestResetPassword() {
           <label htmlFor="email">
             Email
             <input
-              className="border w-full py-3 px-3 mb-10"
+              className="border w-full py-3 px-3 mb-12"
               type="email"
               placeholder="Email"
               onChange={(e) => {
@@ -54,7 +54,7 @@ function RequestResetPassword() {
 
           <div className="text-center">
             <button
-              className="rounded px-8 py-2 mb-6 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
+              className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
               type="submit"
             >
               Submit request

@@ -35,8 +35,11 @@ function AdminList() {
 
   return (
     <div>
+      <div className="text-gray-scale-2 font-bold text-2xl pl-3">
+        Admin list
+      </div>
       <div className="flex justify-end">
-        <button className="flex rounded px-8 py-2 items-center cursor-pointer bg-gray-scale-3 mr-10 hover:bg-gray-scale-2 hover:text-white">
+        <button className="flex rounded px-8 py-1 items-center cursor-pointer bg-gray-scale-3 mr-10 hover:bg-gray-scale-2 hover:text-white">
           Create
         </button>
       </div>

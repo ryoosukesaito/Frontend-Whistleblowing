@@ -53,6 +53,9 @@ function ReportDetails() {
   return (
     <>
       <div>
+      <div className="text-gray-scale-2 font-bold text-xl mb-3">
+        Report detail
+      </div>
         <div key={reportDetail._id}>
           <div className="flex mb-3">
             <table className="w-1/2">
