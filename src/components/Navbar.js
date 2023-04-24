@@ -107,7 +107,7 @@ function Navbar() {
                               <p className="text-sm mb-2">
                                 New Message From User!
                               </p>
-                              <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
+                              <hr className="h-px mb-2 bg-gray-scale-1 border-0"></hr>
                             </div>
                           );
                         })

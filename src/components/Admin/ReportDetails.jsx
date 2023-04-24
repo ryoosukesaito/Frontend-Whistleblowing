@@ -15,7 +15,7 @@ function ReportDetails() {
   const fetchURL = `${SERVER_URL}/api/admin/reports/${id}`;
   const dataFetchedRef = useRef(false);
 
-  const statusOptions = ["Not started","onGoing","Closed"]
+  const statusOptions = ["Not started","In progress", "Closed"]
 
   const { reportDetail, setReportDetail, histories, setHistories } =
     useContext(AppContext);
