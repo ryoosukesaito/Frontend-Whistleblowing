@@ -92,7 +92,7 @@ function Navbar() {
                     }
                   >
                     <div className="text-gray-scale-1 text-center">
-                      {/* {notices !== 0 ? (
+                      {notices !== 0 ? (
                         notices.map((notice) => {
                           return (
                             <div
@@ -124,12 +124,12 @@ function Navbar() {
                         })
                       ) : (
                         <></>
-                      )} */}
+                      )}
                       {/* <p className="text-lg mb-1 ">Report Subject</p> 
                       <p className="text-sm mb-2">New Message From User!</p> 
                       <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
                       <p className="text-lg mb-1">Report Subject</p> 
-                      <p className="text-sm mb-2">New Message From User!</p> */}
+                      <p className="text-sm mb-2">New Message From User!</p>  */}
                     </div>
                   </div>
                 )}
