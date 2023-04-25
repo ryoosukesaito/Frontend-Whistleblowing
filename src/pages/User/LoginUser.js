@@ -13,12 +13,8 @@ function LoginUser() {
 
     //login Admin
     loginUser({ email, password }).then(({ data }) => {
-      if (data) {
-        navigate("/api/user/reports");
-      }
-      if (error) {
-        console.error(error.data.error);
-      }
+      if (data) navigate("/api/user/reports");
+      if (error) console.error(error.data.error);
     });
   };
 
@@ -66,7 +62,7 @@ function LoginUser() {
 
           <div className="mb-8 text-right underline underline-offset-auto">
             <button
-              onClick={() => navigate("/auth/requestResetPassword")}
+              onClick={() => navigate("api/user/password/email")}
               className="underline hover:opacity-50"
             >
               Forgot password?

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
 import RequestResetPassword from "./pages/Admin/RequestResetPassword";
+
 import ResetPasswordAdmin from "./pages/Admin/ResetPasswordAdmin";
 import AdminAccountCreate from "./pages/Admin/AdminAccountCreate";
 import NavbarAdmin from "./components/NavbarAdmin";
@@ -21,6 +22,9 @@ import LoginUser from "./pages/User/LoginUser";
 import Navbar from "./components/Navbar";
 import UserReportsPage from "./pages/User/UserReportsPage";
 import UserReport from "./pages/User/UserReport";
+import UserEditPassword from "./pages/User/UserEditPassword";
+import RequestResetPasswordUser from "./pages/User/RequestResetPasswordUser";
+import ResetPasswordUser from "./pages/User/ResetPasswordUser";
 
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -91,14 +95,23 @@ function App() {
 
         <Routes>
           {/* user authentication route before logging in */}
-          <Route path="/user" element={<LoginUser />} />
+          <Route path="/" element={<LoginUser />} />
           <Route path="/api/user/register" element={<Signup />} />
+          <Route
+            path="/api/user/password/email"
+            element={<RequestResetPasswordUser />}
+          />
+          <Route path="/users/passwordreset" element={<ResetPasswordUser />} />
+
           {/* user router after logging in */}
           <Route path="/api/user/reports" element={<UserReportsPage />} />
+          <Route path="/api/user/edit" element={<UserEditPassword />} />
+
           <Route path="/api/user/reports/:id" element={<UserReport />} />
 
+
           {/* admin authentication route before logging in*/}
-          <Route path="/" element={<LoginAdmin />} />
+          <Route path="/api/admin" element={<LoginAdmin />} />
           <Route
             path="/auth/requestResetPassword"
             element={<RequestResetPassword />}
@@ -107,6 +120,7 @@ function App() {
             path="/api/auth/passwordReset"
             element={<ResetPasswordAdmin />}
           />
+
           <Route path="/api/admin/signup" element={<AdminAccountCreate />} />
 
           {/* admin route after logging in */}
@@ -119,6 +133,7 @@ function App() {
               <Route path="/api/admin/all" element={<AdminAccounts />} />
               <Route path="/api/admin/create/admin" element={<AddNewAdmin />} />
               <Route path="/api/admin/edit" element={<EditAdminAccount />} />
+
               <Route path="/api/admin/users/all" element={<UserAccounts />} />
               <Route path="/api/admin/category/all" element={<Categories />} />
             </>

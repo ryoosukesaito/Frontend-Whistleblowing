@@ -4,7 +4,7 @@ import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import { SERVER_URL } from "../../constants/constants";
 
-function ResetPasswordAdmin() {
+function ResetPasswordUser() {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [token, setToken] = useState(null);
@@ -25,11 +25,14 @@ function ResetPasswordAdmin() {
     try {
       if (password !== password2) throw new Error("Password doesn't match.");
 
-      await fetch(`${SERVER_URL}/auth/resetPassword`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      await fetch(`${SERVER_URL}/api/user/password/reset`, {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          adminId: id,
+          userId: id,
           token: token,
           password: password,
         }),
@@ -63,7 +66,7 @@ function ResetPasswordAdmin() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="justify-center items-center bg-gray-scale-4 m-20 p-10 w-1/3 min-w-fit">
+      <div className="flex justify-center items-center bg-gray-scale-4 m-auto p-10">
         <form onSubmit={handleLogin} id="login" className="">
           <div className="text-4xl flex justify-center items-center mb-24">
             <img
@@ -74,9 +77,9 @@ function ResetPasswordAdmin() {
             <h1 className="">Whistleblowing</h1>
           </div>
           <h1 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
-            Admin
+            User
           </h1>
-          <h2 className=" text-main-color-1 text-2xl font-normal text-center mb-8">
+          <h2 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
             Reset Password
           </h2>
           <label htmlFor="email">
@@ -91,7 +94,7 @@ function ResetPasswordAdmin() {
               value={password}
               required
             />
-            <div className="w-full  flex justify-end pb-3 opacity-25 cursor-pointer ">
+            <div className="w-full  flex justify-end pb-3  opacity-25 cursor-pointer ">
               {pwStyle.type === "password" ? (
                 <EyeSlashIcon
                   className="h-7 w-7 relative -mt-12  mr-3 mb-5"
@@ -103,15 +106,12 @@ function ResetPasswordAdmin() {
                   onClick={showTypeHandler}
                 />
               )}
-
             </div>
-            
           </label>
           <label htmlFor="password">
             Confirm Password
-            <div className="flex items-center mb-4">
             <input
-              className="border w-full py-3 px-3 mb-5 mr-10"
+              className="border rounded w-full py-3 px-3 mb-5"
               type="password"
               placeholder="Confirm New Password"
               onChange={(e) => {
@@ -120,29 +120,22 @@ function ResetPasswordAdmin() {
               value={password2}
               required
             />
-            
-            </div>
-            
           </label>
-
           {msg ? (
             <div className="text-center mb-5 text-main-color-1">{msg}</div>
           ) : (
             <div className="text-center mb-5 text-red-600">{errMsg}</div>
           )}
-
-          <div className="text-center mt-8">
-
+          <div className="text-center">
             <button
-              className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
+              className="px-6 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-100 text-white"
               type="submit"
             >
               Reset Password
             </button>
           </div>
-
-          <div className="text-main-color-1 text-center underline underline-offset-auto hover:opacity-50">
-            <a href="/api/admin">Login</a>
+          <div className="text-main-color-1 text-center underline underline-offset-auto">
+            <a href="/">Login</a>
           </div>
         </form>
       </div>
@@ -150,4 +143,4 @@ function ResetPasswordAdmin() {
   );
 }
 
-export default ResetPasswordAdmin;
+export default ResetPasswordUser;
