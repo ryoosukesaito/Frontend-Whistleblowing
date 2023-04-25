@@ -9,7 +9,7 @@ function AdminAccounts() {
       <div className="h-full w-1/6">
         <SideBar />
       </div>
-      <div className="h-full w-5/6 flex flex-col justify-between">
+      <div className="h-full w-5/6 flex flex-col mt-3 px-3 py-4">
         <AdminList />
       </div>
     </div>

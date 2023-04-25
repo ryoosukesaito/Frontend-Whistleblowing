@@ -45,7 +45,7 @@ function Navbar() {
             <img
               src={`${process.env.PUBLIC_URL}/favicon.ico`}
               alt="Logo"
-              className="h-7 w-7 mr-1.5"
+              className="h-7 w-7 mr-1.5 mb-1"
             />
             Whistleblowing User
           </a>
@@ -78,7 +78,7 @@ function Navbar() {
                 {user && (
                   <div
                     className={
-                      "absolute bg-gray-scale-3 p-4 shadow top-12" +
+                      "rounded absolute bg-gray-scale-4 p-4 shadow top-12" +
                       (notification ? " flex" : " hidden")
                     }
                   >
@@ -107,7 +107,7 @@ function Navbar() {
                               <p className="text-sm mb-2">
                                 New Message From User!
                               </p>
-                              <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
+                              <hr className="h-px mb-2 bg-gray-scale-1 border-0"></hr>
                             </div>
                           );
                         })
@@ -124,7 +124,9 @@ function Navbar() {
                 )}
               </li>
               <li className="nav-item">
-                <a className="mr-10 px-3 py-2 flex items-center leading-snug hover:opacity-75">
+                <a
+                  className="mr-12 px-3 py-2 flex items-center leading-snug hover:opacity-75"
+                >
                   <UserCircleIcon className="h-8 w-8 mr-1.5" />
                   <p>{user.name}</p>
                 </a>

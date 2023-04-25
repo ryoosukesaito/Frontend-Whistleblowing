@@ -17,9 +17,13 @@ function UserList() {
   }
 
   return (
-    <div className="h-full flex items-start justify-center">
+    <div>
+      <div className="text-gray-scale-2 font-bold text-2xl pl-3">
+        User list
+      </div>
+      <div className="h-full mt-5 flex items-start justify-center">
       <table className="w-full">
-        <thead>
+        <thead className="text-lg">
           <tr>
             {usersTableHeaders.map((header, idx) => (
               <th key={idx} className="border-b-4 border-slate-600">
@@ -30,7 +34,10 @@ function UserList() {
         </thead>
         <tbody>
           {users.map((data, idx) => (
-            <tr key={idx}>
+            <tr 
+              key={idx}
+              className="hover:bg-gray-scale-3 cursor-pointer"
+            >
               <td className="border-b-2 border-slate-700 text-center">
                 <div className="my-3">
                   {data._id}
@@ -50,6 +57,8 @@ function UserList() {
         </tbody>
       </table>
     </div>
+    </div>
+    
   );
 }
 

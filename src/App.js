@@ -12,8 +12,9 @@ import Categories from "./pages/Admin/Categories";
 import AddNewAdmin from "./components/Admin/AddNewAdmin";
 import EditAdminAccount from "./components/Admin/EditAdminAccount";
 import Report from "./pages/Admin/Report";
-import AdminsDetail from "./components/Admin/AdminsDetail";
+import AdminsDetail from "./pages/Admin/AdminDetail";
 import AdminsDelete from "./components/Admin/AdminsDelete";
+import UserDetail from "./components/Admin/UserDetail";
 
 //Users router
 import Signup from "./pages/User/SignupUser";
@@ -30,7 +31,20 @@ import { useState } from "react";
 import { AppContext } from "./context/appContext";
 
 function App() {
+  // フィルタ初期値
+  const filterVal ={
+      id:"",
+      statusNotStarted:false,
+      statusInProgress:false,
+      statusClosed:false,
+      subject:"",
+      createdAtFrom:'',
+      createdAtTo:'',
+      updatedAtFrom:'',
+      updatedAtTo:''
+    }
   const [reports, setReports] = useState([]);
+  const [filteredReports, setFilteredReports] = useState([]);
   const [reportDetail, setReportDetail] = useState([]);
   const [admins, setAdmins] = useState([]);
   const [users, setUsers] = useState([]);
@@ -38,6 +52,7 @@ function App() {
   const [newCategory, setNewCategory] = useState([]);
   const [histories, setHistories] = useState([]);
   const [adminDetail, setAdminDetail] = useState([]);
+  const [reportFilter, setReportFilter] = useState(filterVal);
   const admin = useSelector((state) => state.admin);
   const user = useSelector((state) => state.user);
 
@@ -60,6 +75,10 @@ function App() {
         setHistories,
         adminDetail,
         setAdminDetail,
+        reportFilter,
+        setReportFilter,
+        filteredReports,
+        setFilteredReports
       }}
     >
       <BrowserRouter>
@@ -86,8 +105,10 @@ function App() {
 
           {/* user router after logging in */}
           <Route path="/api/user/reports" element={<UserReportsPage />} />
-          <Route path="/api/user/reports/id" element={<UserReport />} />
           <Route path="/api/user/edit" element={<UserEditPassword />} />
+
+          <Route path="/api/user/reports/:id" element={<UserReport />} />
+
 
           {/* admin authentication route before logging in*/}
           <Route path="/api/admin" element={<LoginAdmin />} />
@@ -118,8 +139,10 @@ function App() {
             </>
           )}
 
+          <Route path="/api/admin/userlist/userdetail" element={<UserDetail />} />
           <Route path="/api/admin/:id" element={<AdminsDetail />} />
           <Route path="/api/admin/delete/:id" element={<AdminsDelete />} />
+
 
           <Route
             path="/api/admin/admins/adminsdetail"

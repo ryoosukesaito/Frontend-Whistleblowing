@@ -31,7 +31,7 @@ function NavbarUser() {
       headers: { "x-auth-token": admin.token },
     })
       .then((res) => res.json())
-      .then((data) => setNotices([data]));
+      .then((data) => setNotices(data));
   };
 
   return (
@@ -40,12 +40,12 @@ function NavbarUser() {
         <div className="w-full relative flex justify-between lg:w-auto lg:static">
           <a
             className="text-xl flex leading-snug px-3  py-2 items-center"
-            href="#"
+            href="/api/admin/reports/"
           >
             <img
               src={`${process.env.PUBLIC_URL}/favicon.ico`}
               alt="Logo"
-              className="h-7 w-7 mr-1.5"
+              className="h-7 w-7 mr-1.5 mb-1"
             />
             Whistleblowing Admin
           </a>
@@ -66,7 +66,7 @@ function NavbarUser() {
             }
           >
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-              <li className="nav-item">
+              <li key="notice" className="nav-item">
                 <button
                   className="px-3 py-2 mr-32 flex items-center leading-snug hover:opacity-75"
                   type="button"
@@ -78,16 +78,17 @@ function NavbarUser() {
                 {admin && (
                   <div
                     className={
-                      "absolute bg-gray-scale-3 p-4 shadow top-12" +
+                      "rounded absolute bg-gray-scale-4 p-4 shadow top-12" +
                       (notification ? " flex" : " hidden")
                     }
                   >
                     <div className="text-gray-scale-1 text-center">
-                      {notices !== 0 ? (
+                      {notices?
+                        
                         notices.map((notice) => {
                           return (
                             <div
-                              id={notice.id}
+                              id={notice.id} key={notice.id}
                               onClick={async () => {
                                 setNotification(false);
                                 await fetch(
@@ -108,11 +109,11 @@ function NavbarUser() {
                               <p className="text-sm mb-2">
                                 New Message From User!
                               </p>
-                              <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
+                              <hr className="h-px mb-2 bg-gray-scale-1 border-0"></hr>
                             </div>
                           );
                         })
-                      ) : (
+                      : (
                         <></>
                       )}
                       {/* <p className="text-lg mb-1 ">Report Subject</p> 
@@ -124,8 +125,8 @@ function NavbarUser() {
                   </div>
                 )}
               </li>
-              <li className="nav-item">
-                <a className="mr-10 px-3 py-2 flex items-center leading-snug hover:opacity-75">
+              <li key="usericon" className="nav-item">
+                <a className="mr-12 px-3 py-2 flex items-center leading-snug hover:opacity-75">
                   <UserCircleIcon className="h-8 w-8 mr-1.5" />
                   <p>{admin.name}</p>
                 </a>

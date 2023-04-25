@@ -40,7 +40,7 @@ function RequestResetPassword() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="flex justify-center items-center bg-gray-scale-4 m-auto p-10">
+      <div className="justify-center items-center bg-gray-scale-4 m-20 p-10 w-1/3 min-w-fit">
         <form onSubmit={RequestSendHandler} id="login" className="">
           <div className="text-4xl flex justify-center items-center mb-24">
             <img
@@ -56,7 +56,7 @@ function RequestResetPassword() {
           <label htmlFor="email">
             Email
             <input
-              className="border w-full py-3 px-3 mb-10"
+              className="border w-full py-3 px-3 mb-12"
               type="email"
               placeholder="Email"
               onChange={(e) => {
@@ -74,13 +74,14 @@ function RequestResetPassword() {
           <div className="text-center">
             <button
               className="px-6 py-2 mb-6 cursor-pointer bg-main-color-1 hover:bg-gray-100 text-white disabled:bg-gray-300 disabled:text-gray-400"
+
               type="submit"
               disabled={msg}
             >
-              Submit Request
+              Submit request
             </button>
           </div>
-          <div className="text-main-color-1 text-center underline underline-offset-auto">
+          <div className="text-main-color-1 text-center underline underline-offset-auto hover:opacity-50">
             <a href="/">Login</a>
           </div>
         </form>
