@@ -1,4 +1,3 @@
-
 import React, { useContext } from "react";
 import { AppContext } from "../../context/appContext";
 import { useSelector } from "react-redux";
@@ -37,15 +36,14 @@ const AdminsDelete = () => {
             </li>
           </ul>
         </div>
-        <div className='flex flex-row justify-center mt-20 mb-10'>
-          <button 
+        <div className="flex flex-row justify-center mt-20 mb-10">
+          <button
             className="rounded text-enter px-8 py-2 bg-gray-scale-3 cursor-pointer mr-32"
+            onClick={cancelHandler}
           >
-            Update
+            Cancel
           </button>
-          <button 
-            className=" rounded text-center px-8 py-2 bg-delete cursor-pointer"
-          >
+          <button className=" rounded text-center px-8 py-2 bg-delete cursor-pointer">
             Delete
           </button>
         </div>

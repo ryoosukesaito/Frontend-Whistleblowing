@@ -33,8 +33,6 @@ function AdminList() {
     if (adminDetail) navigation(getAdminDetailUrl);
   }
 
-  
-
   return (
     <div>
       <div className="text-main-color-1 font-bold text-2xl pl-3">
@@ -46,52 +44,51 @@ function AdminList() {
         </button>
       </div>
       <div className="h-full mt-5 flex items-start justify-center">
-      <table className="w-full">
-        <thead className="text-lg">
-          <tr>
-            {adminsTableHeaders.map((header, idx) => (
-              <th key={idx} className="border-b-4 border-slate-600">
-                {header}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {admins.map((data, idx) => (
-            <tr 
-              key={idx}
-              className=" cursor-pointer hover:bg-gray-scale-3"
-              onClick={handleClick}
-            >
-              <td className="border-b-2 border-slate-700 text-center"
-              data-value={data._id}
-              >
-              <div className="my-3">
-                {data._id}
-              </div>
-              </td>
-              <td
-                className="border-b-2 border-slate-700 text-center"
-                data-value={data._id}
-              >
-                {data.role}
-              </td>
-              <td
-                className="border-b-2 border-slate-700 text-center"
-                data-value={data._id}
-              >
-                {data.name}
-              </td>
-              <td
-                className="border-b-2 border-slate-700 text-center"
-                data-value={data._id}
-              >
-                {data.createdAt}
-              </td>
+        <table className="w-full">
+          <thead className="text-lg">
+            <tr>
+              {adminsTableHeaders.map((header, idx) => (
+                <th key={idx} className="border-b-4 border-slate-600">
+                  {header}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {admins.map((data, idx) => (
+              <tr
+                key={idx}
+                className=" cursor-pointer hover:bg-gray-scale-3"
+                onClick={handleClick}
+              >
+                <td
+                  className="border-b-2 border-slate-700 text-center"
+                  data-value={data._id}
+                >
+                  <div className="my-3">{data._id}</div>
+                </td>
+                <td
+                  className="border-b-2 border-slate-700 text-center"
+                  data-value={data._id}
+                >
+                  {data.role}
+                </td>
+                <td
+                  className="border-b-2 border-slate-700 text-center"
+                  data-value={data._id}
+                >
+                  {data.name}
+                </td>
+                <td
+                  className="border-b-2 border-slate-700 text-center"
+                  data-value={data._id}
+                >
+                  {data.createdAt}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

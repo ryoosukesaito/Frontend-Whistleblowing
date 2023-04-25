@@ -28,7 +28,7 @@ function UserReport() {
   }, []);
 
   async function getReports() {
-    await fetch(`${SERVER_URL}/api/user/reports`,{
+    await fetch(`${SERVER_URL}/api/user/reports`, {
       headers: { "x-auth-token": user.token },
     })
       .then((res) => res.json())
@@ -41,14 +41,14 @@ function UserReport() {
     const id = event.target.dataset.value;
     console.log(id);
     const reportDetailUrl = `/api/user/reports/${id}`;
-    // await fetch(`${SERVER_URL}${reportDetailUrl}`)
-    //   .then((res) => res.json())
-    //   .then((data) => setReportDetail(data));
-    // if (reportDetail) {
-      // getHistoryByReportId(id);
+    await fetch(`${SERVER_URL}${reportDetailUrl}`)
+      .then((res) => res.json())
+      .then((data) => setReportDetail(data));
+    if (reportDetail) {
+      getHistoryByReportId(id);
       navigate(reportDetailUrl);
-    // }
-    // navigate(`/api/user/reports/${id}`);
+    }
+    navigate(`/api/user/reports/${id}`);
   }
 
   async function getHistoryByReportId(id) {
@@ -86,25 +86,32 @@ function UserReport() {
                 <td
                   className="border-b-2 border-slate-700 text-center"
                   data-value={data._id}
-                  >
+                >
                   {data.status === "Not started" ? (
-                    <div key={data.status} className="my-1 flex justify-center items-center bg-not-started rounded-full"
+                    <div
+                      key={data.status}
+                      className="my-1 flex justify-center items-center bg-not-started rounded-full"
                       data-value={data._id}
                     >
                       {data.status}
                     </div>
                   ) : data.status === "Closed" ? (
-                    <div key={data.status} className="my-1 flex justify-center items-center bg-completed rounded-full"
-                    data-value={data._id}>
+                    <div
+                      key={data.status}
+                      className="my-1 flex justify-center items-center bg-completed rounded-full"
+                      data-value={data._id}
+                    >
                       {data.status}
                     </div>
                   ) : (
-                    <div key={data.status} className="my-1 justify-center items-center bg-in-progress rounded-full"
-                    data-value={data._id}>
+                    <div
+                      key={data.status}
+                      className="my-1 justify-center items-center bg-in-progress rounded-full"
+                      data-value={data._id}
+                    >
                       {data.status}
                     </div>
-                  )
-                  }
+                  )}
                 </td>
                 <td
                   className="border-b-2 border-slate-700 text-center"

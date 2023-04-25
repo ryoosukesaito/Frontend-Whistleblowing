@@ -11,7 +11,6 @@ function LoginAdmin() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-
     //login Admin
     loginAdmin({ email, password }).then(({ data }) => {
       if (data) {
@@ -28,7 +27,6 @@ function LoginAdmin() {
       handleLogin(e);
     }
   };
-
 
   return (
     <div className="flex justify-center items-center h-screen">

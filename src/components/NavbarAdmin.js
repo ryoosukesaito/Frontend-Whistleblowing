@@ -19,7 +19,6 @@ function NavbarUser() {
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
-    console.log(notices);
     if (notices.length !== 0) {
       getNotices();
     } else {

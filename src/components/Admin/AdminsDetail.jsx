@@ -51,11 +51,7 @@ const AdminsDetail = () => {
             <div>{adminDetail._id}</div>
           </li>
           <li className="flex flex-row basis-2 m-6">
-            <input
-              placeholder={adminDetail.role}
-              type="text"
-              className="border w-56"
-            />
+            <div>{adminDetail.role}</div>
           </li>
           <li className="flex flex-row m-6">
             <input

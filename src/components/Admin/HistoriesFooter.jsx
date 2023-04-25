@@ -41,6 +41,9 @@ function HistoriesFooter() {
     window.location.reload();
     setMessage("");
   }
+
+  function fileUploadHandler(e) {}
+
   return (
     <>
       <div className=" bg-gray-scale-3 p-2">
@@ -53,10 +56,17 @@ function HistoriesFooter() {
             onChange={(e) => setMessage(e.target.value)}
           />
           <div className="flex flex-row justify-between">
-            <button className="cursor-pointe flex text-indigo-700">
+            <label className="cursor-pointer flex flex-row text-indigo-700">
               <DocumentArrowDownIcon className="h-6 w-6 mr-1 " />
               Upload File
-            </button>
+              <input
+                type="file"
+                name="file"
+                hidden
+                className=""
+                onChange={fileUploadHandler}
+              />
+            </label>
             <button className="px-8 py-1 m-2 rounded cursor-pointe bg-gray-scale-2 hover:bg-gray-scale-4 hover:text-gray-scale-1 text-white">
               Submit
             </button>

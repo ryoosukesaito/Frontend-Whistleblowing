@@ -51,6 +51,7 @@ function App() {
   const [newCategory, setNewCategory] = useState([]);
   const [histories, setHistories] = useState([]);
   const [adminDetail, setAdminDetail] = useState([]);
+  const [userDetail, setUserDetail] = useState([]);
   const [reportFilter, setReportFilter] = useState(filterVal);
   const admin = useSelector((state) => state.admin);
   const user = useSelector((state) => state.user);
@@ -78,6 +79,8 @@ function App() {
         setReportFilter,
         filteredReports,
         setFilteredReports,
+        userDetail,
+        setUserDetail,
       }}
     >
       <BrowserRouter>
@@ -126,10 +129,7 @@ function App() {
               <Route path="/api/admin/category/all" element={<Categories />} />
               <Route path="/api/admin/:id" element={<AdminsDetail />} />
               <Route path="/api/admin/delete/:id" element={<AdminsDelete />} />
-              <Route
-                path="/api/admin/userlist/userdetail"
-                element={<UserDetail />}
-              />
+              <Route path="/api/admin/users/:id" element={<UserDetail />} />
             </>
           )}
         </Routes>
