@@ -81,7 +81,7 @@ const EditUserPassword=()=>{
           <h1 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
             User
           </h1>
-          <h2 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
+          <h2 className=" text-main-color-1 text-2xl font-normal text-center mb-8">
             Reset Password
           </h2>
           <label htmlFor="password">
@@ -109,7 +109,7 @@ const EditUserPassword=()=>{
               value={newPassword}
               required
             />
-            <div className="w-full  flex justify-end pb-3  opacity-25 cursor-pointer ">
+            <div className="w-full  flex justify-end pb-3 opacity-25 cursor-pointer ">
               {pwStyle.type === "password" ? (
                 <EyeSlashIcon
                   className="h-7 w-7 relative -mt-12  mr-3 mb-5"
@@ -143,7 +143,7 @@ const EditUserPassword=()=>{
           )}
           <div className="text-center">
             <button
-              className="px-6 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-100 text-white"
+              className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
               type="submit"
             >
               Reset Password

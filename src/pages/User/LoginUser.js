@@ -20,7 +20,7 @@ function LoginUser() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="flex justify-center items-center bg-gray-scale-4 m-auto p-10">
+      <div className="justify-center items-center bg-gray-scale-4 m-auto p-10 w-1/3 min-w-fit">
         <form onSubmit={handleLogin} id="login" className="">
           <div className="text-4xl flex justify-center items-center mb-24">
             <img
@@ -31,7 +31,7 @@ function LoginUser() {
             <h1 className="">Whistleblowing</h1>
           </div>
           <h1 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
-            USER
+            User
           </h1>
           <label htmlFor="email">
             Email
@@ -49,7 +49,7 @@ function LoginUser() {
           <label htmlFor="password">
             Password
             <input
-              className="border rounded w-full py-3 px-3 mb-5"
+              className="border w-full py-3 px-3 mb-5"
               type="password"
               placeholder="Password"
               onChange={(e) => {
@@ -63,7 +63,7 @@ function LoginUser() {
           <div className="mb-8 text-right underline underline-offset-auto">
             <button
               onClick={() => navigate("api/user/password/email")}
-              className="underline"
+              className="underline hover:opacity-50"
             >
               Forgot password?
             </button>
@@ -75,13 +75,13 @@ function LoginUser() {
           )}
           <div className="text-center">
             <button
-              className="px-6 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-100 text-white"
+              className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
               type="submit"
             >
               Login
             </button>
           </div>
-          <div className="text-main-color-1 text-center underline underline-offset-auto">
+          <div className="text-main-color-1 text-center underline underline-offset-auto hover:opacity-50">
             <a href="api/user/register">Sign up</a>
           </div>
         </form>

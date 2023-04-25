@@ -37,7 +37,7 @@ function AdminList() {
 
   return (
     <div>
-      <div className="text-gray-scale-2 font-bold text-2xl pl-3">
+      <div className="text-main-color-1 font-bold text-2xl pl-3">
         Admin list
       </div>
       <div className="flex justify-end">

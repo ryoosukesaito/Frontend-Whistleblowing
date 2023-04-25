@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef,useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { reportTableHeaders } from "../../constants/constants";
 
 import { useSelector } from "react-redux";
@@ -15,10 +15,17 @@ function AdminReport() {
   const dataFetchedRef = useRef(false);
   const admin = useSelector((state) => state.admin);
   const navigate = useNavigate();
-  const [show,setShow] = useState(false);
+  const [show, setShow] = useState(false);
 
-  const { reports, setReports, reportDetail, setReportDetail,setHistories,filteredReports,setFilteredReports, } =
-    useContext(AppContext);
+  const {
+    reports,
+    setReports,
+    reportDetail,
+    setReportDetail,
+    setHistories,
+    filteredReports,
+    setFilteredReports,
+  } = useContext(AppContext);
 
   useEffect(() => {
     if (admin) {
@@ -33,11 +40,9 @@ function AdminReport() {
     await fetch(`${SERVER_URL}/api/admin/reports`)
       .then((res) => res.json())
       .then((data) => {
-        setReports(data)
-        setFilteredReports(data)
-        
+        setReports(data);
+        setFilteredReports(data);
       });
-    console.log("reports:  ", reports);
   }
 
   async function handleClick(event) {
@@ -65,32 +70,27 @@ function AdminReport() {
       </>
     );
 
-    const handleFilter = e => {
-      setShow(current => !current);
-    }
-
-    
+  const handleFilter = (e) => {
+    setShow((current) => !current);
+  };
 
   return (
-    <div className="">
-      <div className="text-gray-scale-2 font-bold text-2xl pl-3">
-        Reports
-      </div>
+    <div className="h-full">
+      <div className="text-main-color-1 font-bold text-2xl pl-3">Reports</div>
       <div className="flex justify-end">
-        <button 
-          className="flex px-8 py-1 items-center bg-gray-scale-3 mr-10 cursor-pointer"
+        <button
+          className="flex rounded px-8 py-1 items-center bg-gray-scale-3 mr-10 cursor-pointer hover:opacity-50"
           onClick={handleFilter}
         >
-          <FunnelIcon className="h-4 w-4 mr-2" />
+          <FunnelIcon className="h-4 w-4 mr-1" />
           Filter
         </button>
       </div>
-      {show && (
-        <ReportFilter />
-      )}
-      <div className="h-full mt-5 flex items-start justify-center">
-        <table className="w-full">
-          <thead>
+
+      {show && <ReportFilter />}
+      <div className="w-full h-full mt-5 relative overflow-y-auto items-center justify-center">
+        <table className="w-full h-fit">
+          <thead className="sticky top-0 bg-gray-scale-4 py-10">
             <tr>
               {reportTableHeaders.map((header, idx) => (
                 <th key={idx} className="border-b-4 border-slate-600">
@@ -99,65 +99,73 @@ function AdminReport() {
               ))}
             </tr>
           </thead>
-          <tbody>
-            {filteredReports?
-            filteredReports.map((data, idx) => (
-              <tr
-                key={data._id}
-                className=" cursor-pointer  hover:bg-gray-scale-3"
-                onClick={handleClick}
-              >
-                <td
-                  className="border-b-2 border-slate-700 text-center"
-                  data-value={data._id}
+          <tbody className="px-1 h-full">
+            {filteredReports ? (
+              filteredReports.map((data, idx) => (
+                <tr
+                  key={data._id}
+                  className="cursor-pointer  hover:bg-gray-scale-3"
+                  onClick={handleClick}
                 >
-
-                  {data.status === "Not started" ? (
-                    <div key={data.status} className="my-1 flex justify-center items-center bg-not-started rounded-full"
-                      data-value={data._id}>
-                      {data.status}
-                    </div>
-                  ) : data.status === "Closed" ? (
-                    <div key={data.status} className="my-1 flex justify-center items-center bg-completed rounded-full"
-                    data-value={data._id}>
-                      {data.status}
-                    </div>
-                  ) : (
-                    <div key={data.status} className="my-1 justify-center items-center bg-in-progress rounded-full"
-                    data-value={data._id}>
-                      {data.status}
-                    </div>
-                  )
-                  }
-                </td>
-                <td
-                  className="border-b-2 border-slate-700 text-center"
-                  data-value={data._id}
-                >
-                  {data.subject}
-                </td>
-                <td
-                  className="border-b-2 border-slate-700 text-center"
-                  data-value={data._id}
-                >
-                  {data.adminId}
-                </td>
-                <td
-                  className="border-b-2 border-slate-700 text-center"
-                  data-value={data._id}
-                >
-                  {data.createdAt}
-                </td>
-                <td
-                  className="border-b-2 border-slate-700 text-center"
-                  data-value={data._id}
-                >
-                  {data.updatedAt}
-                </td>
-              </tr>
-            ))
-            :<></>
-          }
+                  <td
+                    className="border-b-2 border-slate-700 text-center py-2"
+                    data-value={data._id}
+                  >
+                    {data.status === "Not started" ? (
+                      <div
+                        key={data.status}
+                        className="my-1 flex justify-center items-center bg-not-started rounded"
+                        data-value={data._id}
+                      >
+                        {data.status}
+                      </div>
+                    ) : data.status === "Closed" ? (
+                      <div
+                        key={data.status}
+                        className="my-1 flex justify-center items-center bg-completed rounded"
+                        data-value={data._id}
+                      >
+                        {data.status}
+                      </div>
+                    ) : (
+                      <div
+                        key={data.status}
+                        className="my-1 justify-center items-center bg-in-progress rounded"
+                        data-value={data._id}
+                      >
+                        {data.status}
+                      </div>
+                    )}
+                  </td>
+                  <td
+                    className="border-b-2 border-slate-700 text-center p-1 break-all"
+                    data-value={data._id}
+                  >
+                    {data.subject}
+                  </td>
+                  <td
+                    className="border-b-2 border-slate-700 text-center p-1"
+                    data-value={data._id}
+                  >
+                    {data.adminId}
+                  </td>
+                  <td
+                    className="border-b-2 border-slate-700 text-center p-1"
+                    data-value={data._id}
+                  >
+                    {data.createdAt}
+                  </td>
+                  <td
+                    className="border-b-2 border-slate-700 text-center p-1"
+                    data-value={data._id}
+                  >
+                    {data.updatedAt}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <></>
+            )}
           </tbody>
         </table>
       </div>

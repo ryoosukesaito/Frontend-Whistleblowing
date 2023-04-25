@@ -109,7 +109,7 @@ function ResetPasswordAdmin() {
           </label>
           <label htmlFor="password">
             Confirm Password
-            <div className="flex items-center mb-4">
+            
             <input
               className="border w-full py-3 px-3 mb-5 mr-10"
               type="password"
@@ -120,9 +120,6 @@ function ResetPasswordAdmin() {
               value={password2}
               required
             />
-            
-            </div>
-            
           </label>
 
           {msg ? (

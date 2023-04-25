@@ -4,7 +4,6 @@ import RequestResetPassword from "./pages/Admin/RequestResetPassword";
 
 import ResetPasswordAdmin from "./pages/Admin/ResetPasswordAdmin";
 import AdminAccountCreate from "./pages/Admin/AdminAccountCreate";
-import NavbarAdmin from "./components/NavbarAdmin";
 import ReportsPage from "./pages/Admin/ReportsPage";
 import AdminAccounts from "./pages/Admin/AdminAccounts";
 import UserAccounts from "./pages/Admin/UserAccounts";
@@ -19,7 +18,6 @@ import UserDetail from "./components/Admin/UserDetail";
 //Users router
 import Signup from "./pages/User/SignupUser";
 import LoginUser from "./pages/User/LoginUser";
-import Navbar from "./components/Navbar";
 import UserReportsPage from "./pages/User/UserReportsPage";
 import UserReport from "./pages/User/UserReport";
 import UserEditPassword from "./pages/User/UserEditPassword";
@@ -33,17 +31,17 @@ import { AppContext } from "./context/appContext";
 
 function App() {
   // フィルタ初期値
-  const filterVal ={
-      id:"",
-      statusNotStarted:false,
-      statusInProgress:false,
-      statusClosed:false,
-      subject:"",
-      createdAtFrom:'',
-      createdAtTo:'',
-      updatedAtFrom:'',
-      updatedAtTo:''
-    }
+  const filterVal = {
+    id: "",
+    statusNotStarted: false,
+    statusInProgress: false,
+    statusClosed: false,
+    subject: "",
+    createdAtFrom: "",
+    createdAtTo: "",
+    updatedAtFrom: "",
+    updatedAtTo: "",
+  };
   const [reports, setReports] = useState([]);
   const [filteredReports, setFilteredReports] = useState([]);
   const [reportDetail, setReportDetail] = useState([]);
@@ -79,21 +77,10 @@ function App() {
         reportFilter,
         setReportFilter,
         filteredReports,
-        setFilteredReports
+        setFilteredReports,
       }}
     >
       <BrowserRouter>
-        {admin && (
-          <>
-            <NavbarAdmin />
-          </>
-        )}
-        {user && (
-          <>
-            <Navbar />
-          </>
-        )}
-
         <Routes>
           {/* user authentication route before logging in */}
           <Route path="/" element={<LoginUser />} />
@@ -137,22 +124,14 @@ function App() {
 
               <Route path="/api/admin/users/all" element={<UserAccounts />} />
               <Route path="/api/admin/category/all" element={<Categories />} />
+              <Route path="/api/admin/:id" element={<AdminsDetail />} />
+              <Route path="/api/admin/delete/:id" element={<AdminsDelete />} />
+              <Route
+                path="/api/admin/userlist/userdetail"
+                element={<UserDetail />}
+              />
             </>
           )}
-
-          <Route path="/api/admin/userlist/userdetail" element={<UserDetail />} />
-          <Route path="/api/admin/:id" element={<AdminsDetail />} />
-          <Route path="/api/admin/delete/:id" element={<AdminsDelete />} />
-
-
-          <Route
-            path="/api/admin/admins/adminsdetail"
-            element={<AdminsDetail />}
-          />
-          <Route
-            path="/api/admin/admins/adminsdelete"
-            element={<AdminsDelete />}
-          />
         </Routes>
       </BrowserRouter>
     </AppContext.Provider>

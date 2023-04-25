@@ -57,7 +57,7 @@ function HistoriesFooter() {
               <DocumentArrowDownIcon className="h-6 w-6 mr-1 " />
               Upload File
             </button>
-            <button className="px-8 py-2 mb-1 rounded cursor-pointe bg-gray-scale-2 hover:bg-gray-scale-4 hover:text-gray-scale-1 text-white">
+            <button className="px-8 py-1 m-2 rounded cursor-pointe bg-gray-scale-2 hover:bg-gray-scale-4 hover:text-gray-scale-1 text-white">
               Submit
             </button>
           </div>
