@@ -86,31 +86,9 @@ const SideBar = () => {
             </Link>
           </div>
           <div className="my-10">
-            <Link to="#" className="py-4 hover:opacity-50">
+            <Link to="/api/user/reports/new" className="py-4 hover:opacity-50">
               Add report
             </Link>
-            {/*<button
-              key="addreport"
-              className="flex items-center cursor-pointer py-4 hover:opacity-50"
-              type="button"
-              onClick={() => setMenubar(!menubar)}
-            >
-
-              <Link to="/api/user/reports/new" className="text-lg py-4">
-                Add Report
-              </Link>
-              {/* <ChevronDownIcon className="h-6 w-6 ml-3" /> */}
-            </button>
-            <ul
-          id="managements-menu"
-          className={"pb-4" + (menubar ? " block" : " hidden")}
-        >
-          {sidebarMenu.map((menu, idx) => (
-            <li className="py-4" key={idx}>
-              <a href={menu.href}>{menu.name}</a>
-            </li>
-          ))}
-        </ul> */}
           </div>
         </div>
 

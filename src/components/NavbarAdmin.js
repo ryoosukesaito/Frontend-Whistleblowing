@@ -19,6 +19,7 @@ function NavbarUser() {
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
+    console.log(notices);
     if (notices.length !== 0) {
       getNotices();
     } else {
@@ -83,12 +84,12 @@ function NavbarUser() {
                     }
                   >
                     <div className="text-gray-scale-1 text-center">
-                      {notices?
-                        
+                      {notices ? (
                         notices.map((notice) => {
                           return (
                             <div
-                              id={notice.id} key={notice.id}
+                              id={notice.id}
+                              key={notice.id}
                               onClick={async () => {
                                 setNotification(false);
                                 await fetch(
@@ -113,7 +114,7 @@ function NavbarUser() {
                             </div>
                           );
                         })
-                      : (
+                      ) : (
                         <></>
                       )}
                       {/* <p className="text-lg mb-1 ">Report Subject</p> 

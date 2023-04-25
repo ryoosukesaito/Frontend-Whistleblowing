@@ -20,22 +20,27 @@ function Navbar() {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
     getNotices();
+  }, []);
+
+  useEffect(() => {
     if (notices.length !== 0) {
+      console.log(notices);
     } else {
       return;
     }
-  }, []);
+  }, [notices]);
 
   const getNotices = async () => {
-    await fetch(`${SERVER_URL}/api/user/notices`, {
+    await fetch(`${SERVER_URL}/api/user/notice`, {
       headers: { "x-auth-token": user.token },
     })
       .then((res) => res.json())
-      .then((data) =>{ 
+      .then((data) => {
         console.log("getnotice");
         console.log(`${SERVER_URL}/api/user/notices`);
         console.log(data);
-        setNotices(data)});
+        setNotices(data);
+      });
   };
 
   return (
@@ -87,15 +92,17 @@ function Navbar() {
                     }
                   >
                     <div className="text-gray-scale-1 text-center">
-                      {notices !== 0 ? (
+                      {/* {notices !== 0 ? (
                         notices.map((notice) => {
                           return (
                             <div
-                              id={notice._id} key={notice._id}
+                              id={notice._id}
+                              key={notice._id}
                               onClick={async () => {
                                 setNotification(false);
                                 await fetch(
-                                  `${SERVER_URL}/api/user/notices/` + notice._id,
+                                  `${SERVER_URL}/api/user/notices/` +
+                                    notice._id,
                                   {
                                     method: "DELETE",
                                     headers: { "x-auth-token": user.token },
@@ -117,7 +124,7 @@ function Navbar() {
                         })
                       ) : (
                         <></>
-                      )}
+                      )} */}
                       {/* <p className="text-lg mb-1 ">Report Subject</p> 
                       <p className="text-sm mb-2">New Message From User!</p> 
                       <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
@@ -128,9 +135,7 @@ function Navbar() {
                 )}
               </li>
               <li className="nav-item">
-                <a
-                  className="mr-12 px-3 py-2 flex items-center leading-snug hover:opacity-75"
-                >
+                <a className="mr-12 px-3 py-2 flex items-center leading-snug hover:opacity-75">
                   <UserCircleIcon className="h-8 w-8 mr-1.5" />
                   <p>{user.name}</p>
                 </a>
