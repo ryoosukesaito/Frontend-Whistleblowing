@@ -19,7 +19,11 @@ function NavbarUser() {
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
-    getNotices();
+    if (notices.length !== 0) {
+      getNotices();
+    } else {
+      return;
+    }
   }, []);
 
   const getNotices = async () => {
