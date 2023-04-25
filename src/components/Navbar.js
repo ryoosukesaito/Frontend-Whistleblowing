@@ -33,14 +33,11 @@ function Navbar() {
   }, [notices]);
 
   const getNotices = async () => {
-    await fetch(`${SERVER_URL}/api/user/notice`, {
+    await fetch(`${SERVER_URL}/api/user/notices`, {
       headers: { "x-auth-token": user.token },
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("getnotice");
-        console.log(`${SERVER_URL}/api/user/notices`);
-        console.log(data);
         setNotices(data);
       });
   };
@@ -48,7 +45,6 @@ function Navbar() {
   return (
     <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-main-color-1 text-white">
       <div className="w-full mx-2 flex flex-wrap items-center justify-between">
-        <button onClick={()=>console.log(user)}>usertest</button>
         <div className="w-full relative flex justify-between lg:w-auto lg:static">
           <a
             className="text-xl flex leading-snug px-3  py-2 items-center"
@@ -95,7 +91,7 @@ function Navbar() {
                     }
                   >
                     <div className="text-gray-scale-1 text-center">
-                      {notices? (
+                      {/* {notices? (
                         notices.map((notice) => {
                           return (
                             <div
@@ -127,7 +123,7 @@ function Navbar() {
                         })
                       ) : (
                         <></>
-                      )}
+                      )} */}
                       {/* <p className="text-lg mb-1 ">Report Subject</p> 
                       <p className="text-sm mb-2">New Message From User!</p> 
                       <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
