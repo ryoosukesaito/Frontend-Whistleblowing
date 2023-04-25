@@ -65,7 +65,6 @@ const SideBar = () => {
         <div className="border-t border-t-gray-scale-3 w-32 my-4 pt-4">
           <button
             key="signout"
-            className="flex items-center text-center cursor-pointer"
             className="flex items-center text-center cursor-pointer hover:opacity-50"
             onClick={handleLogout}
             method="delete"
@@ -79,24 +78,26 @@ const SideBar = () => {
 
   if (user)
     return (
-      <div className="h-full w-full flex flex-col px-3 py-4 overflow-y-auto bg-gray-scale-4">
-        <div className="items-start">
-          <div className="my-4">
-            <Link to="/api/user/reports" className="text-lg py-4">
+      <div className="h-full w-full flex flex-col pl-10 pr-3 py-4 overflow-y-auto bg-gray-scale-4 text-2xl">
+        <div className="pb-5">
+          <div className="my-10 flex">
+            <Link to="/api/user/reports" className="py-4 hover:opacity-50">
               History
             </Link>
           </div>
-          <div>
-            <button
+          <div className="my-10">
+            <Link to="#" className="py-4 hover:opacity-50">
+              Add report
+            </Link>
+            {/*<button
               key="addreport"
-              className="text-lg flex items-center cursor-pointer py-4"
+              className="flex items-center cursor-pointer py-4 hover:opacity-50"
               type="button"
               onClick={() => setMenubar(!menubar)}
             >
               Add Report
-              <ChevronDownIcon className="h-6 w-6 ml-3" />
             </button>
-            {/* <ul
+            <ul
           id="managements-menu"
           className={"pb-4" + (menubar ? " block" : " hidden")}
         >
@@ -109,15 +110,15 @@ const SideBar = () => {
           </div>
         </div>
 
-        <div className="border-t border-t-gray-scale-3 my-4 pt-4 text-lg">
+        <div className="border-t border-t-gray-scale-3 w-32 my-4 pt-4">
           <button
             key="signout"
-            className="flex items-center text-center cursor-pointer"
+            className="flex items-center text-center cursor-pointer hover:opacity-50"
             onClick={handleLogout}
             method="delete"
           >
             Sign out
-            <ArrowRightOnRectangleIcon className="h-7 w-7 ml-3" />
+            <ArrowRightOnRectangleIcon className="h-6 w-6 mt-1 ml-3" />
           </button>
         </div>
       </div>
