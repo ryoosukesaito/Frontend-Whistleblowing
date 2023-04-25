@@ -73,7 +73,7 @@ function RequestResetPassword() {
           )}
           <div className="text-center">
             <button
-              className="px-6 py-2 mb-6 cursor-pointer bg-main-color-1 hover:bg-gray-100 text-white disabled:bg-gray-300 disabled:text-gray-400"
+              className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1 disabled:bg-gray-300 disabled:text-gray-400"
 
               type="submit"
               disabled={msg}
