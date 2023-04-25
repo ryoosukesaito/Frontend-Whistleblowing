@@ -1,47 +1,59 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useUpdatePasswordUserMutation } from "../../services/appAPI";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  useLogoutUserMutation,
+} from "../../services/appAPI";
 
-function EditUserPassword() {
+const EditUserPassword=()=>{
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPassword2, setNewPassword2] = useState("");
   const [msg, setMsg] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [logoutUser] = useLogoutUserMutation();
   const [updatePasswordUser, { error }] = useUpdatePasswordUserMutation();
 
   const user = useSelector((state) => state.user);
-  const token = user.token;
+  const [token,setToken]=useState("")
+  const navigate = useNavigate()
 
-  const handleLogin = async (e) => {
+  useEffect(() => {
+    if(user){
+      setToken(user.token)
+    } else{
+      navigate("/")
+    }
+  }, [])
+  
+  
+  const handlePasswordReset = async (e) => {
     e.preventDefault();
     try {
       if (newPassword !== newPassword2)
         throw new Error("Password doesn't match.");
-
-      updatePasswordUser({ currentPassword, newPassword, token }).then(
-        ({ data }) => {
-          if (data) setMsg(data.message);
-          if (error) console.error(error);
-        }
-      );
-      // .then((res) => {
-      //   if (res.status === 200) {
-      //     setErrMsg("");
-      //     setMsg("Successfully reset your password");
-      //   } else if (res.status === 500) {
-      //     throw new Error("Password already updated.");
-      //   }
-      // })
-      // .catch((error) => {
-      //   throw new Error(error.message);
-      // });
-    } catch (e) {
-      setMsg("");
-      setErrMsg(e.message);
-    }
+        await updatePasswordUser({body:{ currentPassword, newPassword},token:token}).then(
+          ({ data }) => {
+            if (data) setMsg(data.message);
+            if (error) console.error(error);
+          }
+        )
+        .then(() => {
+            setErrMsg("");
+            setMsg("Successfully reset your password");
+            logoutUser(user);
+            navigate("/")
+        })
+        .catch((error) => {
+          throw new Error(error.message);
+        });
+      } catch (e) {
+        setMsg("");
+        setErrMsg(e.message);
+      }
   };
 
   //Icon trigger js
@@ -57,7 +69,7 @@ function EditUserPassword() {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="flex justify-center items-center bg-gray-scale-4 m-auto p-10">
-        <form onSubmit={handleLogin} id="login" className="">
+        <form onSubmit={handlePasswordReset} id="onSubmit" className="">
           <div className="text-4xl flex justify-center items-center mb-24">
             <img
               src={`${process.env.PUBLIC_URL}/favicon.ico`}
@@ -76,7 +88,7 @@ function EditUserPassword() {
             Current Password
             <input
               className="border rounded w-full py-3 px-3 mb-5"
-              type="text"
+              type={pwStyle.type}
               placeholder="Current Password"
               onChange={(e) => {
                 setCurrentPassword(e.target.value);
@@ -85,7 +97,7 @@ function EditUserPassword() {
               required
             />
           </label>
-          <label htmlFor="email">
+          <label htmlFor="password">
             Password
             <input
               className="border w-full py-3 px-3 mb-3"

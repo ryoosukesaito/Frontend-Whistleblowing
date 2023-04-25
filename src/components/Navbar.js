@@ -8,17 +8,19 @@ import { SERVER_URL } from "../constants/constants";
 import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+
   const user = useSelector((state) => state.user);
   const dataFetchedRef = useRef(false);
   const navigate = useNavigate();
   const [navbar, setNavbar] = useState(false);
   const [notification, setNotification] = useState(false);
+  const [resetPasswordShow, setResetPasswordShow] = useState(false);
   const [notices, setNotices] = useState([]);
 
   // 画面読み込み時にnoticesを取りに行く
   useEffect(() => {
     if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
+      dataFetchedRef.current = true;
     getNotices();
     if (notices.length !== 0) {
     } else {
@@ -37,10 +39,11 @@ function Navbar() {
         console.log(data);
         setNotices(data)});
   };
-
+  if(!user)return <></>
   return (
     <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-gray-scale-2 text-white">
       <div className="w-full mx-2 flex flex-wrap items-center justify-between">
+        <button onClick={()=>console.log(user)}>usertest</button>
         <div className="w-full relative flex justify-between lg:w-auto lg:static">
           <a
             className="text-xl flex leading-snug px-3  py-2 items-center"
@@ -87,7 +90,7 @@ function Navbar() {
                     }
                   >
                     <div className="text-gray-scale-1 text-center">
-                      {notices !== 0 ? (
+                      {notices? (
                         notices.map((notice) => {
                           return (
                             <div
@@ -113,7 +116,7 @@ function Navbar() {
                               </p>
                               <hr className="h-px mb-2 bg-gray-scale-1 border-0"></hr>
                             </div>
-                          );
+                          )
                         })
                       ) : (
                         <></>
@@ -131,8 +134,27 @@ function Navbar() {
                 <a
                   className="mr-12 px-3 py-2 flex items-center leading-snug hover:opacity-75"
                 >
+                <button
+                  className="px-3 py-2 mr-32 flex items-center leading-snug hover:opacity-75"
+                  type="button"
+                  onClick={() => setResetPasswordShow (!resetPasswordShow)}
+                >
                   <UserCircleIcon className="h-8 w-8 mr-1.5" />
                   <p>{user.name}</p>
+                </button>
+                <div
+                    className={
+                      "rounded absolute bg-gray-scale-4 p-4 shadow top-12" +
+                      (resetPasswordShow ? " flex" : " hidden")
+                    }
+                  >
+                    <div className="text-gray-scale-1 text-center" onClick={()=>{
+                      setResetPasswordShow (!resetPasswordShow)
+                      navigate("/api/user/edit/")
+                    }}> 
+                        Change Password
+                    </div>
+                  </div>
                 </a>
               </li>
             </ul>
