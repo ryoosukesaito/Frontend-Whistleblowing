@@ -92,8 +92,10 @@ const SideBar = () => {
               type="button"
               onClick={() => setMenubar(!menubar)}
             >
-              Add Report
-              <ChevronDownIcon className="h-6 w-6 ml-3" />
+              <Link to="/api/user/reports/new" className="text-lg py-4">
+                Add Report
+              </Link>
+              {/* <ChevronDownIcon className="h-6 w-6 ml-3" /> */}
             </button>
             {/* <ul
           id="managements-menu"

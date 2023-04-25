@@ -9,7 +9,7 @@ import HistoriesFooter from "./HistoriesFooter";
 import { useParams } from "react-router-dom";
 
 //data Examples
-import { reportDetail } from "../../data/dataExample";
+// import { reportDetail } from "../../data/dataExample";
 
 function UserReportDetails() {
   const user = useSelector((state) => state.user);
@@ -49,7 +49,7 @@ function UserReportDetails() {
   //   console.log("histories:   ", histories);
   // }
 
-  if (reportDetail.length === 0)
+  if (!reportDetail)
     return (
       <>
         <div>Loading...</div>

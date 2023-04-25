@@ -21,6 +21,7 @@ import LoginUser from "./pages/User/LoginUser";
 import Navbar from "./components/Navbar";
 import UserReportsPage from "./pages/User/UserReportsPage";
 import UserReport from "./pages/User/UserReport";
+import UserReportNew from "./pages/User/UserReportNew";
 
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -96,6 +97,7 @@ function App() {
           {/* user router after logging in */}
           <Route path="/api/user/reports" element={<UserReportsPage />} />
           <Route path="/api/user/reports/:id" element={<UserReport />} />
+          <Route path="/api/user/reports/new" element={<UserReportNew />} />
 
           {/* admin authentication route before logging in*/}
           <Route path="/" element={<LoginAdmin />} />
