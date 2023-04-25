@@ -100,7 +100,7 @@ const SideBar = () => {
                 Add Report
               </Link>
               {/* <ChevronDownIcon className="h-6 w-6 ml-3" /> */}
-            </button>
+            {/*</button>
             <ul
           id="managements-menu"
           className={"pb-4" + (menubar ? " block" : " hidden")}

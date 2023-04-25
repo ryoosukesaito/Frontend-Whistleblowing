@@ -72,7 +72,7 @@ function AdminReport() {
     
 
   return (
-    <div className="">
+    <div className="h-full">
       <div className="text-main-color-1 font-bold text-2xl pl-3">
         Reports
       </div>
@@ -88,9 +88,9 @@ function AdminReport() {
       {show && (
         <ReportFilter />
       )}
-      <div className="h-full mt-5 flex items-start justify-center">
-        <table className="w-full">
-          <thead>
+      <div className="w-full h-full mt-5 relative overflow-y-auto items-center justify-center">
+        <table className="w-full h-fit">
+          <thead className="sticky top-0 bg-gray-scale-4 py-10">
             <tr>
               {reportTableHeaders.map((header, idx) => (
                 <th key={idx} className="border-b-4 border-slate-600">
@@ -99,7 +99,7 @@ function AdminReport() {
               ))}
             </tr>
           </thead>
-          <tbody className="px-1">
+          <tbody className="px-1 h-full">
             {filteredReports?
             filteredReports.map((data, idx) => (
               <tr
@@ -113,17 +113,17 @@ function AdminReport() {
                 >
 
                   {data.status === "Not started" ? (
-                    <div key={data.status} className="my-1 flex justify-center items-center bg-not-started rounded-full"
+                    <div key={data.status} className="my-1 flex justify-center items-center bg-not-started rounded"
                       data-value={data._id}>
                       {data.status}
                     </div>
                   ) : data.status === "Closed" ? (
-                    <div key={data.status} className="my-1 flex justify-center items-center bg-completed rounded-full"
+                    <div key={data.status} className="my-1 flex justify-center items-center bg-completed rounded"
                     data-value={data._id}>
                       {data.status}
                     </div>
                   ) : (
-                    <div key={data.status} className="my-1 justify-center items-center bg-in-progress rounded-full"
+                    <div key={data.status} className="my-1 justify-center items-center bg-in-progress rounded"
                     data-value={data._id}>
                       {data.status}
                     </div>
@@ -131,25 +131,25 @@ function AdminReport() {
                   }
                 </td>
                 <td
-                  className="border-b-2 border-slate-700 text-center py-2"
+                  className="border-b-2 border-slate-700 text-center p-1 break-all"
                   data-value={data._id}
                 >
                   {data.subject}
                 </td>
                 <td
-                  className="border-b-2 border-slate-700 text-center py-2"
+                  className="border-b-2 border-slate-700 text-center p-1"
                   data-value={data._id}
                 >
                   {data.adminId}
                 </td>
                 <td
-                  className="border-b-2 border-slate-700 text-center py-2"
+                  className="border-b-2 border-slate-700 text-center p-1"
                   data-value={data._id}
                 >
                   {data.createdAt}
                 </td>
                 <td
-                  className="border-b-2 border-slate-700 text-center py-2"
+                  className="border-b-2 border-slate-700 text-center p-1"
                   data-value={data._id}
                 >
                   {data.updatedAt}
