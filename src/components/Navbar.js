@@ -19,8 +19,8 @@ function Navbar() {
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
+    getNotices();
     if (notices.length !== 0) {
-      getNotices();
     } else {
       return;
     }
@@ -31,7 +31,11 @@ function Navbar() {
       headers: { "x-auth-token": user.token },
     })
       .then((res) => res.json())
-      .then((data) => setNotices(data));
+      .then((data) =>{ 
+        console.log("getnotice");
+        console.log(`${SERVER_URL}/api/user/notices`);
+        console.log(data);
+        setNotices(data)});
   };
 
   return (
@@ -87,11 +91,11 @@ function Navbar() {
                         notices.map((notice) => {
                           return (
                             <div
-                              id={notice.id} key={notice.id}
+                              id={notice._id} key={notice._id}
                               onClick={async () => {
                                 setNotification(false);
                                 await fetch(
-                                  `${SERVER_URL}/api/user/notices/` + notice.id,
+                                  `${SERVER_URL}/api/user/notices/` + notice._id,
                                   {
                                     method: "DELETE",
                                     headers: { "x-auth-token": user.token },
@@ -103,9 +107,9 @@ function Navbar() {
                                 );
                               }}
                             >
-                              <p className="text-lg mb-1 ">{notice.subject}</p>
+                              <p className="text-lg mb-1 ">{notice.reportId}</p>
                               <p className="text-sm mb-2">
-                                New Message From User!
+                                The Report Updated!
                               </p>
                               <hr className="h-px mb-2 bg-gray-scale-1 border-0"></hr>
                             </div>

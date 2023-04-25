@@ -25,6 +25,7 @@ import UserReport from "./pages/User/UserReport";
 import UserEditPassword from "./pages/User/UserEditPassword";
 import RequestResetPasswordUser from "./pages/User/RequestResetPasswordUser";
 import ResetPasswordUser from "./pages/User/ResetPasswordUser";
+import UserReportNew from "./pages/User/UserReportNew";
 
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -108,7 +109,7 @@ function App() {
           <Route path="/api/user/edit" element={<UserEditPassword />} />
 
           <Route path="/api/user/reports/:id" element={<UserReport />} />
-
+          <Route path="/api/user/reports/new" element={<UserReportNew />} />
 
           {/* admin authentication route before logging in*/}
           <Route path="/api/admin" element={<LoginAdmin />} />
