@@ -21,12 +21,12 @@ const SideBar = () => {
     e.preventDefault();
     if (admin) {
       await logoutAdmin(admin);
-      navigate("/");
+      navigate("/api/admin");
     }
     if (user) {
       console.log("Plz delete 'root' in Application inspect(検証)");
       await logoutUser(user);
-      navigate("/user");
+      navigate("/");
     }
     window.location.reload();
   }

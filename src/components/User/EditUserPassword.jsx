@@ -1,50 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useUpdatePasswordUserMutation } from "../../services/appAPI";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
-import { SERVER_URL } from "../../constants/constants";
+import { useSelector } from "react-redux";
 
-function ResetPasswordAdmin() {
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [token, setToken] = useState(null);
-  const [id, setId] = useState(null);
+function EditUserPassword() {
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPassword2, setNewPassword2] = useState("");
   const [msg, setMsg] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [updatePasswordUser, { error }] = useUpdatePasswordUserMutation();
 
-  const location = useLocation();
-
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    setToken(searchParams.get("token"));
-    setId(searchParams.get("id"));
-  }, [location.search]);
+  const user = useSelector((state) => state.user);
+  const token = user.token;
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      if (password !== password2) throw new Error("Password doesn't match.");
+      if (newPassword !== newPassword2)
+        throw new Error("Password doesn't match.");
 
-      await fetch(`${SERVER_URL}/auth/resetPassword`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          adminId: id,
-          token: token,
-          password: password,
-        }),
-      })
-        .then((res) => {
-          if (res.status === 200) {
-            setErrMsg("");
-            setMsg("Successfully reset your password");
-          } else if (res.status === 500) {
-            throw new Error("Password already updated.");
-          }
-        })
-        .catch((error) => {
-          throw new Error(error.message);
-        });
+      updatePasswordUser({ currentPassword, newPassword, token }).then(
+        ({ data }) => {
+          if (data) setMsg(data.message);
+          if (error) console.error(error);
+        }
+      );
+      // .then((res) => {
+      //   if (res.status === 200) {
+      //     setErrMsg("");
+      //     setMsg("Successfully reset your password");
+      //   } else if (res.status === 500) {
+      //     throw new Error("Password already updated.");
+      //   }
+      // })
+      // .catch((error) => {
+      //   throw new Error(error.message);
+      // });
     } catch (e) {
       setMsg("");
       setErrMsg(e.message);
@@ -74,24 +67,37 @@ function ResetPasswordAdmin() {
             <h1 className="">Whistleblowing</h1>
           </div>
           <h1 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
-            Admin
+            User
           </h1>
           <h2 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
             Reset Password
           </h2>
+          <label htmlFor="password">
+            Current Password
+            <input
+              className="border rounded w-full py-3 px-3 mb-5"
+              type="text"
+              placeholder="Current Password"
+              onChange={(e) => {
+                setCurrentPassword(e.target.value);
+              }}
+              value={currentPassword}
+              required
+            />
+          </label>
           <label htmlFor="email">
             Password
             <input
               className="border w-full py-3 px-3 mb-3"
               type={pwStyle.type}
-              placeholder="Password"
+              placeholder="New Password"
               onChange={(e) => {
-                setPassword(e.target.value);
+                setNewPassword(e.target.value);
               }}
-              value={password}
+              value={newPassword}
               required
             />
-            <div className="w-full  flex justify-end pb-3 opacity-25 cursor-pointer ">
+            <div className="w-full  flex justify-end pb-3  opacity-25 cursor-pointer ">
               {pwStyle.type === "password" ? (
                 <EyeSlashIcon
                   className="h-7 w-7 relative -mt-12  mr-3 mb-5"
@@ -112,9 +118,9 @@ function ResetPasswordAdmin() {
               type="password"
               placeholder="Confirm New Password"
               onChange={(e) => {
-                setPassword2(e.target.value);
+                setNewPassword2(e.target.value);
               }}
-              value={password2}
+              value={newPassword2}
               required
             />
           </label>
@@ -131,13 +137,13 @@ function ResetPasswordAdmin() {
               Reset Password
             </button>
           </div>
-          <div className="text-main-color-1 text-center underline underline-offset-auto">
-            <a href="/api/admin">Login</a>
-          </div>
+          {/* <div className="text-main-color-1 text-center underline underline-offset-auto">
+            <a href="/">Login</a>
+          </div> */}
         </form>
       </div>
     </div>
   );
 }
 
-export default ResetPasswordAdmin;
+export default EditUserPassword;

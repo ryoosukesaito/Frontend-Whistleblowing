@@ -62,6 +62,25 @@ const appApi = createApi({
         body: payload,
       }),
     }),
+
+    //update user password
+    updatePasswordUser: builder.mutation({
+      query: (user) => ({
+        url: "/api/user/password",
+        method: "PATCH",
+        headers: { "x-auth-token": user },
+        body: user,
+      }),
+    }),
+
+    //request resetting user password
+    requestResetUser: builder.mutation({
+      query: (user) => ({
+        url: "/api/user/password/email",
+        method: "POST",
+        body: user,
+      }),
+    }),
   }),
 });
 
@@ -69,8 +88,11 @@ export const {
   useSignupAdminMutation,
   useLoginAdminMutation,
   useLogoutAdminMutation,
+  useSignupUserMutation,
   useLoginUserMutation,
   useLogoutUserMutation,
+  useUpdatePasswordUserMutation,
+  useRequestResetUserMutation,
 } = appApi;
 
 export default appApi;

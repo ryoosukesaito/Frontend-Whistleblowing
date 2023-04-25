@@ -4,7 +4,7 @@ import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import { SERVER_URL } from "../../constants/constants";
 
-function ResetPasswordAdmin() {
+function ResetPasswordUser() {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [token, setToken] = useState(null);
@@ -25,11 +25,14 @@ function ResetPasswordAdmin() {
     try {
       if (password !== password2) throw new Error("Password doesn't match.");
 
-      await fetch(`${SERVER_URL}/auth/resetPassword`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      await fetch(`${SERVER_URL}/api/user/password/reset`, {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          adminId: id,
+          userId: id,
           token: token,
           password: password,
         }),
@@ -74,7 +77,7 @@ function ResetPasswordAdmin() {
             <h1 className="">Whistleblowing</h1>
           </div>
           <h1 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
-            Admin
+            User
           </h1>
           <h2 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
             Reset Password
@@ -91,7 +94,7 @@ function ResetPasswordAdmin() {
               value={password}
               required
             />
-            <div className="w-full  flex justify-end pb-3 opacity-25 cursor-pointer ">
+            <div className="w-full  flex justify-end pb-3  opacity-25 cursor-pointer ">
               {pwStyle.type === "password" ? (
                 <EyeSlashIcon
                   className="h-7 w-7 relative -mt-12  mr-3 mb-5"
@@ -132,7 +135,7 @@ function ResetPasswordAdmin() {
             </button>
           </div>
           <div className="text-main-color-1 text-center underline underline-offset-auto">
-            <a href="/api/admin">Login</a>
+            <a href="/">Login</a>
           </div>
         </form>
       </div>
@@ -140,4 +143,4 @@ function ResetPasswordAdmin() {
   );
 }
 
-export default ResetPasswordAdmin;
+export default ResetPasswordUser;
