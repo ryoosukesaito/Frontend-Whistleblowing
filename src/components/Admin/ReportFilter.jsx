@@ -92,18 +92,18 @@ const ReportFilter = () => {
   }
 
   return (
-    <div className='w-1/4 h-100 border border-current absolute z-50 bg-white top-40 right-3'>
+    <div className='w-1/4 h-100 border border-gray-scale-3 absolute z-50 bg-white top-40 right-3'>
      <form className='m-10' onSubmit={(e)=>{setFilter(e)}}>
-        <div className="flex flex-row text-lg items-center">
-          <div className='mr-3'> ID </div>
-          <input key="id" className="rounded border" value={reportFilter.id} onChange={(e)=>{
+        <div className="flex items-center">
+          <div className='mr-3 text-xl'> ID </div>
+          <input key="id" className="border border-gray-scale-2 w-full pl-1 text-lg" value={reportFilter.id} onChange={(e)=>{
             setReportFilter({...reportFilter,id:e.target.value})
           }}/>
         </div>
 
         <div className="flex flex-col">
           
-          <div key="status" className='text-lg mt-2'>Status </div>
+          <div key="status" className='text-xl mt-3 mb-1'>Status </div>
           {/* <input className="rounded border" /> */}
           <div>
             <div className='flex flex-col flex-wrap grid-rows-2'>
@@ -114,7 +114,7 @@ const ReportFilter = () => {
                      (e)=>setReportFilter({...reportFilter,statusNotStarted:!reportFilter.statusNotStarted})} className='w-4 h-4 mr-2' />
                     <label 
                       htmlFor="checked-checkbox"
-                      className='mr-5'
+                      className='mr-5 text-lg'
                     >Not started</label>
                 </div>
 
@@ -124,13 +124,13 @@ const ReportFilter = () => {
                     <input key="inprogress" type="checkbox" checked={reportFilter.statusInProgress} onChange={(e)=>setReportFilter({...reportFilter,statusInProgress:!reportFilter.statusInProgress})} className='w-4 h-4 mr-2'/>
                     <label 
                       htmlFor="checked-checkbox" 
-                      className='mr-5'
+                      className='mr-5 text-lg'
                     >In Progress</label>
                   </div>
                 
                   <div className="flex items-center">
                     <input key="closed" type="checkbox" checked={reportFilter.statusClosed} onChange={(e)=>setReportFilter({...reportFilter,statusClosed:!reportFilter.statusClosed})}  className='w-4 h-4 mr-2'/>
-                    <label htmlFor="checked-checkbox">Closed </label>
+                    <label htmlFor="checked-checkbox" className='text-lg'>Closed </label>
                   </div>
                 </div>
               </div>
@@ -139,32 +139,32 @@ const ReportFilter = () => {
         </div>
 
         <div className="flex flex-col">
-          <div className='text-lg mb-2 mt-2'>Subject </div>
-          <textarea className="rounded border h-15" value={reportFilter.subject} onChange={(e)=>setReportFilter({...reportFilter,subject:e.target.value})}></textarea>
+          <div className='text-xl mb-2 mt-3'>Subject </div>
+          <textarea className="border border-gray-scale-2 w-full h-15" value={reportFilter.subject} onChange={(e)=>setReportFilter({...reportFilter,subject:e.target.value})}></textarea>
         </div>
 
         <div className="flex flex-col ">
-          <div className='text-lg mb-2 mt-2'>Created </div>
+          <div className='text-lg mb-2 mt-3'>Created </div>
           <div className='flex flex-row'>
-            <input className="rounded border text-center w-3/6" type="date" placeholder='00/00/0000' value={reportFilter.createdAtFrom} onChange={(e)=>setReportFilter({...reportFilter,createdAtFrom:e.target.value})} />
+            <input className="border border-gray-scale-2 text-center w-3/6" type="date" placeholder='00/00/0000' value={reportFilter.createdAtFrom} onChange={(e)=>setReportFilter({...reportFilter,createdAtFrom:e.target.value})} />
             <div className='m-1'>
               ~ 
             </div>
-            <input className='rounded border text-center w-3/6' type="date" placeholder='00/00/0000' value={reportFilter.createdAtTo} onChange={(e)=>setReportFilter({...reportFilter,createdAtTo:e.target.value})} />
+            <input className='border border-gray-scale-2 text-center w-3/6' type="date" placeholder='00/00/0000' value={reportFilter.createdAtTo} onChange={(e)=>setReportFilter({...reportFilter,createdAtTo:e.target.value})} />
           </div>
         </div>
         <div className="flex flex-col">
-          <div className='text-lg mb-2'>Updated </div>
+          <div className='text-lg mb-2 mt-3'>Updated </div>
           <div className='flex flex-row'>
-            <input className="rounded border text-center w-3/6" type="date" placeholder='00/00/0000' value={reportFilter.updatedAtFrom} onChange={(e)=>setReportFilter({...reportFilter,updatedAtFrom:e.target.value})}/>
+            <input className="border border-gray-scale-2 text-center w-3/6" type="date" placeholder='00/00/0000' value={reportFilter.updatedAtFrom} onChange={(e)=>setReportFilter({...reportFilter,updatedAtFrom:e.target.value})}/>
             <div className='m-1'>
               ~ 
             </div>
-            <input className='rounded border text-center w-3/6' type="date" placeholder='00/00/0000' value={reportFilter.updatedAtTo} onChange={(e)=>setReportFilter({...reportFilter,updatedAtTo:e.target.value})} />
+            <input className='border border-gray-scale-2 text-center w-3/6' type="date" placeholder='00/00/0000' value={reportFilter.updatedAtTo} onChange={(e)=>setReportFilter({...reportFilter,updatedAtTo:e.target.value})} />
           </div>
         </div>
-        <div className='flex flex-col items-center m-4 text-sm'>
-          <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 cursor-pointer">Apply</button>
+        <div className='flex-col items-center text-center mt-10 text-sm'>
+          <button className="px-8 py-2 rounded bg-gray-scale-3 cursor-pointer">Apply</button>
         </div>
       </form>
     </div>

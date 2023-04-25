@@ -122,7 +122,7 @@ function NavbarUser() {
                 )}
               </li>
               <li key="usericon" className="nav-item">
-                <a className="mr-12 px-3 py-2 flex items-center leading-snug hover:opacity-75">
+                <a className="mr-12 px-3 py-2 flex items-center leading-snug">
                   <UserCircleIcon className="h-8 w-8 mr-1.5" />
                   <p>{admin.name}</p>
                 </a>

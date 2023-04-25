@@ -73,15 +73,15 @@ function AdminReport() {
 
   return (
     <div className="">
-      <div className="text-gray-scale-2 font-bold text-2xl pl-3">
+      <div className="text-main-color-1 font-bold text-2xl pl-3">
         Reports
       </div>
       <div className="flex justify-end">
         <button 
-          className="flex px-8 py-1 items-center bg-gray-scale-3 mr-10 cursor-pointer"
+          className="flex rounded px-8 py-1 items-center bg-gray-scale-3 mr-10 cursor-pointer hover:opacity-50"
           onClick={handleFilter}
         >
-          <FunnelIcon className="h-4 w-4 mr-2" />
+          <FunnelIcon className="h-4 w-4 mr-1" />
           Filter
         </button>
       </div>
@@ -99,16 +99,16 @@ function AdminReport() {
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="px-1">
             {filteredReports?
             filteredReports.map((data, idx) => (
               <tr
                 key={data._id}
-                className=" cursor-pointer  hover:bg-gray-scale-3"
+                className="cursor-pointer  hover:bg-gray-scale-3"
                 onClick={handleClick}
               >
                 <td
-                  className="border-b-2 border-slate-700 text-center"
+                  className="border-b-2 border-slate-700 text-center py-2"
                   data-value={data._id}
                 >
 
@@ -128,25 +128,25 @@ function AdminReport() {
                   }
                 </td>
                 <td
-                  className="border-b-2 border-slate-700 text-center"
+                  className="border-b-2 border-slate-700 text-center py-2"
                   data-value={data._id}
                 >
                   {data.subject}
                 </td>
                 <td
-                  className="border-b-2 border-slate-700 text-center"
+                  className="border-b-2 border-slate-700 text-center py-2"
                   data-value={data._id}
                 >
                   {data.adminId}
                 </td>
                 <td
-                  className="border-b-2 border-slate-700 text-center"
+                  className="border-b-2 border-slate-700 text-center py-2"
                   data-value={data._id}
                 >
                   {data.createdAt}
                 </td>
                 <td
-                  className="border-b-2 border-slate-700 text-center"
+                  className="border-b-2 border-slate-700 text-center py-2"
                   data-value={data._id}
                 >
                   {data.updatedAt}
