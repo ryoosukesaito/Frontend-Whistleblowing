@@ -67,15 +67,16 @@ function ReportDetails() {
 
   return (
     <>
-      <div>
-      <div className="text-gray-scale-2 font-bold text-xl mb-3">
+      <div className="">
+      <div className="text-gray-scale-2 font-bold text-xl mb-4">
         Report detail
       </div>
-        <div key={reportDetail._id}>
-          <div key="report-status">
+        <div key={reportDetail._id} >
+          <div key="report-status" className="mb-2 inline-block border border-gray-scale-1 px-2 py-1">
             <select id="status"
               value={reportDetail.status}
               onChange={changeReportStatus}
+              className=""
             >
               {statusOptions.map((option,index)=>{
                 return <option key={index}>

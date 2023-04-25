@@ -50,14 +50,14 @@ function CategoryList() {
 
   return (
     <div>
-      <div className="text-gray-scale-2 font-bold text-2xl w-1/2 ml-20 mb-10">
+      <div className="text-main-color-1 font-bold text-2xl w-1/2 ml-20 mb-10">
         Categories
       </div>
       <div className="flex flex-col mt-5 ml-20 h-full text-center w-1/2">
       
       {categories.map((data, idx) => (
         <div
-          className="flex flex-row items-start justify-between my-3"
+          className="flex flex-row items-start mb-7 text-xl"
           key={idx}
         >
           <button
