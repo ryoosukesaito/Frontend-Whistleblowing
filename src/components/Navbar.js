@@ -35,7 +35,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-gray-scale-2 text-white">
+    <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-main-color-1 text-white">
       <div className="w-full mx-2 flex flex-wrap items-center justify-between">
         <div className="w-full relative flex justify-between lg:w-auto lg:static">
           <a
