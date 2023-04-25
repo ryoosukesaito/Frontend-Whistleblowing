@@ -73,12 +73,15 @@ function AdminReport() {
 
   return (
     <div className="">
+      <div className="text-gray-scale-2 font-bold text-2xl pl-3">
+        Reports
+      </div>
       <div className="flex justify-end">
         <button 
-          className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 mr-10 cursor-pointer"
+          className="flex px-8 py-1 items-center bg-gray-scale-3 mr-10 cursor-pointer"
           onClick={handleFilter}
         >
-          <FunnelIcon className="h-4 w-4 mr-1.5" />
+          <FunnelIcon className="h-4 w-4 mr-2" />
           Filter
         </button>
       </div>

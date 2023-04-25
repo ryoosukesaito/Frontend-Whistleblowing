@@ -68,6 +68,9 @@ function ReportDetails() {
   return (
     <>
       <div>
+      <div className="text-gray-scale-2 font-bold text-xl mb-3">
+        Report detail
+      </div>
         <div key={reportDetail._id}>
           <div key="report-status">
             <select id="status"
