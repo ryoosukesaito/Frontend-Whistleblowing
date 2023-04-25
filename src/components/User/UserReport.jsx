@@ -37,7 +37,9 @@ function UserReport() {
   }
 
   async function handleClick(event) {
+    console.log(event.target);
     const id = event.target.dataset.value;
+    console.log(id);
     const reportDetailUrl = `/api/user/reports/${id}`;
     // await fetch(`${SERVER_URL}${reportDetailUrl}`)
     //   .then((res) => res.json())
@@ -84,10 +86,25 @@ function UserReport() {
                 <td
                   className="border-b-2 border-slate-700 text-center"
                   data-value={data._id}
-                >
-                  <div className="my-1 flex justify-center items-center bg-not-started rounded-full">
-                    {data.status}
-                  </div>
+                  >
+                  {data.status === "Not started" ? (
+                    <div key={data.status} className="my-1 flex justify-center items-center bg-not-started rounded-full"
+                      data-value={data._id}
+                    >
+                      {data.status}
+                    </div>
+                  ) : data.status === "Closed" ? (
+                    <div key={data.status} className="my-1 flex justify-center items-center bg-completed rounded-full"
+                    data-value={data._id}>
+                      {data.status}
+                    </div>
+                  ) : (
+                    <div key={data.status} className="my-1 justify-center items-center bg-in-progress rounded-full"
+                    data-value={data._id}>
+                      {data.status}
+                    </div>
+                  )
+                  }
                 </td>
                 <td
                   className="border-b-2 border-slate-700 text-center"

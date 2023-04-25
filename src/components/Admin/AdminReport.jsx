@@ -113,15 +113,18 @@ function AdminReport() {
                 >
 
                   {data.status === "Not started" ? (
-                    <div key={data.status} className="my-1 flex justify-center items-center bg-not-started rounded-full">
+                    <div key={data.status} className="my-1 flex justify-center items-center bg-not-started rounded-full"
+                      data-value={data._id}>
                       {data.status}
                     </div>
                   ) : data.status === "Closed" ? (
-                    <div key={data.status} className="my-1 flex justify-center items-center bg-completed rounded-full">
+                    <div key={data.status} className="my-1 flex justify-center items-center bg-completed rounded-full"
+                    data-value={data._id}>
                       {data.status}
                     </div>
                   ) : (
-                    <div key={data.status} className="my-1 justify-center items-center bg-in-progress rounded-full">
+                    <div key={data.status} className="my-1 justify-center items-center bg-in-progress rounded-full"
+                    data-value={data._id}>
                       {data.status}
                     </div>
                   )

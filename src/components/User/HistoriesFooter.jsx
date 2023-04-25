@@ -12,7 +12,7 @@ function HistoriesFooter() {
   async function handleSubmit(e) {
     e.preventDefault();
     const reportId = reportDetail._id;
-    const userId = user.id;
+    const userId = user._id;
     const adminId = reportDetail.adminId;
     const msg = message;
     const name = reportDetail.userName;
@@ -33,6 +33,7 @@ function HistoriesFooter() {
       body: JSON.stringify({
         message: msg,
       }),
+      
     })
       .then((res) => res.json())
       .catch((err) => console.error(err));
@@ -43,6 +44,7 @@ function HistoriesFooter() {
     <>
       <div className=" bg-gray-scale-3 p-2">
         <form onSubmit={handleSubmit} className="flex flex-col">
+
           <input
             type="text"
             className="h-full w-full mt-2 my-3"
@@ -58,6 +60,7 @@ function HistoriesFooter() {
             <button className="px-4 py-1 mb-1 rounded cursor-pointe bg-gray-scale-2 hover:bg-gray-100 text-white">
               Submit
             </button>
+            <button onClick={()=>console.log(user)}>aaaa</button>
           </div>
         </form>
       </div>
