@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
+import AdminRegist from "./pages/Admin/AdminRegist";
 import RequestResetPassword from "./pages/Admin/RequestResetPassword";
 
 import ResetPasswordAdmin from "./pages/Admin/ResetPasswordAdmin";
@@ -100,6 +101,7 @@ function App() {
 
           {/* admin authentication route before logging in*/}
           <Route path="/api/admin" element={<LoginAdmin />} />
+          <Route path="/api/admin/regist" element={<AdminRegist />} />
           <Route
             path="/auth/requestResetPassword"
             element={<RequestResetPassword />}
