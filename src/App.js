@@ -56,8 +56,6 @@ function App() {
   const [histories, setHistories] = useState([]);
   const [adminDetail, setAdminDetail] = useState([]);
   const [reportFilter, setReportFilter] = useState(filterVal);
-
-  const [close,setClose] = useState(false);
   const admin = useSelector((state) => state.admin);
   const user = useSelector((state) => state.user);
   
@@ -84,8 +82,6 @@ function App() {
         setReportFilter,
         filteredReports,
         setFilteredReports,
-        close,
-        setClose,
       }}
     >
       <BrowserRouter>
