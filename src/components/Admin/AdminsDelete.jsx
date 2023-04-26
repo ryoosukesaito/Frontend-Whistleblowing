@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../../context/appContext";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { SERVER_URL } from "../../constants/constants";
 
 const AdminsDelete = () => {
   const admin = useSelector((state) => state.admin);
@@ -14,11 +15,25 @@ const AdminsDelete = () => {
     setAdminDetail(adminDetail);
     navigation(-1);
   }
+  const deleteAdminApi=async()=>{
+    console.log(`${SERVER_URL}/api/admin/delete/${id}`);
+    await fetch(`${SERVER_URL}/api/admin/delete/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        _id: id,
+      }),
+    })
+      .then((res) => res.json())
+      .catch((err) => console.error(err));
+      navigation("/api/admin/all")
+  }
+
 
   return (
     <div className="flex justify-center mt-20">
       <div className="bg-white w-3/6 border-2">
-        <h1 className="text-center mt-10 font-semibold text-2xl mb-5">
+        <h1 className="text-center mt-10 font-semibold text-2xl mb-8">
           Are you sure to delete this user?
         </h1>
         <div className="flex justify-center">
@@ -37,14 +52,19 @@ const AdminsDelete = () => {
             </li>
           </ul>
         </div>
-        <div className="flex flex-row justify-center m-4 text-sm">
-          <button
-            className="bg-gray-scale-3 w-20 h-6 m-8"
+        <div className='flex flex-row justify-center mt-20 mb-10'>
+          <button 
+            className="rounded text-enter px-8 py-2 bg-gray-scale-3 cursor-pointer mr-32"
             onClick={cancelHandler}
           >
             Cancel
           </button>
-          <button className="bg-delete w-20 h-6 m-8">Delete</button>
+          <button 
+            className=" rounded text-center px-8 py-2 bg-delete cursor-pointer"
+            onClick={deleteAdminApi}
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>

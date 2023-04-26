@@ -15,5 +15,11 @@ export const reportTableHeaders = [
   "Post Date",
   "Update date",
 ];
+
+export const adminRole = [
+  "superAdmin",
+  "Admin",
+];
+
 export const adminsTableHeaders = ["ID", "Role", "Name", "Created Date"];
 export const usersTableHeaders = ["UserID", "Email", "Name", "Created Date"];

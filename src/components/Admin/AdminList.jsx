@@ -37,24 +37,26 @@ function AdminList() {
   }
   const createAdminBtn = e => {
     setShow(current => !current);
+
   }
 
   return (
-    <div className="h-full overflow-hidden">
+    <div>
+      <div className="text-main-color-1 font-bold text-2xl pl-3">
+        Admin list
+      </div>
       <div className="flex justify-end">
         <button 
-          className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 cursor-pointer m-5"
+          className="flex rounded px-8 py-1 items-center bg-gray-scale-3 cursor-pointer mr-10 hover:bg-gray-scale-2 hover:text-white"
           onClick={createAdminBtn}
         >
           Create
         </button>
       </div>
-      {show && (
-        <AddNewAdmin />
-      )}
-      <div className="h-full flex items-start justify-center">
+        {show && (<AddNewAdmin />)}
+      <div className="h-full mt-5 flex items-start justify-center">
       <table className="w-full">
-        <thead>
+        <thead className="text-lg">
           <tr>
             {adminsTableHeaders.map((header, idx) => (
               <th key={idx} className="border-b-4 border-slate-600">
@@ -66,7 +68,7 @@ function AdminList() {
         <tbody>
           {admins.map((data, idx) => (
             <tr 
-              key={data._id}
+              key={idx}
               className=" cursor-pointer hover:bg-gray-scale-3"
               onClick={handleClick}
             >

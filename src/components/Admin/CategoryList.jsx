@@ -2,7 +2,8 @@ import React, { useContext, useEffect } from "react";
 
 import { AppContext } from "../../context/appContext";
 import { SERVER_URL } from "../../constants/constants";
-
+import { PlusCircleIcon } from "@heroicons/react/24/solid";
+import { MinusCircleIcon } from "@heroicons/react/24/outline";
 
 function CategoryList() {
   const { categories, setCategories, newCategory, setNewCategory } =
@@ -10,7 +11,7 @@ function CategoryList() {
 
   useEffect(() => {
     getCategories();
-  }, [categories]);
+  }, []);
 
   function getCategories() {
     fetch(`${SERVER_URL}/api/admin/category/all`)
@@ -18,9 +19,10 @@ function CategoryList() {
       .then((data) => setCategories(data));
   }
 
-  function deleteCategory(e) {
-    const categoryId = e.target.value;
-    fetch(`${SERVER_URL}/api/admin/category/delete/:id`, {
+  const deleteCategory =async (id)=> {
+    const categoryId = id
+    console.log(id);
+    await fetch(`${SERVER_URL}/api/admin/category/delete/${categoryId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -32,7 +34,7 @@ function CategoryList() {
     getCategories();
   }
 
-  function handleAddCategory(e) {
+  const handleAddCategory=async(e)=>{
     e.preventDefault();
     fetch(`${SERVER_URL}/api/admin/create/category`, {
       method: "POST",
@@ -48,41 +50,49 @@ function CategoryList() {
   }
 
   return (
-    <div className="flex flex-col w-1/3">
+    <div>
+      <div className="text-main-color-1 font-bold text-2xl w-1/2 ml-20 mb-10">
+        Categories
+      </div>
+      <div className="flex flex-col mt-5 ml-20 h-full text-center w-1/2">
+      
       {categories.map((data, idx) => (
         <div
-          className="flex flex-row items-start justify-between my-3"
-          key={data._id}
+          className="flex flex-row items-start mb-7 text-xl"
+          key={idx}
         >
-          <div>{data.name}</div>
-          <div>
-            <button
-              className="rounded-full bg-gray-scale-3 text-sm w-5 h-5 px-1"
-              value={data._id}
-              onClick={deleteCategory}
-            >
-              -
-            </button>
-          </div>
+          <button
+            className="items-center mr-6"
+            value={data._id}
+            onClick={()=>deleteCategory(data._id)}
+          >
+            <MinusCircleIcon value={data._id} className="w-8 h-8 text-gray-scale-1 hover:opacity-50"/>
+          </button>
+          <div className="">{data.name}</div>
+          
+          
         </div>
+        
       ))}
       <div>
-        <form onSubmit={handleAddCategory}>
+        <form onSubmit={handleAddCategory} className="flex flex-row mt-5 items-center">
+        <button
+            className="items-center mr-6"
+            type="submit"
+          >
+            <PlusCircleIcon className="w-8 h-8 text-gray-scale-2 hover:opacity-50"/>
+          </button>
           <input
             type="text"
-            className="border rounded  text-gray-700 pl-2"
-            placeholder="New Category"
+            className="border border-gray-scale-3 text-gray-scale-1 pl-2 py-1 text-lg "
+            placeholder="New category"
             onChange={(e) => setNewCategory(e.target.value)}
             value={newCategory}
           />
-          <button
-            className="rounded-full bg-gray-scale-3 text-sm w-5 h-5 px-1"
-            type="submit"
-          >
-            +
-          </button>
+          
         </form>
       </div>
+    </div>
     </div>
   );
 }

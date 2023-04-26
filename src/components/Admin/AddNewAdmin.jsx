@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AppContext } from "../../context/appContext";
 
 
 function AddNewAdmin() {
-  
+  const {close, setClose} = useContext(AppContext);
+
+  function handleClose (e) {
+    
+  }
   
   return (
     <div className="z-50 absolute inset-0 bg-black bg-opacity-10 backdrop-blur-sm">
@@ -25,13 +30,14 @@ function AddNewAdmin() {
                   <input className="border border-black w-96 h-10 m-4" />
                 </div>
               </div>
-              <div className="flex justify-center">
-                <button className="w-40 h-10 text-lg bg-gray-scale-3 mt-10 mb-2">Send</button>
+              <div className="flex flex-col items-center">
+                  <button className="w-40 h-10 text-lg bg-gray-scale-3 mt-10 mb-2">Send</button>
+                  <div className="text-delete mb-10 cursor-pointer">
+                  <button>
+                    Cancel
+                  </button>
+                  </div>
               </div>
-              <div 
-                className="flex justify-center text-delete mb-10 cursor-pointer"
-              >
-                Cancel</div>
             </form>
           </div>
         </div>

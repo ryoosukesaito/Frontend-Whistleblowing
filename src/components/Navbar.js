@@ -8,34 +8,42 @@ import { SERVER_URL } from "../constants/constants";
 import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+
   const user = useSelector((state) => state.user);
   const dataFetchedRef = useRef(false);
   const navigate = useNavigate();
   const [navbar, setNavbar] = useState(false);
   const [notification, setNotification] = useState(false);
+  const [resetPasswordShow, setResetPasswordShow] = useState(false);
   const [notices, setNotices] = useState([]);
 
   // 画面読み込み時にnoticesを取りに行く
   useEffect(() => {
     if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
+      dataFetchedRef.current = true;
+    getNotices();
+  }, []);
+
+  useEffect(() => {
     if (notices.length !== 0) {
-      getNotices();
+      console.log(notices);
     } else {
       return;
     }
-  }, []);
+  }, [notices]);
 
   const getNotices = async () => {
     await fetch(`${SERVER_URL}/api/user/notices`, {
       headers: { "x-auth-token": user.token },
     })
       .then((res) => res.json())
-      .then((data) => setNotices(data));
+      .then((data) => {
+        setNotices(data);
+      });
   };
-
+  if(!user)return <></>
   return (
-    <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-gray-scale-2 text-white">
+    <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-main-color-1 text-white">
       <div className="w-full mx-2 flex flex-wrap items-center justify-between">
         <div className="w-full relative flex justify-between lg:w-auto lg:static">
           <a
@@ -45,7 +53,7 @@ function Navbar() {
             <img
               src={`${process.env.PUBLIC_URL}/favicon.ico`}
               alt="Logo"
-              className="h-7 w-7 mr-1.5"
+              className="h-7 w-7 mr-1.5 mb-1"
             />
             Whistleblowing User
           </a>
@@ -78,20 +86,22 @@ function Navbar() {
                 {user && (
                   <div
                     className={
-                      "absolute bg-gray-scale-3 p-4 shadow top-12" +
+                      "rounded absolute bg-gray-scale-4 p-4 shadow top-12" +
                       (notification ? " flex" : " hidden")
                     }
                   >
                     <div className="text-gray-scale-1 text-center">
-                      {notices !== 0 ? (
+                      {/* {notices? (
                         notices.map((notice) => {
                           return (
                             <div
-                              id={notice.id} key={notice.id}
+                              id={notice._id}
+                              key={notice._id}
                               onClick={async () => {
                                 setNotification(false);
                                 await fetch(
-                                  `${SERVER_URL}/api/user/notices/` + notice.id,
+                                  `${SERVER_URL}/api/user/notices/` +
+                                    notice._id,
                                   {
                                     method: "DELETE",
                                     headers: { "x-auth-token": user.token },
@@ -103,30 +113,50 @@ function Navbar() {
                                 );
                               }}
                             >
-                              <p className="text-lg mb-1 ">{notice.subject}</p>
+                              <p className="text-lg mb-1 ">{notice.reportId}</p>
                               <p className="text-sm mb-2">
-                                New Message From User!
+                                The Report Updated!
                               </p>
-                              <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
+                              <hr className="h-px mb-2 bg-gray-scale-1 border-0"></hr>
                             </div>
-                          );
+                          )
                         })
                       ) : (
                         <></>
-                      )}
+                      )} */}
                       {/* <p className="text-lg mb-1 ">Report Subject</p> 
                       <p className="text-sm mb-2">New Message From User!</p> 
                       <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
                       <p className="text-lg mb-1">Report Subject</p> 
-                      <p className="text-sm mb-2">New Message From User!</p> */}
+                      <p className="text-sm mb-2">New Message From User!</p>  */}
                     </div>
                   </div>
                 )}
               </li>
               <li className="nav-item">
-                <a className="mr-10 px-3 py-2 flex items-center leading-snug hover:opacity-75">
+                <a className="mr-12 px-3 py-2 flex items-center leading-snug hover:opacity-75">
+             
+                <button
+                  className="px-3 py-2 mr-32 flex items-center leading-snug hover:opacity-75"
+                  type="button"
+                  onClick={() => setResetPasswordShow (!resetPasswordShow)}
+                >
                   <UserCircleIcon className="h-8 w-8 mr-1.5" />
                   <p>{user.name}</p>
+                </button>
+                <div
+                    className={
+                      "rounded absolute bg-gray-scale-4 p-4 shadow top-12" +
+                      (resetPasswordShow ? " flex" : " hidden")
+                    }
+                  >
+                    <div className="text-gray-scale-1 text-center" onClick={()=>{
+                      setResetPasswordShow (!resetPasswordShow)
+                      navigate("/api/user/edit/")
+                    }}> 
+                        Change Password
+                    </div>
+                  </div>
                 </a>
               </li>
             </ul>

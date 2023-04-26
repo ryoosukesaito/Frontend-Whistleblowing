@@ -1,41 +1,18 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLoginAdminMutation } from "../../services/appAPI";
+import { useRequestResetUserMutation } from "../../services/appAPI";
 
-import { SERVER_URL } from "../../constants/constants";
-
-function RequestResetPassword() {
+function RequestResetPasswordUser() {
   const [email, setEmail] = useState("");
   const [msg, setMsg] = useState("");
-  const [errMsg, setErrMsg] = useState("");
-  const navigate = useNavigate();
-  const [loginAdmin, { error }] = useLoginAdminMutation();
+  const [requestResetUser, { error }] = useRequestResetUserMutation();
 
   const RequestSendHandler = async (e) => {
     e.preventDefault();
-    try {
-      await fetch(`${SERVER_URL}/auth/requestResetPassword`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-        }),
-      })
-        .then((res) => {
-          if (res.status === 200) {
-            setErrMsg("");
-            setMsg("Successfully reset your password");
-          } else if (res.status === 500) {
-            throw new Error("User does not exists");
-          }
-        })
-        .catch((err) => {
-          throw new Error(err.message);
-        });
-    } catch (e) {
-      setMsg("");
-      setErrMsg(e.message);
-    }
+
+    requestResetUser({ email }).then(({ data }) => {
+      if (data) setMsg(data.message);
+      if (error) console.error(error);
+    });
   };
 
   return (
@@ -51,7 +28,7 @@ function RequestResetPassword() {
             <h1 className="">Whistleblowing</h1>
           </div>
           <h1 className=" text-main-color-1 text-3xl font-normal text-center mb-8">
-            Admin
+            User
           </h1>
           <label htmlFor="email">
             Email
@@ -66,19 +43,22 @@ function RequestResetPassword() {
               required
             />
           </label>
-          {msg ? (
-            <div className="text-center mb-5 text-main-color-1">{msg}</div>
+
+          {error ? (
+            <div className="text-center mb-5 text-red-600">
+              {error.data.error}
+            </div>
           ) : (
-            <div className="text-center mb-5 text-red-600">{errMsg}</div>
+            <div className="text-center mb-5 text-main-color-1">{msg}</div>
           )}
+
           <div className="text-center">
             <button
               className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1 disabled:bg-gray-300 disabled:text-gray-400"
-
               type="submit"
               disabled={msg}
             >
-              Submit request
+              Submit Request
             </button>
           </div>
           <div className="text-main-color-1 text-center underline underline-offset-auto hover:opacity-50">
@@ -90,4 +70,4 @@ function RequestResetPassword() {
   );
 }
 
-export default RequestResetPassword;
+export default RequestResetPasswordUser;

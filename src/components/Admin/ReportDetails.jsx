@@ -16,7 +16,7 @@ function ReportDetails() {
   const fetchURL = `${SERVER_URL}/api/admin/reports/${id}`;
   const dataFetchedRef = useRef(false);
 
-  const statusOptions = ["Not started","onGoing","Closed"]
+  const statusOptions = ["Not started", "In progress", "Closed"];
 
   const { reportDetail, setReportDetail, histories, setHistories } =
     useContext(AppContext);
@@ -45,19 +45,18 @@ function ReportDetails() {
     fetch(`${SERVER_URL}/api/admin/history/${id}`)
       .then((res) => res.json())
       .then((data) => setHistories(data.histories));
-      getReportDetail()
+    getReportDetail();
   }
-  const changeReportStatus = async(e)=>{
-    await fetch(fetchURL,{
-      method: 'PUT',
+  const changeReportStatus = async (e) => {
+    await fetch(fetchURL, {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status:e.target.value})
+      body: JSON.stringify({ status: e.target.value }),
     })
-    .then((res) => res.json())
-    .catch((err) => console.error(err));
-    getReportDetail()
-    console.log("histories:   ", histories);
-  }
+      .then((res) => res.json())
+      .catch((err) => console.error(err));
+    getReportDetail();
+  };
 
   if (reportDetail.length === 0)
     return (
@@ -68,19 +67,24 @@ function ReportDetails() {
 
   return (
     <>
-      <div>
+      <div className="">
+        <div className="text-gray-scale-2 font-bold text-xl mb-4">
+          Report detail
+        </div>
         <div key={reportDetail._id}>
-          <div key="report-status">
-            <select id="status"
+          <div
+            key="report-status"
+            className="mb-2 inline-block border border-gray-scale-1 px-2 py-1"
+          >
+            <select
+              id="status"
               value={reportDetail.status}
               onChange={changeReportStatus}
+              className=""
             >
-              {statusOptions.map((option,index)=>{
-                return <option key={index}>
-                  {option}
-                </option>
-              })
-              }
+              {statusOptions.map((option, index) => {
+                return <option key={index}>{option}</option>;
+              })}
             </select>
           </div>
           <div className="flex mb-3">
@@ -112,7 +116,7 @@ function ReportDetails() {
               <tbody>
                 <tr>
                   <td>Category</td>
-                  <td>: {reportDetail.category_id}</td>
+                  <td>: {reportDetail.category_id?reportDetail.category_id.name:""}</td>
                 </tr>
                 <tr>
                   <td>Subject</td>

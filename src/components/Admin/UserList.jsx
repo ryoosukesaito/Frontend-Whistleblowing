@@ -17,9 +17,13 @@ function UserList() {
   }
 
   return (
-    <div className="h-full flex items-start justify-center">
-      <table className="w-full mt-10">
-        <thead>
+    <div>
+      <div className="text-main-color-1 font-bold text-2xl pl-3">
+        User list
+      </div>
+      <div className="h-full mt-5 flex items-start justify-center">
+      <table className="w-full">
+        <thead className="text-lg">
           <tr>
             {usersTableHeaders.map((header, idx) => (
               <th key={idx} className="border-b-4 border-slate-600">
@@ -53,6 +57,7 @@ function UserList() {
         </tbody>
       </table>
     </div>
+  </div>
   );
 }
 

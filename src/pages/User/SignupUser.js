@@ -22,19 +22,12 @@ function SignupUser() {
             />
             <h1 className="">Whistleblowing</h1>
           </div>
-          <h1 className=" text-main-color-1 text-3xl font-normal text-center mb-5">
+          <h1 className=" text-main-color-1 text-3xl font-normal text-center mb-7">
             Register account
           </h1>
-          <div className="text-sm text-center mb-10">
-            <p>
-              Invited members must set a password and complete registration.
-            </p>
-            <p className="text-red-600">
-              If you do not set a password, your account will not be activated.
-            </p>
-          </div>
+          
           <label htmlFor="email">
-            New member's email
+            Email
             <input
               className="border w-full py-3 px-3 mb-3"
               type="email"
@@ -46,32 +39,7 @@ function SignupUser() {
               required
             />
           </label>
-          <label htmlFor="email">
-            New member's role
-            <input
-              className="border w-full py-3 px-3 mb-3"
-              type="email"
-              placeholder="Email"
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              value={email}
-              required
-            />
-          </label>
-          <label htmlFor="name">
-            Name
-            <input
-              className="border w-full py-3 px-3 mb-3"
-              type="name"
-              placeholder="Name"
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              value={email}
-              required
-            />
-          </label>
+          
           <label htmlFor="password">
             Password
             <input
@@ -88,7 +56,7 @@ function SignupUser() {
           <label htmlFor="confirm">
             Confirm your password
             <input
-              className="border w-full py-3 px-3 mb-10"
+              className="border w-full py-3 px-3 mb-3"
               type="password"
               placeholder="Confirm your password"
               onChange={(e) => {
@@ -98,13 +66,29 @@ function SignupUser() {
               required
             />
           </label>
+          <label htmlFor="name">
+            Name (optional)
+            <input
+              className="border w-full py-3 px-3 mb-10"
+              type="name"
+              placeholder="Name"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              value={email}
+              required
+            />
+          </label>
           <div className="text-center">
             <button
-              className="px-6 py-2 cursor-pointer bg-gray-scale-2 hover:bg-gray-100 text-white"
+              className="rounded px-8 py-2 mb-8 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
               type="submit"
             >
-              Register
+              Sign up
             </button>
+          </div>
+          <div className="text-main-color-1 text-center underline underline-offset-auto hover:opacity-50">
+            <a href="/">Login</a>
           </div>
         </form>
       </div>
