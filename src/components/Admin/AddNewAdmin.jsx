@@ -1,21 +1,17 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../../context/appContext";
+import { adminRole } from "../../constants/constants"
 
 
 function AddNewAdmin() {
-  const {close, setClose} = useContext(AppContext);
 
-  function handleClose (e) {
-    
-  }
-  
   return (
     <div className="z-50 absolute inset-0 bg-black bg-opacity-10 backdrop-blur-sm">
       <div className="flex justify-center mt-40">
         <div className="flex w-11/12">
-          <div className="flex flex-col bg-white mx-40">
+          <div className="flex flex-col items-center bg-white mx-40">
             <div className="text-3xl mx-10 mt-10">Invite New Admin/Staff</div>
-            <div className=" overflow-hidden mt-6 mb-10 mx-10">
+            <div className=" overflow-hidden mt-6 mb-10 mx-40">
               New Admin/Staff members who receive an email invitation must access the
               URL attached to the email and set a password.
             </div>
@@ -27,7 +23,13 @@ function AddNewAdmin() {
                 </div>
                 <div className="flex flex-col ">
                   <input className="border border-black w-96 h-10 m-4" />
-                  <input className="border border-black w-96 h-10 m-4" />
+                  <select 
+                    className="border border-black w-96 h-10 m-4"
+                  >
+                    {adminRole.map((option, index) => {
+                      return <option key={index}>{option}</option>
+                    })}
+                  </select>
                 </div>
               </div>
               <div className="flex flex-col items-center">

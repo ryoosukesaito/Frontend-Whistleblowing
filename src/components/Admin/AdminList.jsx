@@ -41,7 +41,7 @@ function AdminList() {
   }
 
   return (
-    <div>
+    <div className="h-full overflow-hidden">
       <div className="text-main-color-1 font-bold text-2xl pl-3">
         Admin list
       </div>
