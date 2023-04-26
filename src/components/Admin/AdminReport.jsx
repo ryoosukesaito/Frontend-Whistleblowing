@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { FunnelIcon } from "@heroicons/react/24/solid";
 
 import ReportFilter from "../Admin/ReportFilter";
-import { current } from "@reduxjs/toolkit";
+
 
 function AdminReport() {
   const dataFetchedRef = useRef(false);
@@ -68,10 +68,10 @@ function AdminReport() {
     
 
   return (
-    <div className="">
+    <div className="h-full w-full overflow-hidden">
       <div className="flex justify-end">
         <button 
-          className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 mr-10 cursor-pointer"
+          className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 m-5 cursor-pointer"
           onClick={handleFilter}
         >
           <FunnelIcon className="h-4 w-4 mr-1.5" />
@@ -81,7 +81,7 @@ function AdminReport() {
       {show && (
         <ReportFilter />
       )}
-      <div className="h-full mt-5 flex items-start justify-center">
+      <div className="h-full flex items-start justify-center mt-5">
         <table className="w-full">
           <thead>
             <tr>
@@ -105,15 +105,15 @@ function AdminReport() {
                 >
 
                   {data.status === "Not started" ? (
-                    <div className="my-1 flex justify-center items-center bg-not-started rounded-full">
+                    <div className="my-1 flex justify-center items-center bg-not-started rounded-full my-3">
                       {data.status}
                     </div>
                   ) : data.status === "Completed" ? (
-                    <div className="my-1 flex justify-center items-center bg-completed rounded-full">
+                    <div className="my-1 flex justify-center items-center bg-completed rounded-full my-3">
                       {data.status}
                     </div>
                   ) : (
-                    <div className="my-1 justify-center items-center bg-in-progress rounded-full">
+                    <div className="my-1 justify-center items-center bg-in-progress rounded-full my-3">
                       {data.status}
                     </div>
                   )

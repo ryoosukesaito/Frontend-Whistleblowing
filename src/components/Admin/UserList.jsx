@@ -18,7 +18,7 @@ function UserList() {
 
   return (
     <div className="h-full flex items-start justify-center">
-      <table className="w-full">
+      <table className="w-full mt-10">
         <thead>
           <tr>
             {usersTableHeaders.map((header, idx) => (

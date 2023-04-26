@@ -1,13 +1,16 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SERVER_URL, adminsTableHeaders } from "../../constants/constants";
 
 import { AppContext } from "../../context/appContext";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import AddNewAdmin from "./AddNewAdmin";
+
 
 function AdminList() {
   const admin = useSelector((state) => state.admin);
   const navigation = useNavigate();
+  const [show,setShow] = useState(false);
 
   const { admins, setAdmins, adminDetail, setAdminDetail } =
     useContext(AppContext);
@@ -32,19 +35,23 @@ function AdminList() {
       .then((data) => setAdminDetail(data));
     if (adminDetail) navigation(getAdminDetailUrl);
   }
-
-  
+  const createAdminBtn = e => {
+    setShow(current => !current);
+  }
 
   return (
-    <div>
+    <div className="h-full overflow-hidden">
       <div className="flex justify-end">
         <button 
-          className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 cursor-pointer m-10"
-         
+          className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 cursor-pointer m-5"
+          onClick={createAdminBtn}
         >
           Create
         </button>
       </div>
+      {show && (
+        <AddNewAdmin />
+      )}
       <div className="h-full flex items-start justify-center">
       <table className="w-full">
         <thead>
