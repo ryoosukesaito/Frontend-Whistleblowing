@@ -27,11 +27,6 @@ function AdminRegist() {
       
       if(password!==confirmPassword) 
         throw new Error("Password doesn't match.")
-      console.log(`${SERVER_URL}/api/admin/signup`);
-      console.log(token);
-      console.log(email);
-      console.log(name);
-      console.log(password);
       await fetch(`${SERVER_URL}/api/admin/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

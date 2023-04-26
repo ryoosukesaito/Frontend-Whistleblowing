@@ -193,7 +193,8 @@ function AdminList() {
               <td className="border-b-2 border-slate-700 text-center"
               data-value={data._id}
               >
-              <div className="my-3">
+              <div className="my-3"
+              data-value={data._id}>
                 {data._id}
               </div>
               </td>
