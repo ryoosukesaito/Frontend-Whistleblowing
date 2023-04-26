@@ -74,7 +74,7 @@ function Navbar() {
             }
           >
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-              <li className="nav-item">
+              <li key="notice" className="nav-item items-center">
                 <button
                   className="px-3 py-2 mr-32 flex items-center leading-snug hover:opacity-75"
                   type="button"
@@ -134,10 +134,8 @@ function Navbar() {
                 )}
               </li>
               <li className="nav-item">
-                <a className="mr-12 px-3 py-2 flex items-center leading-snug hover:opacity-75">
-             
                 <button
-                  className="px-3 py-2 mr-32 flex items-center leading-snug hover:opacity-75"
+                  className="mr-12 px-3 py-2 flex items-center leading-snug hover:opacity-75"
                   type="button"
                   onClick={() => setResetPasswordShow (!resetPasswordShow)}
                 >
@@ -145,19 +143,18 @@ function Navbar() {
                   <p>{user.name}</p>
                 </button>
                 <div
-                    className={
+                  className={
                       "rounded absolute bg-gray-scale-4 p-4 shadow top-12" +
                       (resetPasswordShow ? " flex" : " hidden")
-                    }
-                  >
-                    <div className="text-gray-scale-1 text-center" onClick={()=>{
+                  }
+                >
+                  <div className="text-gray-scale-1 text-center font-bold cursor-pointer" onClick={()=>{
                       setResetPasswordShow (!resetPasswordShow)
                       navigate("/api/user/edit/")
-                    }}> 
-                        Change Password
-                    </div>
+                  }}> 
+                      Change Password
                   </div>
-                </a>
+                </div>
               </li>
             </ul>
           </div>
