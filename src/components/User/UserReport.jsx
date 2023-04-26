@@ -58,16 +58,20 @@ function UserReport() {
   }
 
   return (
-    <div className="">
+    <>
+    <div className="mt-3 px-3 py-4 h-full">
+      <div className="text-main-color-1 font-bold text-2xl pl-3">History</div>
       <div className="flex justify-end">
-        <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 mr-10 cursor-pointer">
-          <FunnelIcon className="h-4 w-4 mr-1.5" />
+        <button 
+          className="flex rounded px-8 py-1 items-center bg-gray-scale-3 mr-10 cursor-pointer hover:opacity-50"
+        >
+          <FunnelIcon className="h-4 w-4 mr-1" />
           Filter
         </button>
       </div>
-      <div className="h-full mt-5 flex items-start justify-center">
+      <div className="w-full h-fit mt-5 relative overscroll-y-auto items-center justify-center">
         <table className="w-full">
-          <thead>
+          <thead className="sticky top-0 bg-gray-scale-4 py-10">
             <tr>
               {reportTableHeaders.map((header, idx) => (
                 <th key={idx} className="border-b-4 border-slate-600">
@@ -76,7 +80,7 @@ function UserReport() {
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="px-1">
             {reports.map((data, idx) => (
               <tr
                 key={data._id}
@@ -84,22 +88,22 @@ function UserReport() {
                 onClick={handleClick}
               >
                 <td
-                  className="border-b-2 border-slate-700 text-center"
+                  className="border-b-2 border-slate-700 text-center py-2"
                   data-value={data._id}
                   >
                   {data.status === "Not started" ? (
-                    <div key={data.status} className="my-1 flex justify-center items-center bg-not-started rounded-full"
+                    <div key={data.status} className="my-1 flex justify-center items-center bg-not-started rounded"
                       data-value={data._id}
                     >
                       {data.status}
                     </div>
                   ) : data.status === "Closed" ? (
-                    <div key={data.status} className="my-1 flex justify-center items-center bg-completed rounded-full"
+                    <div key={data.status} className="my-1 flex justify-center items-center bg-completed rounded"
                     data-value={data._id}>
                       {data.status}
                     </div>
                   ) : (
-                    <div key={data.status} className="my-1 justify-center items-center bg-in-progress rounded-full"
+                    <div key={data.status} className="my-1 justify-center items-center bg-in-progress rounded"
                     data-value={data._id}>
                       {data.status}
                     </div>
@@ -107,25 +111,25 @@ function UserReport() {
                   }
                 </td>
                 <td
-                  className="border-b-2 border-slate-700 text-center"
+                  className="border-b-2 border-slate-700 text-center p-1 break-all"
                   data-value={data._id}
                 >
                   {data.subject}
                 </td>
                 <td
-                  className="border-b-2 border-slate-700 text-center"
+                  className="border-b-2 border-slate-700 text-center p-1"
                   data-value={data._id}
                 >
                   {data.adminId}
                 </td>
                 <td
-                  className="border-b-2 border-slate-700 text-center"
+                  className="border-b-2 border-slate-700 text-center p-1"
                   data-value={data._id}
                 >
                   {data.createdAt}
                 </td>
                 <td
-                  className="border-b-2 border-slate-700 text-center"
+                  className="border-b-2 border-slate-700 text-center p-1"
                   data-value={data._id}
                 >
                   {data.updatedAt}
@@ -194,7 +198,9 @@ function UserReport() {
       </div>
       {/* <ReportFilter /> */}
     </div>
-  );
+
+    </>
+      );
 }
 
 export default UserReport;
