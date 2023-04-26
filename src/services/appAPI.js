@@ -65,11 +65,14 @@ const appApi = createApi({
 
     //update user password
     updatePasswordUser: builder.mutation({
-      query: (user) => ({
+      query: (payload) => ({
         url: "/api/user/password",
         method: "PATCH",
-        headers: { "x-auth-token": user },
-        body: user,
+        headers: { 
+          "Content-Type": "application/json",
+          "x-auth-token": payload.token
+         },
+        body: payload.body,
       }),
     }),
 
