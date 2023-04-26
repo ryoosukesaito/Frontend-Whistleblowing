@@ -12,7 +12,7 @@ function SignupUser() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="flex justify-center items-center bg-gray-scale-4 w-1/3 my-auto p-10">
+      <div className="justify-center items-center bg-gray-scale-4 p-10 w-1/2">
         <form onSubmit={handleSignIn} id="login" className="">
           <div className="text-4xl flex justify-center items-center mb-20">
             <img
