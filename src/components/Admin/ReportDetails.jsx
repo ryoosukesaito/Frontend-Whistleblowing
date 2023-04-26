@@ -115,7 +115,7 @@ function ReportDetails() {
               <tbody>
                 <tr>
                   <td>Category</td>
-                  <td>: {reportDetail.category_id}</td>
+                  <td>: {reportDetail.category_id?reportDetail.category_id.name:""}</td>
                 </tr>
                 <tr>
                   <td>Subject</td>

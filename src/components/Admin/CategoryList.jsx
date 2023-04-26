@@ -11,7 +11,7 @@ function CategoryList() {
 
   useEffect(() => {
     getCategories();
-  }, [categories]);
+  }, []);
 
   function getCategories() {
     fetch(`${SERVER_URL}/api/admin/category/all`)
@@ -19,9 +19,10 @@ function CategoryList() {
       .then((data) => setCategories(data));
   }
 
-  function deleteCategory(e) {
-    const categoryId = e.target.value;
-    fetch(`${SERVER_URL}/api/admin/category/delete/:id`, {
+  const deleteCategory =async (id)=> {
+    const categoryId = id
+    console.log(id);
+    await fetch(`${SERVER_URL}/api/admin/category/delete/${categoryId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -33,7 +34,7 @@ function CategoryList() {
     getCategories();
   }
 
-  function handleAddCategory(e) {
+  const handleAddCategory=async(e)=>{
     e.preventDefault();
     fetch(`${SERVER_URL}/api/admin/create/category`, {
       method: "POST",
@@ -63,9 +64,9 @@ function CategoryList() {
           <button
             className="items-center mr-6"
             value={data._id}
-            onClick={deleteCategory}
+            onClick={()=>deleteCategory(data._id)}
           >
-            <MinusCircleIcon className="w-8 h-8 text-gray-scale-1 hover:opacity-50"/>
+            <MinusCircleIcon value={data._id} className="w-8 h-8 text-gray-scale-1 hover:opacity-50"/>
           </button>
           <div className="">{data.name}</div>
           
