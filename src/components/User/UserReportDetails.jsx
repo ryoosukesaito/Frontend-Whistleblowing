@@ -58,7 +58,8 @@ function UserReportDetails() {
 
   return (
     <>
-      <div>
+    <div className="mt-3 px-3 py-4">
+    <div>
         <div key={reportDetail._id}>
           <div className="flex mb-3">
             <table className="w-1/2">
@@ -129,7 +130,9 @@ function UserReportDetails() {
         </div>
           <HistoriesFooter />
       </div>
-    </>
+
+    </div>
+          </>
   );
 }
 
