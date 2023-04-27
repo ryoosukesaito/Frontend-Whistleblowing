@@ -101,7 +101,7 @@ function AdminReport() {
             </tr>
           </thead>
           <tbody className="px-1 h-full">
-            {filteredReports ? (
+            {filteredReports.length!==0 ? (
               filteredReports.map((data, idx) => (
                 <tr
                   key={data._id}
