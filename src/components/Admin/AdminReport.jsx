@@ -43,6 +43,7 @@ function AdminReport() {
       .then((data) => {
         setReports(data);
         setFilteredReports(data);
+        console.log(filteredReports);
       });
   }
 

@@ -16,8 +16,14 @@ function UserReport() {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  const { reports, setReports, reportDetail, setReportDetail, setHistories,dateFormater } =
-    useContext(AppContext);
+  const {
+    reports,
+    setReports,
+    reportDetail,
+    setReportDetail,
+    setHistories,
+    dateFormater,
+  } = useContext(AppContext);
 
   useEffect(() => {
     if (dataFetchedRef.current) return;
@@ -28,7 +34,7 @@ function UserReport() {
   }, []);
 
   async function getReports() {
-    await fetch(`${SERVER_URL}/api/user/reports`,{
+    await fetch(`${SERVER_URL}/api/user/reports`, {
       headers: { "x-auth-token": user.token },
     })
       .then((res) => res.json())
@@ -45,8 +51,8 @@ function UserReport() {
     //   .then((res) => res.json())
     //   .then((data) => setReportDetail(data));
     // if (reportDetail) {
-      // getHistoryByReportId(id);
-      navigate(reportDetailUrl);
+    //   getHistoryByReportId(id);
+    navigate(reportDetailUrl);
     // }
     // navigate(`/api/user/reports/${id}`);
   }
@@ -86,25 +92,32 @@ function UserReport() {
                 <td
                   className="border-b-2 border-slate-700 text-center"
                   data-value={data._id}
-                  >
+                >
                   {data.status === "Not started" ? (
-                    <div key={data.status} className="my-1 flex justify-center items-center bg-not-started rounded-full"
+                    <div
+                      key={data.status}
+                      className="my-1 flex justify-center items-center bg-not-started rounded-full"
                       data-value={data._id}
                     >
                       {data.status}
                     </div>
                   ) : data.status === "Closed" ? (
-                    <div key={data.status} className="my-1 flex justify-center items-center bg-completed rounded-full"
-                    data-value={data._id}>
+                    <div
+                      key={data.status}
+                      className="my-1 flex justify-center items-center bg-completed rounded-full"
+                      data-value={data._id}
+                    >
                       {data.status}
                     </div>
                   ) : (
-                    <div key={data.status} className="my-1 justify-center items-center bg-in-progress rounded-full"
-                    data-value={data._id}>
+                    <div
+                      key={data.status}
+                      className="my-1 justify-center items-center bg-in-progress rounded-full"
+                      data-value={data._id}
+                    >
                       {data.status}
                     </div>
-                  )
-                  }
+                  )}
                 </td>
                 <td
                   className="border-b-2 border-slate-700 text-center"
@@ -116,7 +129,7 @@ function UserReport() {
                   className="border-b-2 border-slate-700 text-center"
                   data-value={data._id}
                 >
-                  {data.adminId?data.adminId.name:<></>}
+                  {data.adminId ? data.adminId.name : <></>}
                 </td>
                 <td
                   className="border-b-2 border-slate-700 text-center"
