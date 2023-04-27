@@ -9,39 +9,39 @@ function SignupUser() {
   const [name, setName] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
+    try {
       await fetch(`${SERVER_URL}/api/user/register`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        name: name,
-      }),
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          navigate("/")
-        } else if (res.status === 500) {
-          throw new Error("something bad.");
-        }
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          name: name,
+        }),
       })
-      .catch((error) => {
-        throw new Error(error.message);
-      });
-    }catch(error){
-      console.error(error)
+        .then((res) => {
+          if (res.status === 200) {
+            navigate("/");
+          } else if (res.status === 500) {
+            throw new Error("something bad.");
+          }
+        })
+        .catch((error) => {
+          throw new Error(error.message);
+        });
+    } catch (error) {
+      console.error(error);
     }
-  }
+  };
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="flex justify-center items-center bg-gray-scale-4 w-1/3 my-auto p-10">
+      <div className="justify-center items-center bg-gray-scale-4 p-10 w-1/2">
         <form onSubmit={handleSubmit} id="login" className="">
           <div className="text-4xl flex justify-center items-center mb-20">
             <img
@@ -54,7 +54,7 @@ function SignupUser() {
           <h1 className=" text-main-color-1 text-3xl font-normal text-center mb-7">
             Register account
           </h1>
-          
+
           <label htmlFor="email">
             Email
             <input
@@ -68,7 +68,7 @@ function SignupUser() {
               required
             />
           </label>
-          
+
           <label htmlFor="password">
             Password
             <input

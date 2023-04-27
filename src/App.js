@@ -119,23 +119,27 @@ function App() {
           <Route path="/users/passwordreset" element={<ResetPasswordUser />} />
 
           {/* user router after logging in */}
-          <Route path="/api/user/reports" element={<UserReportsPage />} />
-          <Route path="/api/user/edit" element={<UserEditPassword />} />
+          {user && (
+            <>
+              <Route path="/api/user/reports" element={<UserReportsPage />} />
+              <Route path="/api/user/edit" element={<UserEditPassword />} />
 
-          <Route path="/api/user/reports/:id" element={<UserReport />} />
-          <Route path="/api/user/reports/new" element={<UserReportNew />} />
+              <Route path="/api/user/reports/:id" element={<UserReport />} />
+              <Route path="/api/user/reports/new" element={<UserReportNew />} />
 
-          {/* admin authentication route before logging in*/}
-          <Route path="/api/admin" element={<LoginAdmin />} />
-          <Route path="/api/admin/regist" element={<AdminRegist />} />
-          <Route
-            path="/auth/requestResetPassword"
-            element={<RequestResetPassword />}
-          />
-          <Route
-            path="/api/auth/passwordReset"
-            element={<ResetPasswordAdmin />}
-          />
+              {/* admin authentication route before logging in*/}
+              <Route path="/api/admin" element={<LoginAdmin />} />
+              <Route path="/api/admin/regist" element={<AdminRegist />} />
+              <Route
+                path="/auth/requestResetPassword"
+                element={<RequestResetPassword />}
+              />
+              <Route
+                path="/api/auth/passwordReset"
+                element={<ResetPasswordAdmin />}
+              />
+            </>
+          )}
 
           {/* <Route path="/api/admin/signup" element={<AdminAccountCreate />} /> */}
 

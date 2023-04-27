@@ -17,20 +17,25 @@ function UserReportDetails() {
   const fetchURL = `${SERVER_URL}/api/user/reports/${id}`;
   const dataFetchedRef = useRef(false);
 
-  const { reportDetail, setReportDetail, histories, setHistories,dateFormater } =
-    useContext(AppContext);
+  const {
+    reportDetail,
+    setReportDetail,
+    histories,
+    setHistories,
+    dateFormater,
+  } = useContext(AppContext);
 
   useEffect(() => {
     if (user) {
       if (dataFetchedRef.current) return;
       dataFetchedRef.current = true;
 
-       getReportDetail();
+      getReportDetail();
     }
     // getHistoryByReportId();
   }, []);
 
-  const getReportDetail= async () =>{
+  const getReportDetail = async () => {
     await fetch(fetchURL, {
       headers: { "x-auth-token": user.token },
     })
@@ -38,9 +43,9 @@ function UserReportDetails() {
       .then((data) => {
         console.log(data);
         setReportDetail(data.report);
-        setHistories(data.histories)
+        setHistories(data.histories);
       });
-  }
+  };
 
   // function getHistoryByReportId() {
   //   fetch(`${SERVER_URL}/api/admin/history/${id}`)
@@ -48,6 +53,28 @@ function UserReportDetails() {
   //     .then((data) => setHistories(data.histories));
   //   console.log("histories:   ", histories);
   // }
+
+  function downloadHandler(e) {
+    e.preventDefault();
+    const fileNameForUrl = reportDetail.file;
+
+    fetch(`${SERVER_URL}/uploadFn/file/showRespond/${fileNameForUrl}`, {
+      method: "GET",
+    })
+      .then((res) => res.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", fileNameForUrl);
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+      })
+      .catch((error) => {
+        console.error("Error fetching file:", error);
+      });
+  }
 
   if (!reportDetail)
     return (
@@ -69,11 +96,15 @@ function UserReportDetails() {
                 </tr>
                 <tr>
                   <td className="py-2">Post Date</td>
-                  <td className="py-2">: {dateFormater(reportDetail.createdAt)}</td>
+                  <td className="py-2">
+                    : {dateFormater(reportDetail.createdAt)}
+                  </td>
                 </tr>
                 <tr>
                   <td className="py-2">Update Date</td>
-                  <td className="py-2">: {dateFormater(reportDetail.updatedAt)}</td>
+                  <td className="py-2">
+                    : {dateFormater(reportDetail.updatedAt)}
+                  </td>
                 </tr>
                 <tr>
                   <td className="py-2">Your Name</td>
@@ -81,10 +112,7 @@ function UserReportDetails() {
                 </tr>
                 <tr>
                   <td className="py-2">Your Department</td>
-                  <td className="py-2">
-                    {" "}
-                    : {reportDetail.userDepartment}
-                  </td>
+                  <td className="py-2"> : {reportDetail.userDepartment}</td>
                 </tr>
               </tbody>
             </table>
@@ -92,7 +120,14 @@ function UserReportDetails() {
               <tbody>
                 <tr>
                   <td>Category</td>
-                  <td>: {reportDetail.category_id?reportDetail.category_id.name:<></>}</td>
+                  <td>
+                    :{" "}
+                    {reportDetail.category_id ? (
+                      reportDetail.category_id.name
+                    ) : (
+                      <></>
+                    )}
+                  </td>
                 </tr>
                 <tr>
                   <td>Subject</td>
@@ -100,12 +135,27 @@ function UserReportDetails() {
                 </tr>
                 <tr>
                   <td>File</td>
-                  <td className="text-indigo-700">: img-file.jpeg</td>
+                  <td>
+                    {reportDetail.file ? (
+                      <button
+                        onClick={downloadHandler}
+                        value={reportDetail.file}
+                      >
+                        <div className="text-indigo-700">
+                          : {reportDetail.file}
+                        </div>
+                      </button>
+                    ) : (
+                      <div>: No Files</div>
+                    )}
+                  </td>
                 </tr>
                 <tr>
                   <td>Your Agent</td>
                   {/* <td>: {reportDetail.adminId.name}</td> */}
-                  <td>: {reportDetail.adminId?reportDetail.adminId.name:<></>}</td>
+                  <td>
+                    : {reportDetail.adminId ? reportDetail.adminId.name : <></>}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -122,13 +172,8 @@ function UserReportDetails() {
         <div className="text-lg border-b-2 border-gray-scale-1">
           Contact Record
         </div>
-        <div className="">
-          {histories?
-            <Histories />
-            :<></>
-        }
-        </div>
-          <HistoriesFooter />
+        <div className="">{histories ? <Histories /> : <></>}</div>
+        <HistoriesFooter />
       </div>
     </>
   );

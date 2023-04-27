@@ -44,7 +44,6 @@ function HistoriesFooter() {
     if (file) {
       fileValue = await handleFetchFile();
     }
-    console.log("inside handleSubmit:  ", fileValue);
     await fetch(`${SERVER_URL}/api/history`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -88,7 +87,7 @@ function HistoriesFooter() {
                 onChange={(e) => setFile(e.target.files[0])}
               />
             </label>
-            <button className="px-8 py-1 m-2 rounded cursor-pointe bg-gray-scale-2 hover:bg-gray-scale-4 hover:text-gray-scale-1 text-white">
+            <button className="px-8 py-1 m-2 rounded cursor-pointer bg-gray-scale-2 hover:bg-gray-scale-4 hover:text-gray-scale-1 text-white">
               Submit
             </button>
           </div>

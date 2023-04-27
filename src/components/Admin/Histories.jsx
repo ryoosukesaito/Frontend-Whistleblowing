@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { AppContext } from "../../context/appContext";
 import { SERVER_URL } from "../../constants/constants";
+
 function Histories() {
   const { histories } = useContext(AppContext);
 

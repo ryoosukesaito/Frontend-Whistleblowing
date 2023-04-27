@@ -66,10 +66,10 @@ function UserReport() {
   return (
     <div className="">
       <div className="flex justify-end">
-        {/* <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 mr-10 cursor-pointer">
-          <FunnelIcon className="h-4 w-4 mr-1.5" />
+        <button className="flex rounded px-8 py-1 items-center bg-gray-scale-3 mr-10 cursor-pointer hover:opacity-50">
+          <FunnelIcon className="h-4 w-4 mr-1" />
           Filter
-        </button> */}
+        </button>
       </div>
       <div className="h-full mt-5 flex items-start justify-center">
         <table className="w-full">
