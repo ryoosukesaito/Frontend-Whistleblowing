@@ -1,19 +1,23 @@
-import React from 'react'
-import SideBar from '../../components/SideBar'
+import React from "react";
+import SideBar from "../../components/SideBar";
+import NavbarAdmin from "../../components/NavbarAdmin";
 import { pageHeight } from "../../constants/constants";
-import UserDetail from '../../components/Admin/UserDetail';
+import UsersDetail from "../../components/Admin/UsersDetail";
 
-function AdminDetail() {
+function UserDetail() {
   return (
-    <div className="w-screen flex items-center flex-row" style={pageHeight}>
-      <div className='h-full w-1/6'>
-        <SideBar />
+    <>
+      <NavbarAdmin />
+      <div className="w-screen flex items-center flex-row" style={pageHeight}>
+        <div className="h-full w-1/6">
+          <SideBar />
+        </div>
+        <div className="h-full w-5/6 flex flex-col justify-between">
+          <UsersDetail />
+        </div>
       </div>
-      <div className='h-full w-5/6 flex flex-col justify-between'>
-        <UserDetail />
-      </div>
-    </div>
+    </>
   );
 }
 
-export default AdminDetail
+export default UserDetail;

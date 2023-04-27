@@ -17,7 +17,7 @@ import EditAdminAccount from "./components/Admin/EditAdminAccount";
 import Report from "./pages/Admin/Report";
 import AdminsDetail from "./pages/Admin/AdminDetail";
 import AdminsDelete from "./components/Admin/AdminsDelete";
-import UserDetail from "./components/Admin/UserDetail";
+import UserDetail from "./pages/Admin/UserDetail";
 
 //Users router
 import Signup from "./pages/User/SignupUser";
@@ -55,6 +55,7 @@ function App() {
   const [newCategory, setNewCategory] = useState([]);
   const [histories, setHistories] = useState([]);
   const [adminDetail, setAdminDetail] = useState([]);
+  const [userDetail, setUserDetail] = useState([]);
   const [reportFilter, setReportFilter] = useState(filterVal);
   const admin = useSelector((state) => state.admin);
   const user = useSelector((state) => state.user);
@@ -78,6 +79,8 @@ function App() {
         setHistories,
         adminDetail,
         setAdminDetail,
+        userDetail,
+        setUserDetail,
         reportFilter,
         setReportFilter,
         filteredReports,
@@ -128,13 +131,10 @@ function App() {
               <Route path="/api/admin/edit" element={<EditAdminAccount />} />
 
               <Route path="/api/admin/users/all" element={<UserAccounts />} />
+              <Route path="/api/admin/users/:id" element={<UserDetail />} />
               <Route path="/api/admin/category/all" element={<Categories />} />
               <Route path="/api/admin/:id" element={<AdminsDetail />} />
               <Route path="/api/admin/delete/:id" element={<AdminsDelete />} />
-              <Route
-                path="/api/admin/userlist/userdetail"
-                element={<UserDetail />}
-              />
             </>
           )}
         </Routes>

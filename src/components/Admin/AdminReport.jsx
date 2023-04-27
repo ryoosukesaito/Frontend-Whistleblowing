@@ -77,15 +77,17 @@ function AdminReport() {
   return (
 
     <div className="h-full w-full overflow-hidden">
-      <div className="text-main-color-1 font-bold text-2xl pl-3">Reports</div>
-      <div className="flex justify-end">
-        <button
-          className="flex rounded px-8 py-1 items-center bg-gray-scale-3 mr-10 cursor-pointer hover:opacity-50"
-          onClick={handleFilter}
-        >
-          <FunnelIcon className="h-4 w-4 mr-1" />
-          Filter
-        </button>
+      <div className="flex justify-between">
+        <div className="text-main-color-1 font-bold text-2xl pl-3">Reports</div>
+          <div className="flex justify-end">
+            <button
+              className="flex rounded px-8 py-1 items-center bg-gray-scale-3 mr-10 cursor-pointer hover:opacity-50"
+              onClick={handleFilter}
+            >
+              <FunnelIcon className="h-4 w-4 mr-1" />
+              Filter
+            </button>
+          </div>
       </div>
 
       {show && <ReportFilter />}
@@ -115,7 +117,7 @@ function AdminReport() {
                     {data.status === "Not started" ? (
                       <div
                         key={data.status}
-                        className="my-1 flex justify-center items-center bg-not-started rounded"
+                        className=" flex justify-center items-center bg-not-started rounded"
                         data-value={data._id}
                       >
                         {data.status}
