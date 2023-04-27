@@ -1,19 +1,48 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SERVER_URL } from "../../constants/constants";
 
 function SignupUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState("");
   const navigate = useNavigate();
 
-  const handleSignIn = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-  };
+    try{
+      await fetch(`${SERVER_URL}/api/user/register`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        name: name,
+      }),
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          navigate("/")
+        } else if (res.status === 500) {
+          throw new Error("something bad.");
+        }
+      })
+      .catch((error) => {
+        throw new Error(error.message);
+      });
+    }catch(error){
+      console.error(error)
+    }
+  }
 
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="flex justify-center items-center bg-gray-scale-4 w-1/3 my-auto p-10">
-        <form onSubmit={handleSignIn} id="login" className="">
+        <form onSubmit={handleSubmit} id="login" className="">
           <div className="text-4xl flex justify-center items-center mb-20">
             <img
               src={`${process.env.PUBLIC_URL}/favicon.ico`}
@@ -60,9 +89,9 @@ function SignupUser() {
               type="password"
               placeholder="Confirm your password"
               onChange={(e) => {
-                setPassword(e.target.value);
+                setConfirmPassword(e.target.value);
               }}
-              value={password}
+              value={confirmPassword}
               required
             />
           </label>
@@ -73,9 +102,9 @@ function SignupUser() {
               type="name"
               placeholder="Name"
               onChange={(e) => {
-                setEmail(e.target.value);
+                setName(e.target.value);
               }}
-              value={email}
+              value={name}
               required
             />
           </label>
