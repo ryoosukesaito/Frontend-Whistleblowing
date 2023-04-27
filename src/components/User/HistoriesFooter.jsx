@@ -60,7 +60,6 @@ function HistoriesFooter() {
             <button className="px-4 py-1 mb-1 rounded cursor-pointe bg-gray-scale-2 hover:bg-gray-100 text-white">
               Submit
             </button>
-            <button onClick={()=>console.log(user)}>aaaa</button>
           </div>
         </form>
       </div>

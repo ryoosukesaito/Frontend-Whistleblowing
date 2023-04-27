@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
+import AdminRegist from "./pages/Admin/AdminRegist";
 import RequestResetPassword from "./pages/Admin/RequestResetPassword";
 
 import ResetPasswordAdmin from "./pages/Admin/ResetPasswordAdmin";
@@ -13,7 +14,7 @@ import EditAdminAccount from "./components/Admin/EditAdminAccount";
 import Report from "./pages/Admin/Report";
 import AdminsDetail from "./pages/Admin/AdminDetail";
 import AdminsDelete from "./components/Admin/AdminsDelete";
-import UserDetail from "./components/Admin/UserDetail";
+import UserDetail from "./pages/Admin/UserDetail";
 
 //Users router
 import Signup from "./pages/User/SignupUser";
@@ -56,6 +57,20 @@ function App() {
   const admin = useSelector((state) => state.admin);
   const user = useSelector((state) => state.user);
 
+<<<<<<< HEAD
+=======
+  const dateFormater=(dateStr)=>{
+    if(Date(dateStr)){
+      const date = new Date(dateStr)
+
+      return  date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()
+    }else{
+      return '9999-99-99 99:99:99'
+    }
+      
+  }
+  
+>>>>>>> 79397c76e743477a24510cc448fd1f366173eea6
   return (
     <AppContext.Provider
       value={{
@@ -75,12 +90,18 @@ function App() {
         setHistories,
         adminDetail,
         setAdminDetail,
+        userDetail,
+        setUserDetail,
         reportFilter,
         setReportFilter,
         filteredReports,
         setFilteredReports,
+<<<<<<< HEAD
         userDetail,
         setUserDetail,
+=======
+        dateFormater
+>>>>>>> 79397c76e743477a24510cc448fd1f366173eea6
       }}
     >
       <BrowserRouter>
@@ -103,6 +124,7 @@ function App() {
 
           {/* admin authentication route before logging in*/}
           <Route path="/api/admin" element={<LoginAdmin />} />
+          <Route path="/api/admin/regist" element={<AdminRegist />} />
           <Route
             path="/auth/requestResetPassword"
             element={<RequestResetPassword />}
@@ -112,7 +134,7 @@ function App() {
             element={<ResetPasswordAdmin />}
           />
 
-          <Route path="/api/admin/signup" element={<AdminAccountCreate />} />
+          {/* <Route path="/api/admin/signup" element={<AdminAccountCreate />} /> */}
 
           {/* admin route after logging in */}
           {admin && (
@@ -126,10 +148,14 @@ function App() {
               <Route path="/api/admin/edit" element={<EditAdminAccount />} />
 
               <Route path="/api/admin/users/all" element={<UserAccounts />} />
+              <Route path="/api/admin/users/:id" element={<UserDetail />} />
               <Route path="/api/admin/category/all" element={<Categories />} />
               <Route path="/api/admin/:id" element={<AdminsDetail />} />
               <Route path="/api/admin/delete/:id" element={<AdminsDelete />} />
+<<<<<<< HEAD
               <Route path="/api/admin/users/:id" element={<UserDetail />} />
+=======
+>>>>>>> 79397c76e743477a24510cc448fd1f366173eea6
             </>
           )}
         </Routes>

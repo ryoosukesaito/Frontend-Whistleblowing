@@ -16,7 +16,7 @@ function UserReport() {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  const { reports, setReports, reportDetail, setReportDetail, setHistories } =
+  const { reports, setReports, reportDetail, setReportDetail, setHistories,dateFormater } =
     useContext(AppContext);
 
   useEffect(() => {
@@ -60,10 +60,10 @@ function UserReport() {
   return (
     <div className="">
       <div className="flex justify-end">
-        <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 mr-10 cursor-pointer">
+        {/* <button className="flex justify-center items-center w-20 h-6 bg-gray-scale-3 mr-10 cursor-pointer">
           <FunnelIcon className="h-4 w-4 mr-1.5" />
           Filter
-        </button>
+        </button> */}
       </div>
       <div className="h-full mt-5 flex items-start justify-center">
         <table className="w-full">
@@ -123,19 +123,19 @@ function UserReport() {
                   className="border-b-2 border-slate-700 text-center"
                   data-value={data._id}
                 >
-                  {data.adminId}
+                  {data.adminId?data.adminId.name:<></>}
                 </td>
                 <td
                   className="border-b-2 border-slate-700 text-center"
                   data-value={data._id}
                 >
-                  {data.createdAt}
+                  {dateFormater(data.createdAt)}
                 </td>
                 <td
                   className="border-b-2 border-slate-700 text-center"
                   data-value={data._id}
                 >
-                  {data.updatedAt}
+                  {dateFormater(data.updatedAt)}
                 </td>
               </tr>
             ))}

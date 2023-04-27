@@ -32,8 +32,8 @@ function UserReportDetails() {
       });
   }
   const postReport = async()=>{
-    console.log("post");
-    await fetch(`${SERVER_URL}/api/user/reports/`, {
+    console.log(`${SERVER_URL}/api/user/reports`);
+    await fetch(`${SERVER_URL}/api/user/reports`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +51,9 @@ function UserReportDetails() {
         },
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        res.json()})
       .catch((err) => console.error(err));
     window.location.reload();
 

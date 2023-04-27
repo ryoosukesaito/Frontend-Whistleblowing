@@ -18,8 +18,9 @@ function Navbar() {
 
   // 画面読み込み時にnoticesを取りに行く
   useEffect(() => {
-    if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
+    // if (dataFetchedRef.current) return;
+    // dataFetchedRef.current = true;
+    console.log("getnotice");
     getNotices();
   }, []);
 
@@ -47,7 +48,7 @@ function Navbar() {
         <div className="w-full relative flex justify-between lg:w-auto lg:static">
           <a
             className="text-xl flex leading-snug px-3  py-2 items-center"
-            href="#"
+            href="/api/user/reports"
           >
             <img
               src={`${process.env.PUBLIC_URL}/favicon.ico`}
@@ -90,7 +91,7 @@ function Navbar() {
                     }
                   >
                     <div className="text-gray-scale-1 text-center">
-                      {notices ? (
+                      {notices.length !== 0 ? (
                         notices.map((notice) => {
                           return (
                             <div

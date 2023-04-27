@@ -17,16 +17,24 @@ function NavbarUser() {
 
   // 画面読み込み時にnoticesを取りに行く
   useEffect(() => {
+<<<<<<< HEAD
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
     if (notices.length !== 0) {
+=======
+    // if (dataFetchedRef.current) return;
+    // // dataFetchedRef.current = true;
+    // console.log(notices);
+    // if (notices.length == 0) {
+>>>>>>> 79397c76e743477a24510cc448fd1f366173eea6
       getNotices();
-    } else {
-      return;
-    }
+    // } else {
+    //   return;
+    // }
   }, []);
 
   const getNotices = async () => {
+    console.log("getnotice");
     await fetch(`${SERVER_URL}/api/admin/notices`, {
       headers: { "x-auth-token": admin.token },
     })

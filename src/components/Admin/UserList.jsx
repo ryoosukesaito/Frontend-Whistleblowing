@@ -1,15 +1,13 @@
 import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { SERVER_URL, usersTableHeaders } from "../../constants/constants";
 
 import { AppContext } from "../../context/appContext";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 function UserList() {
-  const user = useSelector((state) => state.user);
+  const { users, setUsers, userDetail, setUserDetail, dateFormater } =
+    useContext(AppContext);
   const navigation = useNavigate();
-
-  const { users, setUsers, userDetail, setUserDetail } = useContext(AppContext);
 
   useEffect(() => {
     getUsers();
@@ -48,14 +46,17 @@ function UserList() {
             {users.map((data, idx) => (
               <tr
                 key={idx}
-                className="hover:bg-gray-scale-3 cursor-pointer"
                 onClick={handleClick}
+                data-value={data._id}
+                className="hover:bg-gray-scale-3 cursor-pointer"
               >
                 <td
                   className="border-b-2 border-slate-700 text-center"
                   data-value={data._id}
                 >
-                  <div className="my-3">{data._id}</div>
+                  <div className="my-3" data-value={data._id}>
+                    {data._id}
+                  </div>
                 </td>
                 <td
                   className="border-b-2 border-slate-700 text-center"
@@ -73,7 +74,7 @@ function UserList() {
                   className="border-b-2 border-slate-700 text-center"
                   data-value={data._id}
                 >
-                  {data.createdAt}
+                  {dateFormater(data.createdAt)}
                 </td>
               </tr>
             ))}

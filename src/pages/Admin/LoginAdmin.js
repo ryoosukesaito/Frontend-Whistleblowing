@@ -94,7 +94,7 @@ function LoginAdmin() {
             </button>
           </div>
           <div className="text-main-color-1 text-center underline underline-offset-auto hover:opacity-50">
-            <a href="/api/admin/signup">Sign up</a>
+            {/* <a href="/api/admin/signup">Sign up</a> */}
           </div>
         </form>
       </div>
