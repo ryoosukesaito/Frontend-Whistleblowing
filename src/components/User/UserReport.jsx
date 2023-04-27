@@ -16,7 +16,7 @@ function UserReport() {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  const { reports, setReports, reportDetail, setReportDetail, setHistories } =
+  const { reports, setReports, reportDetail, setReportDetail, setHistories,dateFormater } =
     useContext(AppContext);
 
   useEffect(() => {
@@ -122,13 +122,13 @@ function UserReport() {
                   className="border-b-2 border-slate-700 text-center"
                   data-value={data._id}
                 >
-                  {data.createdAt}
+                  {dateFormater(data.createdAt)}
                 </td>
                 <td
                   className="border-b-2 border-slate-700 text-center"
                   data-value={data._id}
                 >
-                  {data.updatedAt}
+                  {dateFormater(data.updatedAt)}
                 </td>
               </tr>
             ))}

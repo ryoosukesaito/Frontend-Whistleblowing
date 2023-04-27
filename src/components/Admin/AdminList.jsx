@@ -13,7 +13,7 @@ function AdminList() {
   const admin = useSelector((state) => state.admin);
   const navigation = useNavigate();
 
-  const { admins, setAdmins, adminDetail, setAdminDetail } =
+  const { admins, setAdmins, adminDetail, setAdminDetail,dateFormater } =
     useContext(AppContext);
 
   useEffect(() => {
@@ -214,7 +214,7 @@ function AdminList() {
                 className="border-b-2 border-slate-700 text-center"
                 data-value={data._id}
               >
-                {data.createdAt}
+                {dateFormater(data.createdAt)}
               </td>
             </tr>
           ))}
