@@ -8,7 +8,7 @@ function Categories() {
   return (
     <>
       <NavbarAdmin />
-      <div className="w-screen flex items-center flex-row" style={pageHeight}>
+      <div className="w-screen flex items-center flex-row overflow-hidden" style={pageHeight}>
         <div className="h-full w-1/6">
           <SideBar />
         </div>

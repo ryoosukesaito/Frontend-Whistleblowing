@@ -92,7 +92,7 @@ const ReportFilter = () => {
   }
 
   return (
-    <div className='w-1/4 h-100 border border-gray-scale-3 absolute z-50 bg-white top-40 right-3'>
+    <div className='w-1/4 h-100 border border-gray-scale-3 absolute z-50 bg-white top-40 right-3 overflow-hidden'>
      <form className='m-10' onSubmit={(e)=>{setFilter(e)}}>
         <div className="flex items-center">
           <div className='mr-3 text-xl'> ID </div>
