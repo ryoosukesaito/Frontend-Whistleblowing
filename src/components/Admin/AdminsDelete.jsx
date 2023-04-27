@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../../context/appContext";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { SERVER_URL } from "../../constants/constants";
 
 const AdminsDelete = () => {
   const admin = useSelector((state) => state.admin);
@@ -13,6 +14,19 @@ const AdminsDelete = () => {
     setAdminDetail(adminDetail);
     navigation(-1);
   }
+  const deleteAdminApi = async () => {
+    console.log(`${SERVER_URL}/api/admin/delete/${id}`);
+    await fetch(`${SERVER_URL}/api/admin/delete/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        _id: id,
+      }),
+    })
+      .then((res) => res.json())
+      .catch((err) => console.error(err));
+    navigation("/api/admin/all");
+  };
 
   return (
     <div className="flex justify-center mt-28">
@@ -43,7 +57,11 @@ const AdminsDelete = () => {
           >
             Cancel
           </button>
-          <button className=" rounded text-center px-8 py-2 bg-delete cursor-pointer">
+
+          <button
+            className=" rounded text-center px-8 py-2 bg-delete cursor-pointer"
+            onClick={deleteAdminApi}
+          >
             Delete
           </button>
         </div>

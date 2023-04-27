@@ -57,6 +57,28 @@ function ReportDetails() {
     getReportDetail();
   };
 
+  function downloadHandler(e) {
+    e.preventDefault();
+    const fileNameForUrl = e.target.value;
+
+    fetch(`${SERVER_URL}/uploadFn/file/showRespond/${fileNameForUrl}`, {
+      method: "GET",
+    })
+      .then((res) => res.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", fileNameForUrl);
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+      })
+      .catch((error) => {
+        console.error("Error fetching file:", error);
+      });
+  }
+
   if (reportDetail.length === 0)
     return (
       <>
@@ -115,7 +137,12 @@ function ReportDetails() {
               <tbody>
                 <tr>
                   <td>Category</td>
-                  <td>: {reportDetail.category_id}</td>
+                  <td>
+                    :{" "}
+                    {reportDetail.category_id
+                      ? reportDetail.category_id.name
+                      : ""}
+                  </td>
                 </tr>
                 <tr>
                   <td>Subject</td>
@@ -123,7 +150,18 @@ function ReportDetails() {
                 </tr>
                 <tr>
                   <td>File</td>
-                  <td className="text-indigo-700">: img-file.jpeg</td>
+                  <td>
+                    :
+                    <button onClick={downloadHandler} value={reportDetail.file}>
+                      {reportDetail.file ? (
+                        <div className="text-indigo-700">
+                          {reportDetail.file}
+                        </div>
+                      ) : (
+                        <div>No Files</div>
+                      )}
+                    </button>
+                  </td>
                 </tr>
                 <tr>
                   <td>Your Agent</td>

@@ -8,7 +8,6 @@ import { SERVER_URL } from "../constants/constants";
 import { useNavigate } from "react-router-dom";
 
 function Navbar() {
-
   const user = useSelector((state) => state.user);
   const dataFetchedRef = useRef(false);
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ function Navbar() {
   // 画面読み込み時にnoticesを取りに行く
   useEffect(() => {
     if (dataFetchedRef.current) return;
-      dataFetchedRef.current = true;
+    dataFetchedRef.current = true;
     getNotices();
   }, []);
 
@@ -41,7 +40,7 @@ function Navbar() {
         setNotices(data);
       });
   };
-  if(!user)return <></>
+  if (!user) return <></>;
   return (
     <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-main-color-1 text-white">
       <div className="w-full mx-2 flex flex-wrap items-center justify-between">
@@ -91,7 +90,7 @@ function Navbar() {
                     }
                   >
                     <div className="text-gray-scale-1 text-center">
-                      {/* {notices? (
+                      {notices ? (
                         notices.map((notice) => {
                           return (
                             <div
@@ -119,11 +118,11 @@ function Navbar() {
                               </p>
                               <hr className="h-px mb-2 bg-gray-scale-1 border-0"></hr>
                             </div>
-                          )
+                          );
                         })
                       ) : (
                         <></>
-                      )} */}
+                      )}
                       {/* <p className="text-lg mb-1 ">Report Subject</p> 
                       <p className="text-sm mb-2">New Message From User!</p> 
                       <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
@@ -135,26 +134,28 @@ function Navbar() {
               </li>
               <li className="nav-item">
                 <a className="mr-12 px-3 py-2 flex items-center leading-snug hover:opacity-75">
-             
-                <button
-                  className="px-3 py-2 mr-32 flex items-center leading-snug hover:opacity-75"
-                  type="button"
-                  onClick={() => setResetPasswordShow (!resetPasswordShow)}
-                >
-                  <UserCircleIcon className="h-8 w-8 mr-1.5" />
-                  <p>{user.name}</p>
-                </button>
-                <div
+                  <button
+                    className="px-3 py-2 mr-32 flex items-center leading-snug hover:opacity-75"
+                    type="button"
+                    onClick={() => setResetPasswordShow(!resetPasswordShow)}
+                  >
+                    <UserCircleIcon className="h-8 w-8 mr-1.5" />
+                    <p>{user.name}</p>
+                  </button>
+                  <div
                     className={
                       "rounded absolute bg-gray-scale-4 p-4 shadow top-12" +
                       (resetPasswordShow ? " flex" : " hidden")
                     }
                   >
-                    <div className="text-gray-scale-1 text-center" onClick={()=>{
-                      setResetPasswordShow (!resetPasswordShow)
-                      navigate("/api/user/edit/")
-                    }}> 
-                        Change Password
+                    <div
+                      className="text-gray-scale-1 text-center"
+                      onClick={() => {
+                        setResetPasswordShow(!resetPasswordShow);
+                        navigate("/api/user/edit/");
+                      }}
+                    >
+                      Change Password
                     </div>
                   </div>
                 </a>
