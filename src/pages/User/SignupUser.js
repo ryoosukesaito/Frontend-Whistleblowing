@@ -105,7 +105,6 @@ function SignupUser() {
                 setName(e.target.value);
               }}
               value={name}
-              required
             />
           </label>
           <div className="text-center">

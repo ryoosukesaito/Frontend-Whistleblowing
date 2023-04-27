@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 function AdminList() {
   const [showInviteModal, setShowInviteModal] = useState(false)
   const [inviteMailAdress, setInviteMailAdress] = useState("")
-  const [inviteRole, setInviteRole] = useState("")
+  const [inviteRole, setInviteRole] = useState("superAdmin")
 
   const admin = useSelector((state) => state.admin);
   const navigation = useNavigate();
@@ -83,7 +83,7 @@ function AdminList() {
     })
       .then((res) => res.json())
       .catch((err) => console.error(err));
-    // window.location.reload();
+    window.location.reload();
 
   }
 

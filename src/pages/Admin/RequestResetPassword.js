@@ -82,7 +82,7 @@ function RequestResetPassword() {
             </button>
           </div>
           <div className="text-main-color-1 text-center underline underline-offset-auto hover:opacity-50">
-            <a href="/">Login</a>
+            <a href="/api/admin">Login</a>
           </div>
         </form>
       </div>
