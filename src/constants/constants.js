@@ -1,6 +1,6 @@
 export const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-export const pageHeight = { height: "calc(100vh - 66px)" };
+export const pageHeight = { height: "calc(100vh - 72px)" };
 
 export const sidebarMenu = [
   { name: "Admin", href: "/api/admin/all" },
@@ -15,5 +15,11 @@ export const reportTableHeaders = [
   "Post Date",
   "Update date",
 ];
+
+export const adminRole = [
+  "superAdmin",
+  "Admin",
+];
+
 export const adminsTableHeaders = ["ID", "Role", "Name", "Created Date"];
 export const usersTableHeaders = ["UserID", "Email", "Name", "Created Date"];

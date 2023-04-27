@@ -69,9 +69,9 @@ function HistoriesFooter() {
     <>
       <div className=" bg-gray-scale-3 p-2">
         <form onSubmit={handleSubmit} className="flex flex-col">
-          <input
+          <textarea
             type="text"
-            className="h-full w-full mt-2 my-3 px-2 py-5"
+            className="h-24 w-full mt-2 my-3 px-2 py-5"
             rows={3}
             value={message}
             onChange={(e) => setMessage(e.target.value)}

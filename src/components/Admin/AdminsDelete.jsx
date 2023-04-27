@@ -29,24 +29,24 @@ const AdminsDelete = () => {
   };
 
   return (
-    <div className="flex justify-center mt-28">
+    <div className="flex justify-center mt-20">
       <div className="bg-white w-3/6 border-2">
         <h1 className="text-center mt-10 font-semibold text-2xl mb-8">
           Are you sure to delete this user?
         </h1>
         <div className="flex justify-center">
           <ul className="flex items-start flex-col w-2/5">
-            <li className="flex flex-row m-6">
-              <div>ID</div>:<div>{adminDetail._id}</div>
+            <li className="flex flex-row m-4">
+              <div>ID</div>: <div>{adminDetail._id}</div>
             </li>
-            <li className="flex flex-row basis-2 m-6">
-              <div>Role</div>:<div>{adminDetail.role}</div>
+            <li className="flex flex-row basis-2 m-4">
+              <div>Role</div><div>: {adminDetail.role}</div>
             </li>
-            <li className="flex flex-row m-6">
-              <div>Name</div>:<div>{adminDetail.name}</div>
+            <li className="flex flex-row m-4">
+              <div>Name</div><div>: {adminDetail.name}</div>
             </li>
-            <li className="flex flex-row m-6">
-              <div>Email</div>:<div>{adminDetail.email}</div>
+            <li className="flex flex-row m-4">
+              <div>Email</div><div>: {adminDetail.email}</div>
             </li>
           </ul>
         </div>

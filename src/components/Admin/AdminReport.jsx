@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { FunnelIcon } from "@heroicons/react/24/solid";
 
 import ReportFilter from "../Admin/ReportFilter";
-import { current } from "@reduxjs/toolkit";
+
 
 function AdminReport() {
   const dataFetchedRef = useRef(false);
@@ -76,16 +76,19 @@ function AdminReport() {
   };
 
   return (
-    <div className="z-10">
-      <div className="text-main-color-1 font-bold text-2xl pl-3">Reports</div>
-      <div className="flex justify-end">
-        <button
-          className="flex rounded px-8 py-1 items-center bg-gray-scale-3 mr-10 cursor-pointer hover:opacity-50"
-          onClick={handleFilter}
-        >
-          <FunnelIcon className="h-4 w-4 mr-1" />
-          Filter
-        </button>
+
+    <div className="h-full w-full overflow-hidden">
+      <div className="flex justify-between">
+        <div className="text-main-color-1 font-bold text-2xl pl-3">Reports</div>
+          <div className="flex justify-end">
+            <button
+              className="flex rounded px-8 py-1 items-center bg-gray-scale-3 mr-10 cursor-pointer hover:opacity-50"
+              onClick={handleFilter}
+            >
+              <FunnelIcon className="h-4 w-4 mr-1" />
+              Filter
+            </button>
+          </div>
       </div>
 
       {show && <ReportFilter />}
@@ -105,17 +108,17 @@ function AdminReport() {
               reports.map((data, idx) => (
                 <tr
                   key={data._id}
-                  className="cursor-pointer  hover:bg-gray-scale-3"
+                  className="cursor-pointer  hover:bg-gray-scale-3 h-14"
                   onClick={handleClick}
                 >
                   <td
-                    className="border-b-2 border-slate-700 text-center"
+                    className="border-b-2 border-slate-700 text-center h-14"
                     data-value={data._id}
                   >
                     {data.status === "Not started" ? (
                       <div
                         key={data.status}
-                        className="my-1 flex justify-center items-center bg-not-started rounded"
+                        className=" flex justify-center items-center bg-not-started rounded-full"
                         data-value={data._id}
                       >
                         {data.status}
@@ -123,7 +126,7 @@ function AdminReport() {
                     ) : data.status === "Closed" ? (
                       <div
                         key={data.status}
-                        className="my-1 flex justify-center items-center bg-completed rounded"
+                        className="my-1 flex justify-center items-center bg-completed rounded-full w-24"
                         data-value={data._id}
                       >
                         {data.status}
@@ -131,7 +134,7 @@ function AdminReport() {
                     ) : (
                       <div
                         key={data.status}
-                        className="my-1 justify-center items-center bg-in-progress rounded"
+                        className="my-1 justify-center items-center bg-in-progress rounded-full"
                         data-value={data._id}
                       >
                         {data.status}
@@ -139,13 +142,13 @@ function AdminReport() {
                     )}
                   </td>
                   <td
-                    className="border-b-2 border-slate-700 text-center"
+                    className="border-b-2 border-slate-700 text-center p-1"
                     data-value={data._id}
                   >
                     {data.subject}
                   </td>
                   <td
-                    className="border-b-2 border-slate-700 text-center"
+                    className="border-b-2 border-slate-700 text-center p-1 w-60"
                     data-value={data._id}
                   >
                     {data.adminId?data.adminId.name:<></>}

@@ -1,3 +1,6 @@
+
+ 
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
 import AdminRegist from "./pages/Admin/AdminRegist";
@@ -9,7 +12,6 @@ import ReportsPage from "./pages/Admin/ReportsPage";
 import AdminAccounts from "./pages/Admin/AdminAccounts";
 import UserAccounts from "./pages/Admin/UserAccounts";
 import Categories from "./pages/Admin/Categories";
-import AddNewAdmin from "./components/Admin/AddNewAdmin";
 import EditAdminAccount from "./components/Admin/EditAdminAccount";
 import Report from "./pages/Admin/Report";
 import AdminsDetail from "./pages/Admin/AdminDetail";
@@ -147,7 +149,6 @@ function App() {
               <Route path="/api/admin/reports/:id" element={<Report />} />
 
               <Route path="/api/admin/all" element={<AdminAccounts />} />
-              <Route path="/api/admin/create/admin" element={<AddNewAdmin />} />
               <Route path="/api/admin/edit" element={<EditAdminAccount />} />
 
               <Route path="/api/admin/users/all" element={<UserAccounts />} />

@@ -8,6 +8,7 @@ const UserDetail = () => {
   const { id } = useParams();
   const admin = useSelector((state) => state.admin);
   const { userDetail, setUserDetail } = useContext(AppContext);
+  const navigation = useNavigate();
 
   useEffect(() => {
     if (admin) {
@@ -36,31 +37,47 @@ const UserDetail = () => {
     })
   }
 
+  const handleBack = e => {
+    navigation(`/api/admin/users/all`);
+  }
+
   return (
-    <div>
+    <div className="h-full w-full">
+      <div className="flex flex-row m-10 cursor-pointer" onClick={handleBack}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+        <div>
+          Back
+        </div>
+      </div>
       <div className='flex justify-center mt-20'>
-        <ul className="flex items-start flex-col w-1/5">
-          <li className="flex flex-row m-6">
-            ID :
-          </li>
-          <li className="flex flex-row basis-2 m-6">
-            Name :
-          </li>
-          <li className="flex flex-row m-6">
-            Email:
-          </li>
-        </ul>
-        <ul className="flex items-start flex-col w-1/5">
-          <li className="flex flex-row m-6"> 
-            {userDetail._id}
-          </li>
-          <li className="flex flex-row m-6">
-            {userDetail.name}
-          </li>
-          <li className="flex flex-row m-6">
-            {userDetail.email}
-          </li>
-        </ul>
+        <div className="border border-black w-auto">
+          <div className="flex flex-row justify-center m-10">
+            <ul className="flex items-start flex-col mr-20">
+              <li className="my-3">
+                ID :
+              </li>
+              <li className="my-3">
+                Name :
+              </li>
+              <li className="my-3">
+                Email:
+              </li>
+            </ul>
+            <ul className="flex items-start flex-col">
+              <li className="my-3"> 
+                {userDetail._id}
+              </li>
+              <li className="my-3">
+                {userDetail.name}
+              </li>
+              <li className="my-3">
+                {userDetail.email}
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div className="flex flex-row justify-center">
         <button
