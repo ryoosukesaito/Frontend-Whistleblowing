@@ -117,6 +117,11 @@ function SignupUser() {
               value={name}
             />
           </label>
+          {msg ? (
+            <div className="text-center mb-5 text-main-color-1">{msg}</div>
+          ) : (
+            <div className="text-center mb-5 text-red-600">{errMsg}</div>
+          )}
           <div className="text-center">
             <button
               className="rounded px-8 py-2 mb-8 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
