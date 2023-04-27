@@ -49,7 +49,7 @@ function AdminRegist() {
   return (
     <div className="flex justify-center items-center h-screen bg-white overflow-hidden">
       <div className="flex justify-center items-center m-auto mt-5 w-10/12 min-w-fit">
-        <form onSubmit={registAdmin} id="login" className="w-3/5 bg-gray-scale-3">
+        <form onSubmit={registAdmin} id="login" className="w-3/5 bg-gray-scale-4">
           <div className="text-4xl flex justify-center items-center">
             <img
               src={`${process.env.PUBLIC_URL}/favicon.ico`}
