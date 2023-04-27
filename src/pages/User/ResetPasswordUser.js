@@ -66,9 +66,9 @@ function ResetPasswordUser() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="justify-center items-center bg-gray-scale-4 m-20 p-10 w-1/3 min-w-fit">
+      <div className="justify-center items-center bg-gray-scale-4 m-auto p-10 w-1/3 min-w-fit">
         <form onSubmit={handleLogin} id="login" className="">
-          <div className="text-4xl flex justify-center items-center mb-24">
+          <div className="text-4xl flex justify-center items-center mb-16">
             <img
               src={`${process.env.PUBLIC_URL}/favicon.ico`}
               alt="Logo"
@@ -80,7 +80,7 @@ function ResetPasswordUser() {
             User
           </h1>
           <h2 className=" text-main-color-1 text-2xl font-normal text-center mb-8">
-            Reset Password
+            Reset password
           </h2>
           <label htmlFor="email">
             Password
@@ -109,11 +109,11 @@ function ResetPasswordUser() {
             </div>
           </label>
           <label htmlFor="password">
-            Confirm Password
+            Confirm password
             <input
               className="border w-full py-3 px-3 mb-5"
               type="password"
-              placeholder="Confirm New Password"
+              placeholder="Confirm password"
               onChange={(e) => {
                 setPassword2(e.target.value);
               }}
@@ -131,7 +131,7 @@ function ResetPasswordUser() {
               className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
               type="submit"
             >
-              Reset Password
+              Reset password
             </button>
           </div>
           <div className="text-main-color-1 text-center underline underline-offset-auto hover:opacity-50">
