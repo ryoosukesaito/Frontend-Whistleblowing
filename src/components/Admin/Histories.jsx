@@ -7,7 +7,7 @@ function Histories() {
   const commentEndRef = useRef(null);
   useEffect(() => {
     scrollToBottom();
-  }, []);
+  }, [histories]);
 
   function scrollToBottom() {
     commentEndRef.current?.scrollIntoView({ behavior: "smooth" });

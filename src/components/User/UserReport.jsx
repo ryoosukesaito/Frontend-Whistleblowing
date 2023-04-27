@@ -16,8 +16,14 @@ function UserReport() {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  const { reports, setReports, reportDetail, setReportDetail, setHistories,dateFormater } =
-    useContext(AppContext);
+  const {
+    reports,
+    setReports,
+    reportDetail,
+    setReportDetail,
+    setHistories,
+    dateFormater,
+  } = useContext(AppContext);
 
   useEffect(() => {
     if (dataFetchedRef.current) return;
@@ -41,14 +47,14 @@ function UserReport() {
     const id = event.target.dataset.value;
     console.log(id);
     const reportDetailUrl = `/api/user/reports/${id}`;
-    await fetch(`${SERVER_URL}${reportDetailUrl}`)
-      .then((res) => res.json())
-      .then((data) => setReportDetail(data));
-    if (reportDetail) {
-      getHistoryByReportId(id);
-      navigate(reportDetailUrl);
-    }
-    navigate(`/api/user/reports/${id}`);
+    // await fetch(`${SERVER_URL}${reportDetailUrl}`)
+    //   .then((res) => res.json())
+    //   .then((data) => setReportDetail(data));
+    // if (reportDetail) {
+    //   getHistoryByReportId(id);
+    navigate(reportDetailUrl);
+    // }
+    // navigate(`/api/user/reports/${id}`);
   }
 
   async function getHistoryByReportId(id) {
@@ -123,7 +129,7 @@ function UserReport() {
                   className="border-b-2 border-slate-700 text-center"
                   data-value={data._id}
                 >
-                  {data.adminId?data.adminId.name:<></>}
+                  {data.adminId ? data.adminId.name : <></>}
                 </td>
                 <td
                   className="border-b-2 border-slate-700 text-center"
