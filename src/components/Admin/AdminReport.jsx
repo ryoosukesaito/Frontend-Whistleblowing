@@ -25,6 +25,7 @@ function AdminReport() {
     setHistories,
     filteredReports,
     setFilteredReports,
+    dateFormater
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -147,19 +148,19 @@ function AdminReport() {
                     className="border-b-2 border-slate-700 text-center p-1"
                     data-value={data._id}
                   >
-                    {data.adminId}
+                    {data.adminId?data.adminId.name:<></>}
                   </td>
                   <td
                     className="border-b-2 border-slate-700 text-center p-1"
                     data-value={data._id}
                   >
-                    {data.createdAt}
+                    {dateFormater(data.createdAt)}
                   </td>
                   <td
                     className="border-b-2 border-slate-700 text-center p-1"
                     data-value={data._id}
                   >
-                    {data.updatedAt}
+                    {dateFormater(data.updatedAt)}
                   </td>
                 </tr>
               ))
