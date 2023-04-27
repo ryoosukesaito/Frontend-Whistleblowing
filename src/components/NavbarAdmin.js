@@ -38,7 +38,7 @@ function NavbarUser() {
       .then((res) => res.json())
       .then((data) => setNotices(data));
   };
-
+  if (!admin || !notices) return <></>;
   return (
     <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-gray-scale-2 text-white">
       <div className="w-full mx-2 flex flex-wrap items-center justify-between">
