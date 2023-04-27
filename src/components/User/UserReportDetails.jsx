@@ -80,7 +80,7 @@ function UserReportDetails() {
                 </tr>
                 <tr>
                   <td className="py-2">Update Date</td>
-                  <td className="py-2">: {reportDetail.updatedAt}</td>
+                  <td className="py-2">: {dateFormater(reportDetail.updatedAt)}</td>
                 </tr>
                 <tr>
                   <td className="py-2">Your Name</td>

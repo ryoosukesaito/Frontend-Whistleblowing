@@ -69,7 +69,7 @@ function Navbar() {
         {user && (
           <div
             className={
-              "lg:flex flex-grow items-center text-sm relative ml-32" +
+              "lg:flex flex-grow items-center text-sm relative ml-32 z-40" +
               (navbar ? " flex" : " hidden")
             }
           >
