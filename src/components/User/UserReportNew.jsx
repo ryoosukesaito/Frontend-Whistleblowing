@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import { DocumentArrowDownIcon } from "@heroicons/react/24/outline";
 import { useSelector } from "react-redux";
 import { SERVER_URL } from "../../constants/constants";
 
@@ -16,6 +16,9 @@ function UserReportDetails() {
   const [reportSubject, setReportSubject] = useState("");
   const [reportDescription, setReportDescription] = useState("");
   const [categories, setCategories] = useState([]);
+  const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState(null);
+  const formData = new FormData();
 
   useEffect(() => {
     getCategories();
@@ -29,8 +32,33 @@ function UserReportDetails() {
         setReportCategory(data[0]._id);
       });
   };
-  const postReport = async () => {
+
+  async function handleFetchFile() {
+    formData.append("caption", file.lastModified);
+    formData.append("file", file);
+
+    try {
+      const res = await fetch(`${SERVER_URL}/uploadFn`, {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      const value = data.filename;
+      setFileName(value);
+      return value;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }
+  const postReport = async (e) => {
+    e.preventDefault();
     console.log(`${SERVER_URL}/api/user/reports`);
+
+    let fileValue = null;
+    if (file) {
+      fileValue = await handleFetchFile();
+    }
     await fetch(`${SERVER_URL}/api/user/reports`, {
       method: "POST",
       headers: {
@@ -46,6 +74,7 @@ function UserReportDetails() {
           category_id: reportCategory,
           description: reportDescription,
           status: "Not started",
+          file: fileValue,
         },
       }),
     })
@@ -73,7 +102,7 @@ function UserReportDetails() {
             others.
           </p>
         </div>
-        <form onSubmit={postReport} className="">
+        <form onSubmit={postReport}>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label className="block text-gray-scale-1 text-base font-semibold mb-2">
@@ -165,7 +194,17 @@ function UserReportDetails() {
           </div>
           <div className="flex items-center justify-center w-full">
             <div className="w-full px-3">
-              <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+              <div className="flex flex-row text-indigo-700">
+                {file ? (
+                  <>
+                    <DocumentArrowDownIcon className="h-6 w-6 mr-1 " />
+                    {file.name}
+                  </>
+                ) : (
+                  <></>
+                )}
+              </div>
+              <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                   <svg
                     aria-hidden="true"
@@ -190,7 +229,12 @@ function UserReportDetails() {
                     SVG, PNG, JPG or GIF (MAX. 800x400px)
                   </p>
                 </div>
-                <input id="dropzone-file" type="file" className="hidden" />
+                <input
+                  id="dropzone-file"
+                  type="file"
+                  className="hidden"
+                  onChange={(e) => setFile(e.target.files[0])}
+                />
               </label>
             </div>
           </div>
