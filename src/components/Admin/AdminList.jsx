@@ -5,6 +5,7 @@ import { AppContext } from "../../context/appContext";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+
 function AdminList() {
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [inviteMailAdress, setInviteMailAdress] = useState("");
@@ -88,10 +89,10 @@ function AdminList() {
 
   return (
     <div>
+      <div className="flex justify-between">
       <div className="text-main-color-1 font-bold text-2xl pl-3">
         Admin list
       </div>
-      <div className="flex justify-end">
         {admin.role === "superAdmin" ? (
           <button
             className="flex rounded px-8 py-1 items-center bg-gray-scale-3 cursor-pointer mr-10 hover:bg-gray-scale-2 hover:text-white"
@@ -107,87 +108,69 @@ function AdminList() {
         <>
           <div
             className={
-              "fixed flex flex-col items-center justify-center overflow-hidden bg-gray-500/50 transition-all " +
-              (showInviteModal
-                ? " top-0 left-0 h-screen w-screen "
-                : " top-1/2 left-1/2 h-0 w-0 ")
+              (showInviteModal)
             }
             onClick={onClickBackground}
           >
-            <div className="relative h-3/4 w-3/4 max-w-3xl">
-              {/* 閉じるボタン */}
-              <div className="absolute right-0 -top-10 h-10 w-10 hover:cursor-pointer">
-                <p>Close</p>
-              </div>
+            <div className="z-50 absolute inset-0 bg-black bg-opacity-10 backdrop-blur-sm flex justify-center">
+            <div className="mt-20 w-2/4">
               <div
                 id="modalDiv"
-                className="w-full max-w-xl"
+                className="w-full"
                 onClick={onClickCard}
               >
-                <form
-                  className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-                  onSubmit={inviteAdminUser}
-                >
-                  <div className="md:flex md:items-center mb-6">
-                    <div className="md:w-1/3">
+              <div className="">
+              <div className="flex flex-col bg-white">
+              <div className="text-center text-3xl mx-10 mt-10">Invite New Admin/Staff</div>
+                <div className="text-center overflow-hidden mt-6 mb-10 mx-10">
+                  New Admin/Staff members who receive an email invitation must access the
+                  URL attached to the email and set a password.
+                </div>
+                <form className="" onSubmit={inviteAdminUser}>
+                  <div className="flex mb-6 mr-10 ml-20">
+                    <div className="flex flex-row">
+                      <div className="flex flex-col">
                       <label
-                        className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                        className="text-lg my-5"
                         htmlFor="inline-full-name"
                       >
-                        New member's Email
+                        New member's Email :
                       </label>
+                      <label className="text-lg my-8" htmlFor="inline-password">
+                        Role :
+                      </label>
+                      </div>
                     </div>
-                    <div className="md:w-2/3">
+                    <div className="flex flex-col">
                       <input
-                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        className="border border-black h-10 m-4 w-96" 
                         type="text"
                         value={inviteMailAdress}
                         onChange={(e) => setInviteMailAdress(e.target.value)}
                       />
-                    </div>
-                  </div>
-                  <div className="md:flex md:items-center mb-6">
-                    <div className="md:w-1/3">
-                      <label
-                        className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                        htmlFor="inline-password"
-                      >
-                        Role
-                      </label>
-                    </div>
-
-                    <div className="inline-block relative w-64">
                       <select
-                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        className="border border-black  h-10 m-4 w-96"
                         onChange={(e) => setInviteRole(e.target.value)}
                       >
                         <option value="superAdmin">SuperAdmin</option>
                         <option value="admin">Admin</option>
                       </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg
-                          className="fill-current h-4 w-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
-                      </div>
                     </div>
                   </div>
-                  <div className="md:flex md:items-center">
-                    <div className="md:w-1/3"></div>
-                    <div className="md:w-2/3">
+                  <div className="flex flex-col items-center">
                       <button
-                        className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                        className="w-40 h-10 text-lg bg-gray-scale-3 mb-2"
                         type="submit"
                       >
-                        Sign Up
+                        Send
                       </button>
-                    </div>
+                      <button className="text-delete mb-10 cursor-pointer mt-2">Cancel</button>
                   </div>
                 </form>
+                </div>
               </div>
+            </div>
+            </div>
             </div>
           </div>
         </>

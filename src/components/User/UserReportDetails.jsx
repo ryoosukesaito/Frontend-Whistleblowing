@@ -131,7 +131,7 @@ function UserReportDetails() {
                 </tr>
                 <tr>
                   <td>Subject</td>
-                  <td>: {reportDetail.subject}</td>
+                  <td className="break-all">: {reportDetail.subject}</td>
                 </tr>
                 <tr>
                   <td>File</td>
@@ -166,14 +166,14 @@ function UserReportDetails() {
             <div className="border p-2">{reportDetail.description}</div>
           </div>
         </div>
-      </div>
 
-      <div className="h-full border bg-gray-scale-4 p-2 overflow-auto">
-        <div className="text-lg border-b-2 border-gray-scale-1">
-          Contact Record
+        <div className="max-h-full border bg-gray-scale-4 p-2 overflow-auto">
+          <div className="text-lg border-b-2 border-gray-scale-1">
+            Contact Record
+          </div>
+          <div className="">{histories ? <Histories /> : <></>}</div>
+          <HistoriesFooter />
         </div>
-        <div className="">{histories ? <Histories /> : <></>}</div>
-        <HistoriesFooter />
       </div>
     </>
   );

@@ -82,14 +82,14 @@ const EditUserPassword=()=>{
             User
           </h1>
           <h2 className=" text-main-color-1 text-2xl font-normal text-center mb-8">
-            Reset Password
+            Reset password
           </h2>
           <label htmlFor="password">
-            Current Password
+            Current password
             <input
               className="border rounded w-full py-3 px-3 mb-5"
               type={pwStyle.type}
-              placeholder="Current Password"
+              placeholder="Current password"
               onChange={(e) => {
                 setCurrentPassword(e.target.value);
               }}
@@ -102,7 +102,7 @@ const EditUserPassword=()=>{
             <input
               className="border w-full py-3 px-3 mb-3"
               type={pwStyle.type}
-              placeholder="New Password"
+              placeholder="New password"
               onChange={(e) => {
                 setNewPassword(e.target.value);
               }}
@@ -124,11 +124,11 @@ const EditUserPassword=()=>{
             </div>
           </label>
           <label htmlFor="password">
-            Confirm Password
+            Confirm password
             <input
               className="border rounded w-full py-3 px-3 mb-5"
               type="password"
-              placeholder="Confirm New Password"
+              placeholder="Confirm new password"
               onChange={(e) => {
                 setNewPassword2(e.target.value);
               }}
@@ -146,7 +146,7 @@ const EditUserPassword=()=>{
               className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
               type="submit"
             >
-              Reset Password
+              Reset password
             </button>
           </div>
           {/* <div className="text-main-color-1 text-center underline underline-offset-auto">

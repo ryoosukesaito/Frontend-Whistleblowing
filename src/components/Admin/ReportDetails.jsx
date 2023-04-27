@@ -7,6 +7,7 @@ import { SERVER_URL } from "../../constants/constants";
 import Histories from "./Histories";
 import HistoriesFooter from "./HistoriesFooter";
 import { useParams } from "react-router-dom";
+import AdminsDelete from "./AdminsDelete";
 // import { report } from "../../../../../Backend-whistleblowing/src/routes";
 
 function ReportDetails() {
@@ -64,7 +65,7 @@ function ReportDetails() {
 
   function downloadHandler(e) {
     e.preventDefault();
-    const fileNameForUrl = e.target.value;
+    const fileNameForUrl = reportDetail.file;
 
     fetch(`${SERVER_URL}/uploadFn/file/showRespond/${fileNameForUrl}`, {
       method: "GET",

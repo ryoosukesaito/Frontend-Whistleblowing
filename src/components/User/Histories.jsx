@@ -3,7 +3,7 @@ import { AppContext } from "../../context/appContext";
 import { SERVER_URL } from "../../constants/constants";
 
 function Histories() {
-  const { histories } = useContext(AppContext);
+  const { histories,dateFormater } = useContext(AppContext);
 
   const commentEndRef = useRef(null);
   useEffect(() => {
@@ -41,10 +41,10 @@ function Histories() {
       <div className="h-full w-full flex flex-col">
         {histories ? (
           histories.map((data, idx) => (
-            <div key={idx} className="flex flex-col bg-gray-scale-3 my-3 p-2">
+            <div key={idx} className="flex flex-col bg-gray-scale-3 my-3 px-2 py-4">
               <div className="flex flex-row justify-between">
                 <div className="flex flex-row">
-                  <div className="font-bold">
+                  <div className="font-bold mb-3">
                     {data.replierType === "admin"
                       ? `${data.name} (Admin)`
                       : `${data.name} (User)`}
@@ -60,7 +60,7 @@ function Histories() {
                   </div>
                 </div>
 
-                <div>{data.createdAt}</div>
+                <div>{dateFormater(data.createdAt)}</div>
               </div>
 
               <div>{data.message}</div>

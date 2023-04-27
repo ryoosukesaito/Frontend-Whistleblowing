@@ -3,7 +3,7 @@ import { AppContext } from "../../context/appContext";
 import { SERVER_URL } from "../../constants/constants";
 
 function Histories() {
-  const { histories } = useContext(AppContext);
+  const { histories,dateFormater } = useContext(AppContext);
 
   const commentEndRef = useRef(null);
   useEffect(() => {
@@ -63,7 +63,7 @@ function Histories() {
                   </div>
                 </div>
 
-                <div>{data.createdAt}</div>
+                <div>{dateFormater(data.createdAt)}</div>
               </div>
 
               <div>{data.message}</div>

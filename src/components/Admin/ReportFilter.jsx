@@ -1,52 +1,31 @@
 import React from 'react'
 import { useState,useContext,useEffect } from 'react'
 import { AppContext } from "../../context/appContext";
+import { SERVER_URL } from "../../constants/constants";
 
 
 const ReportFilter = () => {
   // 各種フィルタの値管理用state
-  const { reports,reportFilter, setReportFilter,setFilteredReports} = useContext(AppContext);
-  // const [idFilter, setIdFilter] = useState("")
-  // const [statusFilterNotStarted, setStatusFilterNotStarted] = useState(false)
-  // const [statusFilterInProgress, setStatusFilterInProgress] = useState(false)
-  // const [statusFilterClosed, setStatusFilterClosed] = useState(false)
-  // const [subjectFilter, setSubjectFilter] = useState("")
-  // const [createdAtFromFilter, setCreatedAtFromFilter] = useState()
-  // const [createdAtToFilter, setCreatedAtToFilter] = useState()
-  // const [updatedAtFromFilter, setUpdatedAtFromFilter] = useState()
-  // const [updatedAtToFilter, setUpdatedAtToFilter] = useState()
+  const { reports,reportFilter, setReportFilter,setReports} = useContext(AppContext);
+
 
   useEffect(() => {
-    // filter初期値セット
-    // if(reportFilter.id){
-    //   setIdFilter(reportFilter.id)
-    // }
-    // setStatusFilterNotStarted(reportFilter.statusNotStarted)
-    // setStatusFilterInProgress(reportFilter.statusInProgress)
-    // setStatusFilterClosed(reportFilter.statusClosed)
-    // if(reportFilter.subject){
-    //   setSubjectFilter(reportFilter.subject)
-    // }
-    // if(reportFilter.createdAtFrom){
-    //   setCreatedAtFromFilter(reportFilter.createdAtFrom)
-    // }
-    // if(reportFilter.createdAtTo){
-    //   setSubjectFilter(reportFilter.createdAtTo)
-    // }
-    // if(reportFilter.updatedAtFrom){
-    //   setCreatedAtToFilter(reportFilter.updatedAtFrom)
-    // }
-    // if(reportFilter.updatedAtTo){
-    //   setUpdatedAtToFilter(reportFilter.updatedAtTo)
-    // }
-
+    getReports()
 
   }, [])
+  async function getReports() {
+    await fetch(`${SERVER_URL}/api/admin/reports`)
+      .then((res) => res.json())
+      .then((data) => {
+        // setReports(data);
+        setReports(data);
+      });
+  }
   
 
   const setFilter = async (e)=>{
 
-
+    getReports()
     let filteredRepts = reports
 
     if(filteredRepts&&reportFilter.id){
@@ -85,19 +64,19 @@ const ReportFilter = () => {
       )
     }
 
-    await setFilteredReports(
+    await setReports(
       filteredRepts
     )
       return e.preventDefault()
   }
 
   return (
-    <div className='w-1/4 h-100 border border-gray-scale-3 absolute z-50 bg-white top-40 right-3'>
+    <div className='w-1/4 h-100 border border-gray-scale-3 absolute z-50 bg-white top-40 right-3 overflow-hidden'>
      <form className='m-10' onSubmit={(e)=>{setFilter(e)}}>
         <div className="flex items-center">
           <div className='mr-3 text-xl'> ID </div>
           <input key="id" className="border border-gray-scale-2 w-full pl-1 text-lg" value={reportFilter.id} onChange={(e)=>{
-            setReportFilter({...reportFilter,id:e.target.value})
+            setReports({...reports,id:e.target.value})
           }}/>
         </div>
 
