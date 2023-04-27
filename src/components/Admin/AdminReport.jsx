@@ -41,8 +41,8 @@ function AdminReport() {
     await fetch(`${SERVER_URL}/api/admin/reports`)
       .then((res) => res.json())
       .then((data) => {
+        // setReports(data);
         setReports(data);
-        setFilteredReports(data);
       });
   }
 
@@ -76,7 +76,7 @@ function AdminReport() {
   };
 
   return (
-    <div className="h-full">
+    <div className="z-10">
       <div className="text-main-color-1 font-bold text-2xl pl-3">Reports</div>
       <div className="flex justify-end">
         <button
@@ -90,8 +90,8 @@ function AdminReport() {
 
       {show && <ReportFilter />}
       <div className="w-full h-full mt-5 relative overflow-y-auto items-center justify-center">
-        <table className="w-full h-fit">
-          <thead className="sticky top-0 bg-gray-scale-4 py-10">
+        <table className="w-full">
+          <thead>
             <tr>
               {reportTableHeaders.map((header, idx) => (
                 <th key={idx} className="border-b-4 border-slate-600">
@@ -100,16 +100,16 @@ function AdminReport() {
               ))}
             </tr>
           </thead>
-          <tbody className="px-1 h-full">
-            {filteredReports.length!==0 ? (
-              filteredReports.map((data, idx) => (
+          <tbody>
+            {reports.length!==0 ? (
+              reports.map((data, idx) => (
                 <tr
                   key={data._id}
                   className="cursor-pointer  hover:bg-gray-scale-3"
                   onClick={handleClick}
                 >
                   <td
-                    className="border-b-2 border-slate-700 text-center py-2"
+                    className="border-b-2 border-slate-700 text-center"
                     data-value={data._id}
                   >
                     {data.status === "Not started" ? (
@@ -139,25 +139,25 @@ function AdminReport() {
                     )}
                   </td>
                   <td
-                    className="border-b-2 border-slate-700 text-center p-1 break-all"
+                    className="border-b-2 border-slate-700 text-center"
                     data-value={data._id}
                   >
                     {data.subject}
                   </td>
                   <td
-                    className="border-b-2 border-slate-700 text-center p-1"
+                    className="border-b-2 border-slate-700 text-center"
                     data-value={data._id}
                   >
                     {data.adminId?data.adminId.name:<></>}
                   </td>
                   <td
-                    className="border-b-2 border-slate-700 text-center p-1"
+                    className="border-b-2 border-slate-700 text-center"
                     data-value={data._id}
                   >
                     {dateFormater(data.createdAt)}
                   </td>
                   <td
-                    className="border-b-2 border-slate-700 text-center p-1"
+                    className="border-b-2 border-slate-700 text-center"
                     data-value={data._id}
                   >
                     {dateFormater(data.updatedAt)}
