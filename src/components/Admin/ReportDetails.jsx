@@ -17,8 +17,13 @@ function ReportDetails() {
 
   const statusOptions = ["Not started", "In progress", "Closed"];
 
-  const { reportDetail, setReportDetail, histories, setHistories } =
-    useContext(AppContext);
+  const {
+    reportDetail,
+    setReportDetail,
+    histories,
+    setHistories,
+    dateFormater,
+  } = useContext(AppContext);
 
   useEffect(() => {
     if (admin) {
@@ -56,6 +61,28 @@ function ReportDetails() {
       .catch((err) => console.error(err));
     getReportDetail();
   };
+
+  function downloadHandler(e) {
+    e.preventDefault();
+    const fileNameForUrl = e.target.value;
+
+    fetch(`${SERVER_URL}/uploadFn/file/showRespond/${fileNameForUrl}`, {
+      method: "GET",
+    })
+      .then((res) => res.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", fileNameForUrl);
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+      })
+      .catch((error) => {
+        console.error("Error fetching file:", error);
+      });
+  }
 
   if (reportDetail.length === 0)
     return (
@@ -95,11 +122,15 @@ function ReportDetails() {
                 </tr>
                 <tr>
                   <td className="py-2">Post Date</td>
-                  <td className="py-2">: {reportDetail.createdAt}</td>
+                  <td className="py-2">
+                    : {dateFormater(reportDetail.createdAt)}
+                  </td>
                 </tr>
                 <tr>
                   <td className="py-2">Update Date</td>
-                  <td className="py-2">: {reportDetail.updatedAt}</td>
+                  <td className="py-2">
+                    : {dateFormater(reportDetail.updatedAt)}
+                  </td>
                 </tr>
                 <tr>
                   <td className="py-2">Your Name</td>
@@ -115,7 +146,12 @@ function ReportDetails() {
               <tbody>
                 <tr>
                   <td>Category</td>
-                  <td>: {reportDetail.category_id?reportDetail.category_id.name:""}</td>
+                  <td>
+                    :{" "}
+                    {reportDetail.category_id
+                      ? reportDetail.category_id.name
+                      : ""}
+                  </td>
                 </tr>
                 <tr>
                   <td>Subject</td>
@@ -123,11 +159,26 @@ function ReportDetails() {
                 </tr>
                 <tr>
                   <td>File</td>
-                  <td className="text-indigo-700">: img-file.jpeg</td>
+                  <td>
+                    {reportDetail.file ? (
+                      <button
+                        onClick={downloadHandler}
+                        value={reportDetail.file}
+                      >
+                        <div className="text-indigo-700">
+                          : {reportDetail.file}
+                        </div>
+                      </button>
+                    ) : (
+                      <div>: No Files</div>
+                    )}
+                  </td>
                 </tr>
                 <tr>
                   <td>Your Agent</td>
-                  <td>: Name</td>
+                  <td>
+                    : {reportDetail.adminId ? reportDetail.adminId.name : <></>}
+                  </td>
                 </tr>
               </tbody>
             </table>

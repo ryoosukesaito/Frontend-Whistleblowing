@@ -53,6 +53,7 @@ const AdminsDetail = () => {
           <li className="flex flex-row basis-2 m-6">
             <input
               placeholder={adminDetail.role}
+              value={adminDetail.role}
               type="text"
               className="border w-56"
             />
@@ -60,6 +61,7 @@ const AdminsDetail = () => {
           <li className="flex flex-row m-6">
             <input
               placeholder={adminDetail.name}
+              value={adminDetail.name}
               type="text"
               className="border w-56"
             />
@@ -67,6 +69,7 @@ const AdminsDetail = () => {
           <li className="flex flex-row m-6">
             <input
               placeholder={adminDetail.email}
+              value={adminDetail.email}
               type="text"
               className="border w-56"
             />
@@ -74,18 +77,19 @@ const AdminsDetail = () => {
         </ul>
       </div>
       <div className="flex flex-row justify-center mt-20">
-        <button className="rounded text-enter px-8 py-2 bg-gray-scale-3 cursor-pointer mr-32">
+        {/* <button className="rounded text-enter px-8 py-2 bg-gray-scale-3 cursor-pointer mr-32">
           Update
-        </button>
-        {admin.role==='superAdmin'?
-        <button
-          className="rounded text-center px-8 py-2 bg-delete cursor-pointer"
-          onClick={deleteHandler}
-        >
-          Delete
-        </button>
-        :<></>
-        }
+        </button> */}
+        {admin.role === "superAdmin" ? (
+          <button
+            className="rounded text-center px-8 py-2 bg-delete cursor-pointer"
+            onClick={deleteHandler}
+          >
+            Delete
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
