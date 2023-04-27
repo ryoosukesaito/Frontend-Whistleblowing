@@ -17,7 +17,7 @@ function UserReportDetails() {
   const fetchURL = `${SERVER_URL}/api/user/reports/${id}`;
   const dataFetchedRef = useRef(false);
 
-  const { reportDetail, setReportDetail, histories, setHistories } =
+  const { reportDetail, setReportDetail, histories, setHistories,dateFormater } =
     useContext(AppContext);
 
   useEffect(() => {
@@ -69,11 +69,11 @@ function UserReportDetails() {
                 </tr>
                 <tr>
                   <td className="py-2">Post Date</td>
-                  <td className="py-2">: {reportDetail.createdAt}</td>
+                  <td className="py-2">: {dateFormater(reportDetail.createdAt)}</td>
                 </tr>
                 <tr>
                   <td className="py-2">Update Date</td>
-                  <td className="py-2">: {reportDetail.updatedAt}</td>
+                  <td className="py-2">: {dateFormater(reportDetail.updatedAt)}</td>
                 </tr>
                 <tr>
                   <td className="py-2">Your Name</td>
@@ -92,7 +92,7 @@ function UserReportDetails() {
               <tbody>
                 <tr>
                   <td>Category</td>
-                  <td>: {reportDetail.category_id}</td>
+                  <td>: {reportDetail.category_id?reportDetail.category_id.name:<></>}</td>
                 </tr>
                 <tr>
                   <td>Subject</td>
@@ -104,7 +104,8 @@ function UserReportDetails() {
                 </tr>
                 <tr>
                   <td>Your Agent</td>
-                  <td>: Name</td>
+                  {/* <td>: {reportDetail.adminId.name}</td> */}
+                  <td>: {reportDetail.adminId?reportDetail.adminId.name:<></>}</td>
                 </tr>
               </tbody>
             </table>

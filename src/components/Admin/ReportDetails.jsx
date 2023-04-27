@@ -18,7 +18,7 @@ function ReportDetails() {
 
   const statusOptions = ["Not started", "In progress", "Closed"];
 
-  const { reportDetail, setReportDetail, histories, setHistories } =
+  const { reportDetail, setReportDetail, histories, setHistories,dateFormater } =
     useContext(AppContext);
 
   useEffect(() => {
@@ -96,11 +96,11 @@ function ReportDetails() {
                 </tr>
                 <tr>
                   <td className="py-2">Post Date</td>
-                  <td className="py-2">: {reportDetail.createdAt}</td>
+                  <td className="py-2">: {dateFormater(reportDetail.createdAt)}</td>
                 </tr>
                 <tr>
                   <td className="py-2">Update Date</td>
-                  <td className="py-2">: {reportDetail.updatedAt}</td>
+                  <td className="py-2">: {dateFormater(reportDetail.updatedAt)}</td>
                 </tr>
                 <tr>
                   <td className="py-2">Your Name</td>
@@ -128,7 +128,7 @@ function ReportDetails() {
                 </tr>
                 <tr>
                   <td>Your Agent</td>
-                  <td>: Name</td>
+                  <td>: {reportDetail.adminId?reportDetail.adminId.name:<></>}</td>
                 </tr>
               </tbody>
             </table>

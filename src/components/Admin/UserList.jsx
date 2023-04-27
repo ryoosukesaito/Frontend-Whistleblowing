@@ -5,7 +5,7 @@ import { SERVER_URL, usersTableHeaders } from "../../constants/constants";
 import { AppContext } from "../../context/appContext";
 
 function UserList() {
-  const { users, setUsers,userDetail,setUserDetail } = useContext(AppContext);
+  const { users, setUsers,userDetail,setUserDetail,dateFormater} = useContext(AppContext);
   const navigation = useNavigate()
 
 
@@ -71,7 +71,7 @@ function UserList() {
               </td>
               <td className="border-b-2 border-slate-700 text-center"
               data-value={data._id}>
-                {data.createdAt}
+                {dateFormater(data.createdAt)}
               </td>
             </tr>
           ))}

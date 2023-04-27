@@ -14,7 +14,7 @@ function AdminList() {
   const admin = useSelector((state) => state.admin);
   const navigation = useNavigate();
 
-  const { admins, setAdmins, adminDetail, setAdminDetail } =
+  const { admins, setAdmins, adminDetail, setAdminDetail,dateFormater } =
     useContext(AppContext);
 
   useEffect(() => {
@@ -91,10 +91,10 @@ function AdminList() {
 
   return (
     <div>
+      <div className="flex justify-between">
       <div className="text-main-color-1 font-bold text-2xl pl-3">
         Admin list
       </div>
-      <div className="flex justify-end">
       {admin.role==='superAdmin'?
         <button className="flex rounded px-8 py-1 items-center bg-gray-scale-3 cursor-pointer mr-10 hover:bg-gray-scale-2 hover:text-white"
         onClick={()=>setShowInviteModal(!showInviteModal)}>
@@ -211,7 +211,7 @@ function AdminList() {
                 className="border-b-2 border-slate-700 text-center"
                 data-value={data._id}
               >
-                {data.createdAt}
+                {dateFormater(data.createdAt)}
               </td>
             </tr>
           ))}

@@ -59,6 +59,17 @@ function App() {
   const [reportFilter, setReportFilter] = useState(filterVal);
   const admin = useSelector((state) => state.admin);
   const user = useSelector((state) => state.user);
+
+  const dateFormater=(dateStr)=>{
+    if(Date(dateStr)){
+      const date = new Date(dateStr)
+
+      return  date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()
+    }else{
+      return '9999-99-99 99:99:99'
+    }
+      
+  }
   
   return (
     <AppContext.Provider
@@ -85,6 +96,7 @@ function App() {
         setReportFilter,
         filteredReports,
         setFilteredReports,
+        dateFormater
       }}
     >
       <BrowserRouter>
@@ -117,7 +129,7 @@ function App() {
             element={<ResetPasswordAdmin />}
           />
 
-          <Route path="/api/admin/signup" element={<AdminAccountCreate />} />
+          {/* <Route path="/api/admin/signup" element={<AdminAccountCreate />} /> */}
 
           {/* admin route after logging in */}
           {admin && (

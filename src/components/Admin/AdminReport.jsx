@@ -25,6 +25,7 @@ function AdminReport() {
     setHistories,
     filteredReports,
     setFilteredReports,
+    dateFormater
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -107,17 +108,17 @@ function AdminReport() {
               filteredReports.map((data, idx) => (
                 <tr
                   key={data._id}
-                  className="cursor-pointer  hover:bg-gray-scale-3"
+                  className="cursor-pointer  hover:bg-gray-scale-3 h-14"
                   onClick={handleClick}
                 >
                   <td
-                    className="border-b-2 border-slate-700 text-center py-2"
+                    className="border-b-2 border-slate-700 text-center h-14"
                     data-value={data._id}
                   >
                     {data.status === "Not started" ? (
                       <div
                         key={data.status}
-                        className=" flex justify-center items-center bg-not-started rounded"
+                        className=" flex justify-center items-center bg-not-started rounded-full"
                         data-value={data._id}
                       >
                         {data.status}
@@ -125,7 +126,7 @@ function AdminReport() {
                     ) : data.status === "Closed" ? (
                       <div
                         key={data.status}
-                        className="my-1 flex justify-center items-center bg-completed rounded"
+                        className="my-1 flex justify-center items-center bg-completed rounded-full w-24"
                         data-value={data._id}
                       >
                         {data.status}
@@ -133,7 +134,7 @@ function AdminReport() {
                     ) : (
                       <div
                         key={data.status}
-                        className="my-1 justify-center items-center bg-in-progress rounded"
+                        className="my-1 justify-center items-center bg-in-progress rounded-full"
                         data-value={data._id}
                       >
                         {data.status}
@@ -143,6 +144,8 @@ function AdminReport() {
                   <td
                     className="border-b-2 border-slate-700 text-center p-1 break-all"
                     data-value={data._id}
+                    numberOfLines={1}
+                    ellopsizeMode ="tail"
                   >
                     {data.subject}
                   </td>
@@ -150,19 +153,19 @@ function AdminReport() {
                     className="border-b-2 border-slate-700 text-center p-1"
                     data-value={data._id}
                   >
-                    {data.adminId}
+                    {data.adminId?data.adminId.name:<></>}
                   </td>
                   <td
                     className="border-b-2 border-slate-700 text-center p-1"
                     data-value={data._id}
                   >
-                    {data.createdAt}
+                    {dateFormater(data.createdAt)}
                   </td>
                   <td
                     className="border-b-2 border-slate-700 text-center p-1"
                     data-value={data._id}
                   >
-                    {data.updatedAt}
+                    {dateFormater(data.updatedAt)}
                   </td>
                 </tr>
               ))
