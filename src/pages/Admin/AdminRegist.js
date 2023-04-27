@@ -40,7 +40,7 @@ function AdminRegist() {
       navigate("/api/admin")
     } catch (error) {
       setMsg("");
-      setErrMsg(e.message);
+      setErrMsg(error.message);
     }
   };
   

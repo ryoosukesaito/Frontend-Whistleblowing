@@ -8,10 +8,17 @@ function SignupUser() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
   const navigate = useNavigate();
+    const [msg, setMsg] = useState("");
+  const [errMsg, setErrMsg] = useState("");
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    console.log(password);
+    console.log(confirmPassword);
     try{
+      if(password!==confirmPassword){ 
+        console.log("error");
+        throw new Error("Password doesn't match.")}
       await fetch(`${SERVER_URL}/api/user/register`, {
       method: "POST",
       headers: {
@@ -35,7 +42,9 @@ function SignupUser() {
         throw new Error(error.message);
       });
     }catch(error){
-      console.error(error)
+      console.log("catch error");
+      setMsg("");
+      setErrMsg(error.message);
     }
   }
 
@@ -107,6 +116,11 @@ function SignupUser() {
               value={name}
             />
           </label>
+            {msg ? (
+            <div className="text-center mb-5 text-main-color-1">{msg}</div>
+          ) : (
+            <div className="text-center mb-5 text-red-600">{errMsg}</div>
+          )}
           <div className="text-center">
             <button
               className="rounded px-8 py-2 mb-8 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
