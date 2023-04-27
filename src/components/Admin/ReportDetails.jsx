@@ -17,8 +17,13 @@ function ReportDetails() {
 
   const statusOptions = ["Not started", "In progress", "Closed"];
 
-  const { reportDetail, setReportDetail, histories, setHistories,dateFormater } =
-    useContext(AppContext);
+  const {
+    reportDetail,
+    setReportDetail,
+    histories,
+    setHistories,
+    dateFormater,
+  } = useContext(AppContext);
 
   useEffect(() => {
     if (admin) {
@@ -117,11 +122,15 @@ function ReportDetails() {
                 </tr>
                 <tr>
                   <td className="py-2">Post Date</td>
-                  <td className="py-2">: {dateFormater(reportDetail.createdAt)}</td>
+                  <td className="py-2">
+                    : {dateFormater(reportDetail.createdAt)}
+                  </td>
                 </tr>
                 <tr>
                   <td className="py-2">Update Date</td>
-                  <td className="py-2">: {dateFormater(reportDetail.updatedAt)}</td>
+                  <td className="py-2">
+                    : {dateFormater(reportDetail.updatedAt)}
+                  </td>
                 </tr>
                 <tr>
                   <td className="py-2">Your Name</td>
@@ -151,21 +160,25 @@ function ReportDetails() {
                 <tr>
                   <td>File</td>
                   <td>
-                    :
-                    <button onClick={downloadHandler} value={reportDetail.file}>
-                      {reportDetail.file ? (
+                    {reportDetail.file ? (
+                      <button
+                        onClick={downloadHandler}
+                        value={reportDetail.file}
+                      >
                         <div className="text-indigo-700">
-                          {reportDetail.file}
+                          : {reportDetail.file}
                         </div>
-                      ) : (
-                        <div>No Files</div>
-                      )}
-                    </button>
+                      </button>
+                    ) : (
+                      <div>: No Files</div>
+                    )}
                   </td>
                 </tr>
                 <tr>
                   <td>Your Agent</td>
-                  <td>: {reportDetail.adminId?reportDetail.adminId.name:<></>}</td>
+                  <td>
+                    : {reportDetail.adminId ? reportDetail.adminId.name : <></>}
+                  </td>
                 </tr>
               </tbody>
             </table>

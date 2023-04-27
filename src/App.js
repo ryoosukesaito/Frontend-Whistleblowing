@@ -57,20 +57,28 @@ function App() {
   const admin = useSelector((state) => state.admin);
   const user = useSelector((state) => state.user);
 
-<<<<<<< HEAD
-=======
-  const dateFormater=(dateStr)=>{
-    if(Date(dateStr)){
-      const date = new Date(dateStr)
+  const dateFormater = (dateStr) => {
+    if (Date(dateStr)) {
+      const date = new Date(dateStr);
 
-      return  date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()
-    }else{
-      return '9999-99-99 99:99:99'
+      return (
+        date.getFullYear() +
+        "-" +
+        (date.getMonth() + 1) +
+        "-" +
+        date.getDate() +
+        " " +
+        date.getHours() +
+        ":" +
+        date.getMinutes() +
+        ":" +
+        date.getSeconds()
+      );
+    } else {
+      return "9999-99-99 99:99:99";
     }
-      
-  }
-  
->>>>>>> 79397c76e743477a24510cc448fd1f366173eea6
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -96,12 +104,7 @@ function App() {
         setReportFilter,
         filteredReports,
         setFilteredReports,
-<<<<<<< HEAD
-        userDetail,
-        setUserDetail,
-=======
-        dateFormater
->>>>>>> 79397c76e743477a24510cc448fd1f366173eea6
+        dateFormater,
       }}
     >
       <BrowserRouter>
@@ -152,10 +155,6 @@ function App() {
               <Route path="/api/admin/category/all" element={<Categories />} />
               <Route path="/api/admin/:id" element={<AdminsDetail />} />
               <Route path="/api/admin/delete/:id" element={<AdminsDelete />} />
-<<<<<<< HEAD
-              <Route path="/api/admin/users/:id" element={<UserDetail />} />
-=======
->>>>>>> 79397c76e743477a24510cc448fd1f366173eea6
             </>
           )}
         </Routes>
