@@ -17,20 +17,25 @@ function UserReportDetails() {
   const fetchURL = `${SERVER_URL}/api/user/reports/${id}`;
   const dataFetchedRef = useRef(false);
 
-  const { reportDetail, setReportDetail, histories, setHistories,dateFormater } =
-    useContext(AppContext);
+  const {
+    reportDetail,
+    setReportDetail,
+    histories,
+    setHistories,
+    dateFormater,
+  } = useContext(AppContext);
 
   useEffect(() => {
     if (user) {
       if (dataFetchedRef.current) return;
       dataFetchedRef.current = true;
 
-       getReportDetail();
+      getReportDetail();
     }
     // getHistoryByReportId();
   }, []);
 
-  const getReportDetail= async () =>{
+  const getReportDetail = async () => {
     await fetch(fetchURL, {
       headers: { "x-auth-token": user.token },
     })
@@ -38,9 +43,9 @@ function UserReportDetails() {
       .then((data) => {
         console.log(data);
         setReportDetail(data.report);
-        setHistories(data.histories)
+        setHistories(data.histories);
       });
-  }
+  };
 
   // function getHistoryByReportId() {
   //   fetch(`${SERVER_URL}/api/admin/history/${id}`)
@@ -69,11 +74,13 @@ function UserReportDetails() {
                 </tr>
                 <tr>
                   <td className="py-2">Post Date</td>
-                  <td className="py-2">: {dateFormater(reportDetail.createdAt)}</td>
+                  <td className="py-2">
+                    : {dateFormater(reportDetail.createdAt)}
+                  </td>
                 </tr>
                 <tr>
                   <td className="py-2">Update Date</td>
-                  <td className="py-2">: {dateFormater(reportDetail.updatedAt)}</td>
+                  <td className="py-2">: {reportDetail.updatedAt}</td>
                 </tr>
                 <tr>
                   <td className="py-2">Your Name</td>
@@ -81,10 +88,7 @@ function UserReportDetails() {
                 </tr>
                 <tr>
                   <td className="py-2">Your Department</td>
-                  <td className="py-2">
-                    {" "}
-                    : {reportDetail.userDepartment}
-                  </td>
+                  <td className="py-2"> : {reportDetail.userDepartment}</td>
                 </tr>
               </tbody>
             </table>
@@ -92,11 +96,18 @@ function UserReportDetails() {
               <tbody>
                 <tr>
                   <td>Category</td>
-                  <td>: {reportDetail.category_id?reportDetail.category_id.name:<></>}</td>
+                  <td>
+                    :{" "}
+                    {reportDetail.category_id ? (
+                      reportDetail.category_id.name
+                    ) : (
+                      <></>
+                    )}
+                  </td>
                 </tr>
                 <tr>
                   <td>Subject</td>
-                  <td>: {reportDetail.subject}</td>
+                  <td className="break-all">: {reportDetail.subject}</td>
                 </tr>
                 <tr>
                   <td>File</td>
@@ -105,7 +116,9 @@ function UserReportDetails() {
                 <tr>
                   <td>Your Agent</td>
                   {/* <td>: {reportDetail.adminId.name}</td> */}
-                  <td>: {reportDetail.adminId?reportDetail.adminId.name:<></>}</td>
+                  <td>
+                    : {reportDetail.adminId ? reportDetail.adminId.name : <></>}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -116,19 +129,14 @@ function UserReportDetails() {
             <div className="border p-2">{reportDetail.description}</div>
           </div>
         </div>
-      </div>
 
-      <div className="h-full border bg-gray-scale-4 p-2 overflow-auto">
-        <div className="text-lg border-b-2 border-gray-scale-1">
-          Contact Record
-        </div>
-        <div className="">
-          {histories?
-            <Histories />
-            :<></>
-        }
-        </div>
+        <div className="max-h-full border bg-gray-scale-4 p-2 overflow-auto">
+          <div className="text-lg border-b-2 border-gray-scale-1">
+            Contact Record
+          </div>
+          <div className="">{histories ? <Histories /> : <></>}</div>
           <HistoriesFooter />
+        </div>
       </div>
     </>
   );
