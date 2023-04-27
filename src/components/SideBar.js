@@ -19,14 +19,13 @@ const SideBar = () => {
   const [logoutUser] = useLogoutUserMutation();
   async function handleLogout(e) {
     e.preventDefault();
+    if (user) {
+      await logoutUser(user);
+      navigate("/");
+    }
     if (admin) {
       await logoutAdmin(admin);
       navigate("/api/admin");
-    }
-    if (user) {
-      console.log("Plz delete 'root' in Application inspect(検証)");
-      await logoutUser(user);
-      navigate("/");
     }
     window.location.reload();
   }
@@ -34,7 +33,7 @@ const SideBar = () => {
   if (admin)
     return (
       <div className="h-full w-full flex flex-col pl-10 pr-3 py-4 overflow-y-auto bg-gray-scale-4 text-2xl">
-        <div className="items-start">
+        <div className="pb-5">
           <div className="my-4">
             <Link to="/api/admin/reports" className="py-4 hover:opacity-50">
               Reports

@@ -57,17 +57,28 @@ function App() {
   const admin = useSelector((state) => state.admin);
   const user = useSelector((state) => state.user);
 
-  const dateFormater=(dateStr)=>{
-    if(Date(dateStr)){
-      const date = new Date(dateStr)
+  const dateFormater = (dateStr) => {
+    if (Date(dateStr)) {
+      const date = new Date(dateStr);
 
-      return  date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()
-    }else{
-      return '9999-99-99 99:99:99'
+      return (
+        date.getFullYear() +
+        "-" +
+        (date.getMonth() + 1) +
+        "-" +
+        date.getDate() +
+        " " +
+        date.getHours() +
+        ":" +
+        date.getMinutes() +
+        ":" +
+        date.getSeconds()
+      );
+    } else {
+      return "9999-99-99 99:99:99";
     }
-      
-  }
-  
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -93,7 +104,7 @@ function App() {
         setReportFilter,
         filteredReports,
         setFilteredReports,
-        dateFormater
+        dateFormater,
       }}
     >
       <BrowserRouter>

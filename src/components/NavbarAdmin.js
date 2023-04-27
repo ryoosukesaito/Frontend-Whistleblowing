@@ -21,7 +21,7 @@ function NavbarUser() {
     // // dataFetchedRef.current = true;
     // console.log(notices);
     // if (notices.length == 0) {
-      getNotices();
+    getNotices();
     // } else {
     //   return;
     // }
