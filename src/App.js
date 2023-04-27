@@ -12,7 +12,6 @@ import ReportsPage from "./pages/Admin/ReportsPage";
 import AdminAccounts from "./pages/Admin/AdminAccounts";
 import UserAccounts from "./pages/Admin/UserAccounts";
 import Categories from "./pages/Admin/Categories";
-import AddNewAdmin from "./components/Admin/AddNewAdmin";
 import EditAdminAccount from "./components/Admin/EditAdminAccount";
 import Report from "./pages/Admin/Report";
 import AdminsDetail from "./pages/Admin/AdminDetail";
@@ -60,17 +59,28 @@ function App() {
   const admin = useSelector((state) => state.admin);
   const user = useSelector((state) => state.user);
 
-  const dateFormater=(dateStr)=>{
-    if(Date(dateStr)){
-      const date = new Date(dateStr)
+  const dateFormater = (dateStr) => {
+    if (Date(dateStr)) {
+      const date = new Date(dateStr);
 
-      return  date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()
-    }else{
-      return '9999-99-99 99:99:99'
+      return (
+        date.getFullYear() +
+        "-" +
+        (date.getMonth() + 1) +
+        "-" +
+        date.getDate() +
+        " " +
+        date.getHours() +
+        ":" +
+        date.getMinutes() +
+        ":" +
+        date.getSeconds()
+      );
+    } else {
+      return "9999-99-99 99:99:99";
     }
-      
-  }
-  
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -96,7 +106,7 @@ function App() {
         setReportFilter,
         filteredReports,
         setFilteredReports,
-        dateFormater
+        dateFormater,
       }}
     >
       <BrowserRouter>
@@ -139,7 +149,6 @@ function App() {
               <Route path="/api/admin/reports/:id" element={<Report />} />
 
               <Route path="/api/admin/all" element={<AdminAccounts />} />
-              <Route path="/api/admin/create/admin" element={<AddNewAdmin />} />
               <Route path="/api/admin/edit" element={<EditAdminAccount />} />
 
               <Route path="/api/admin/users/all" element={<UserAccounts />} />

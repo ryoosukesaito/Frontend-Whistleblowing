@@ -88,16 +88,17 @@ const AdminsDetail = () => {
       <div className="flex flex-row justify-center mt-20">
         <button className="rounded text-enter px-8 py-2 bg-gray-scale-3 cursor-pointer mr-20">
           Update
-        </button>
-        {admin.role==='superAdmin'?
-        <button
-          className="rounded text-center px-8 py-2 bg-delete cursor-pointer"
-          onClick={deleteHandler}
-        >
-          Delete
-        </button>
-        :<></>
-        }
+        </button> 
+        {admin.role === "superAdmin" ? (
+          <button
+            className="rounded text-center px-8 py-2 bg-delete cursor-pointer"
+            onClick={deleteHandler}
+          >
+            Delete
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

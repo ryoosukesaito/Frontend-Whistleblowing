@@ -43,6 +43,7 @@ function AdminReport() {
       .then((data) => {
         setReports(data);
         setFilteredReports(data);
+        console.log(filteredReports);
       });
   }
 
@@ -104,7 +105,7 @@ function AdminReport() {
             </tr>
           </thead>
           <tbody className="px-1 h-full">
-            {filteredReports ? (
+            {filteredReports.length!==0 ? (
               filteredReports.map((data, idx) => (
                 <tr
                   key={data._id}
@@ -142,15 +143,13 @@ function AdminReport() {
                     )}
                   </td>
                   <td
-                    className="border-b-2 border-slate-700 text-center p-1 break-all"
+                    className="border-b-2 border-slate-700 text-center p-1"
                     data-value={data._id}
-                    numberOfLines={1}
-                    ellopsizeMode ="tail"
                   >
                     {data.subject}
                   </td>
                   <td
-                    className="border-b-2 border-slate-700 text-center p-1"
+                    className="border-b-2 border-slate-700 text-center p-1 w-60"
                     data-value={data._id}
                   >
                     {data.adminId?data.adminId.name:<></>}

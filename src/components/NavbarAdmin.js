@@ -17,17 +17,18 @@ function NavbarUser() {
 
   // 画面読み込み時にnoticesを取りに行く
   useEffect(() => {
-    if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
-    console.log(notices);
-    if (notices.length !== 0) {
-      getNotices();
-    } else {
-      return;
-    }
+    // if (dataFetchedRef.current) return;
+    // // dataFetchedRef.current = true;
+    // console.log(notices);
+    // if (notices.length == 0) {
+    getNotices();
+    // } else {
+    //   return;
+    // }
   }, []);
 
   const getNotices = async () => {
+    console.log("getnotice");
     await fetch(`${SERVER_URL}/api/admin/notices`, {
       headers: { "x-auth-token": admin.token },
     })
