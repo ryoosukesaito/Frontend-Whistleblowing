@@ -105,27 +105,27 @@ function UserReportDetails() {
         <form onSubmit={postReport}>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                Your Name(Optional)
+              <label className="block text-gray-scale-1 text-base font-semibold mb-2">
+                Your name (optional)
               </label>
               <input
                 className="border w-full py-3 px-3 mb-3"
                 type="text"
-                placeholder="Your Name(Optional)"
+                placeholder="Your name (optional)"
                 onChange={(e) => {
                   setReportUserName(e.target.value);
                 }}
                 value={reportUserName}
               />
             </div>
-            <div className="w-full md:w-1/2 px-3">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                Your Department(Optional)
+            <div className="w-full md:w-1/2">
+              <label className="block text-gray-scale-1 text-base font-semibold mb-2">
+                Your department (optional)
               </label>
               <input
                 className="border w-full py-3 px-3 mb-3"
                 type="text"
-                placeholder="Your Department(Optional)"
+                placeholder="Your department (optional)"
                 onChange={(e) => {
                   setReportUserDepartment(e.target.value);
                 }}
@@ -135,8 +135,9 @@ function UserReportDetails() {
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-1/2 px-3">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                Category(Required)
+              <label className="block text-gray-scale-1 text-base font-semibold mb-2">
+                Category
+                <p className="inline-block text-red-600 pl-1"> (required)</p>
               </label>
               <select
                 id="categories"
@@ -160,7 +161,7 @@ function UserReportDetails() {
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              <label className="block text-gray-scale-1 text-base font-semibold mb-2">
                 Subject
               </label>
               <input
@@ -177,7 +178,7 @@ function UserReportDetails() {
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              <label className="block text-gray-scale-1 text-base font-semibold mb-2">
                 Description
               </label>
               <textarea
