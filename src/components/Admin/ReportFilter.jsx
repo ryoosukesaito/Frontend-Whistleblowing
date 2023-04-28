@@ -8,15 +8,6 @@ const ReportFilter = () => {
   // 各種フィルタの値管理用state
   const { reports,filteredReports,reportFilter, setReportFilter,setFilteredReports} = useContext(AppContext);
 
-  async function getReports() {
-    await fetch(`${SERVER_URL}/api/admin/reports`)
-      .then((res) => res.json())
-      .then((data) => {
-        // setReports(data);
-        setFilteredReports(reports);
-      });
-  }
-  
 
   const setFilter = async (e)=>{
     e.preventDefault()
@@ -68,10 +59,6 @@ const ReportFilter = () => {
   return (
     <div className='w-1/4 h-100 border border-gray-scale-3 absolute z-50 bg-white top-40 right-3 overflow-hidden'>
      <form className='m-10' onSubmit={(e)=>{setFilter(e)}}>
-      <div onClick={(e)=>console.log(reportFilter)}>filter</div>
-      <div onClick={(e)=>console.log(reports)}>reports</div>
-      <div onClick={(e)=>getReports()}>getreport</div>
-      <div onClick={(e)=>console.log(filteredReports)}>filteredreports</div>
         <div className="flex items-center">
           <div className='mr-3 text-xl'> ID </div>
           <input key="id" className="border border-gray-scale-2 w-full pl-1 text-lg" value={reportFilter.id} onChange={(e)=>{
