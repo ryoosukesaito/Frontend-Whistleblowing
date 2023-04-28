@@ -41,7 +41,7 @@ function Navbar() {
         setNotices(data);
       });
   };
-  if (!user) return <></>;
+  if (!user || !notices) return <></>;
   return (
     <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-main-color-1 text-white">
       <div className="w-full mx-2 flex flex-wrap items-center justify-between">
@@ -69,7 +69,7 @@ function Navbar() {
         {user && (
           <div
             className={
-              "lg:flex flex-grow items-center text-sm relative ml-32" +
+              "lg:flex flex-grow items-center text-sm relative ml-32 z-40" +
               (navbar ? " flex" : " hidden")
             }
           >

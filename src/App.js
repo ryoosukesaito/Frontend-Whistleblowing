@@ -1,6 +1,3 @@
-
- 
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
 import AdminRegist from "./pages/Admin/AdminRegist";
@@ -121,11 +118,15 @@ function App() {
           <Route path="/users/passwordreset" element={<ResetPasswordUser />} />
 
           {/* user router after logging in */}
-          <Route path="/api/user/reports" element={<UserReportsPage />} />
-          <Route path="/api/user/edit" element={<UserEditPassword />} />
+          {user && (
+            <>
+              <Route path="/api/user/reports" element={<UserReportsPage />} />
+              <Route path="/api/user/edit" element={<UserEditPassword />} />
 
-          <Route path="/api/user/reports/:id" element={<UserReport />} />
-          <Route path="/api/user/reports/new" element={<UserReportNew />} />
+              <Route path="/api/user/reports/:id" element={<UserReport />} />
+              <Route path="/api/user/reports/new" element={<UserReportNew />} />
+            </>
+          )}
 
           {/* admin authentication route before logging in*/}
           <Route path="/api/admin" element={<LoginAdmin />} />

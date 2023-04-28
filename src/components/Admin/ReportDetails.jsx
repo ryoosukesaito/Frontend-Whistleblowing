@@ -65,7 +65,7 @@ function ReportDetails() {
 
   function downloadHandler(e) {
     e.preventDefault();
-    const fileNameForUrl = e.target.value;
+    const fileNameForUrl = reportDetail.file;
 
     fetch(`${SERVER_URL}/uploadFn/file/showRespond/${fileNameForUrl}`, {
       method: "GET",
