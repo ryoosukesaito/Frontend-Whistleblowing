@@ -177,7 +177,7 @@ function AdminList() {
       ) : (
         <></>
       )}
-      <div className="h-full mt-5  mt-5 relative overflow-y-auto">
+      <div className="h-full mt-5 flex items-start justify-center mt-5 relative overflow-y-scroll">
         <table className="w-full mx-6">
           <thead className="text-lg">
             <tr>
