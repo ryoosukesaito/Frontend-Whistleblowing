@@ -14,7 +14,7 @@ function UserReportsPage() {
         <div className="h-full w-1/6">
           <SideBar />
         </div>
-        <div className="h-full w-5/6 flex flex-col">
+        <div className="h-full w-5/6 flex flex-col px-3 py-4">
           <UserReport />
         </div>
       </div>
