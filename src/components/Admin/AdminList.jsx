@@ -88,8 +88,8 @@ function AdminList() {
   };
 
   return (
-    <div>
-      <div className="flex justify-between">
+    <div className="overflow-hidden">
+      <div className="flex justify-between mt-3">
       <div className="text-main-color-1 font-bold text-2xl pl-3">
         Admin list
       </div>
@@ -177,8 +177,8 @@ function AdminList() {
       ) : (
         <></>
       )}
-      <div className="h-full mt-5 flex items-start justify-center">
-        <table className="w-full">
+      <div className="h-full mt-5  mt-5 relative overflow-y-auto">
+        <table className="w-full mx-6">
           <thead className="text-lg">
             <tr>
               {adminsTableHeaders.map((header, idx) => (
@@ -189,9 +189,10 @@ function AdminList() {
             </tr>
           </thead>
           <tbody>
-            {admins.map((data, idx) => (
+          {admins.length!==0 ? (
+            admins.map((data, idx) => (
               <tr
-                key={idx}
+                key={data._id}
                 className=" cursor-pointer hover:bg-gray-scale-3"
                 onClick={handleClick}
               >
@@ -222,7 +223,10 @@ function AdminList() {
                   {dateFormater(data.createdAt)}
                 </td>
               </tr>
-            ))}
+              ))
+            ) : (
+              <></>
+            )}
           </tbody>
         </table>
       </div>

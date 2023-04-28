@@ -29,10 +29,10 @@ function UserList() {
   }
 
   return (
-    <div>
-      <div className="text-main-color-1 font-bold text-2xl pl-3">User list</div>
-      <div className="h-full mt-5 flex items-start justify-center">
-        <table className="w-full">
+    <div className="overflow-hidden">
+      <div className="text-main-color-1 font-bold text-2xl pl-3 overflow-hidden">User list</div>
+      <div className="h-full overflow-y-scroll mt-5 flex items-start justify-center">
+        <table className="w-full mx-6">
           <thead className="text-lg">
             <tr>
               {usersTableHeaders.map((header, idx) => (
@@ -43,11 +43,11 @@ function UserList() {
             </tr>
           </thead>
           <tbody>
-            {users.map((data, idx) => (
+            {users.length!==0 ? (
+              users.map((data, idx) => (
               <tr
-                key={idx}
+                key={data._id}
                 onClick={handleClick}
-                data-value={data._id}
                 className="hover:bg-gray-scale-3 cursor-pointer"
               >
                 <td
@@ -77,7 +77,10 @@ function UserList() {
                   {dateFormater(data.createdAt)}
                 </td>
               </tr>
-            ))}
+            ))
+            ) : (
+              <></>
+            )}
           </tbody>
         </table>
       </div>

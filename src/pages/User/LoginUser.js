@@ -17,6 +17,11 @@ function LoginUser() {
       if (error) console.error(error.data.error);
     });
   };
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      handleLogin(e);
+    }
+  };
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -43,6 +48,7 @@ function LoginUser() {
                 setEmail(e.target.value);
               }}
               value={email}
+              onKeyDown={handleEnter}
               required
             />
           </label>
@@ -56,6 +62,7 @@ function LoginUser() {
                 setPassword(e.target.value);
               }}
               value={password}
+              onKeyDown={handleEnter}
               required
             />
           </label>

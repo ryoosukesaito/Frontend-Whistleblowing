@@ -76,8 +76,7 @@ function AdminReport() {
   };
 
   return (
-
-    <div className="h-full w-full overflow-hidden">
+    <div className="h-full w-full overflow-hidden mt-3">
       <div className="flex justify-between">
         <div className="text-main-color-1 font-bold text-2xl pl-3">Reports</div>
           <div className="flex justify-end">
@@ -93,7 +92,7 @@ function AdminReport() {
 
       {show && <ReportFilter />}
       <div className="w-full h-full mt-5 relative overflow-y-auto items-center justify-center">
-        <table className="w-full">
+        <table className="w-fit mx-6">
           <thead>
             <tr>
               {reportTableHeaders.map((header, idx) => (
@@ -116,7 +115,7 @@ function AdminReport() {
                     data-value={data._id}
                   >
                     {data.status === "Not started" ? (
-                      <div
+                      <div 
                         key={data.status}
                         className=" flex justify-center items-center bg-not-started rounded-full"
                         data-value={data._id}
