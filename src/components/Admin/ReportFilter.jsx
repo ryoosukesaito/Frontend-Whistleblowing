@@ -1,33 +1,18 @@
-import React from 'react'
-import { useState,useContext,useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useState,useContext } from 'react'
 import { AppContext } from "../../context/appContext";
 import { SERVER_URL } from "../../constants/constants";
 
 
 const ReportFilter = () => {
   // 各種フィルタの値管理用state
-  const { reports,reportFilter, setReportFilter,setReports} = useContext(AppContext);
+  const { reports,filteredReports,reportFilter, setReportFilter,setFilteredReports} = useContext(AppContext);
 
-
-  useEffect(() => {
-    getReports()
-
-  }, [])
-  async function getReports() {
-    await fetch(`${SERVER_URL}/api/admin/reports`)
-      .then((res) => res.json())
-      .then((data) => {
-        // setReports(data);
-        setReports(data);
-      });
-  }
-  
 
   const setFilter = async (e)=>{
-
-    getReports()
+    e.preventDefault()
+    
     let filteredRepts = reports
-
     if(filteredRepts&&reportFilter.id){
       const searchKeywords = reportFilter.id
       .trim()
@@ -63,11 +48,12 @@ const ReportFilter = () => {
         report.updatedAt >= reportFilter.updatedAtFrom && report.updatedAt <= reportFilter.updatedAtTo
       )
     }
-
-    await setReports(
+    console.log(reports);
+    console.log(filteredRepts);
+    await setFilteredReports(
       filteredRepts
-    )
-      return e.preventDefault()
+      )
+      
   }
 
   return (
@@ -76,7 +62,7 @@ const ReportFilter = () => {
         <div className="flex items-center">
           <div className='mr-3 text-xl'> ID </div>
           <input key="id" className="border border-gray-scale-2 w-full pl-1 text-lg" value={reportFilter.id} onChange={(e)=>{
-            setReports({...reports,id:e.target.value})
+            setReportFilter({...reportFilter,id:e.target.value})
           }}/>
         </div>
 

@@ -33,7 +33,9 @@ function AdminReport() {
       if (dataFetchedRef.current) return;
       dataFetchedRef.current = true;
 
-      if (reports.length === 0) getReports();
+      if (reports.length === 0) {
+        getReports();
+      }
     }
   }, []);
 
@@ -43,6 +45,7 @@ function AdminReport() {
       .then((data) => {
         // setReports(data);
         setReports(data);
+        setFilteredReports(data)
       });
   }
 
@@ -64,7 +67,7 @@ function AdminReport() {
       .then((data) => setHistories(data.histories));
   }
 
-  if (reports.length === 0)
+  if (!filteredReports)
     return (
       <>
         <div>Loading....</div>
@@ -104,8 +107,8 @@ function AdminReport() {
             </tr>
           </thead>
           <tbody>
-            {reports.length!==0 ? (
-              reports.map((data, idx) => (
+            {filteredReports.length!==0 ? (
+              filteredReports.map((data, idx) => (
                 <tr
                   key={data._id}
                   className="cursor-pointer  hover:bg-gray-scale-3 h-14"
