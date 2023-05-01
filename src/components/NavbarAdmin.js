@@ -27,9 +27,6 @@ function NavbarUser() {
     // }
   }, []);
 
-
-
-
   const getNotices = async () => {
     console.log("getnotice");
     await fetch(`${SERVER_URL}/api/admin/notices`, {
@@ -83,18 +80,18 @@ function NavbarUser() {
                 {admin && (
                   <div
                     className={
-                      "rounded absolute bg-gray-scale-4 p-4 shadow top-12 z-40" +
-                      (notification ? " flex" : " hidden")
+                      "rounded absolute bg-gray-scale-4 p-4 shadow top-12 z-40 max-h-80 overflow-y-scroll" +
+                      (notification ? " flex " : " hidden")
                     }
                   >
-                    <div className="text-gray-scale-1 text-center">
-                      {notices.length!==0 ? (
+                    <div className="text-gray-scale-1 text-center max-w-xs ">
+                      {notices.length !== 0 ? (
                         notices.map((notice) => {
                           return (
                             <div
                               id={notice.id}
                               key={notice.id}
-                              className="z-40"
+                              className="z-40 truncate"
                               onClick={async () => {
                                 setNotification(false);
                                 await fetch(
