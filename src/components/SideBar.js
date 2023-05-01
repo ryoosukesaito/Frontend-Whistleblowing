@@ -35,9 +35,9 @@ const SideBar = () => {
       <div className="h-full w-full flex flex-col pl-10 pr-3 py-4 overflow-y-auto bg-gray-scale-4 text-2xl">
         <div className="pb-5">
           <div className="my-4">
-            <Link to="/api/admin/reports" className="py-4 hover:opacity-50">
+            <a href="/api/admin/reports" className="py-4 hover:opacity-50">
               Reports
-            </Link>
+            </a>
           </div>
           <div>
             <button
@@ -80,9 +80,9 @@ const SideBar = () => {
       <div className="h-full w-full flex flex-col pl-10 pr-3 py-4 overflow-y-auto bg-gray-scale-4 text-2xl">
         <div className="pb-5">
           <div className="my-10 flex">
-            <Link to="/api/user/reports" className="py-4 hover:opacity-50">
+            <a href="/api/user/reports" className="py-4 hover:opacity-50">
               History
-            </Link>
+            </a>
           </div>
           <div className="my-10">
             <Link to="/api/user/reports/new" className="py-4 hover:opacity-50">

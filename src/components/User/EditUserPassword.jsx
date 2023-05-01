@@ -1,14 +1,12 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useUpdatePasswordUserMutation } from "../../services/appAPI";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  useLogoutUserMutation,
-} from "../../services/appAPI";
+import { useLogoutUserMutation } from "../../services/appAPI";
 
-const EditUserPassword=()=>{
+const EditUserPassword = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPassword2, setNewPassword2] = useState("");
@@ -18,42 +16,43 @@ const EditUserPassword=()=>{
   const [updatePasswordUser, { error }] = useUpdatePasswordUserMutation();
 
   const user = useSelector((state) => state.user);
-  const [token,setToken]=useState("")
-  const navigate = useNavigate()
+  const [token, setToken] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if(user){
-      setToken(user.token)
-    } else{
-      navigate("/")
+    if (user) {
+      setToken(user.token);
+    } else {
+      navigate("/");
     }
-  }, [])
-  
-  
+  }, []);
+
   const handlePasswordReset = async (e) => {
     e.preventDefault();
     try {
       if (newPassword !== newPassword2)
         throw new Error("Password doesn't match.");
-        await updatePasswordUser({body:{ currentPassword, newPassword},token:token}).then(
-          ({ data }) => {
-            if (data) setMsg(data.message);
-            if (error) console.error(error);
-          }
-        )
+      await updatePasswordUser({
+        body: { currentPassword, newPassword },
+        token: token,
+      })
+        .then(({ data }) => {
+          if (data) setMsg(data.message);
+          if (error) console.error(error);
+        })
         .then(() => {
-            setErrMsg("");
-            setMsg("Successfully reset your password");
-            logoutUser(user);
-            navigate("/")
+          setErrMsg("");
+          setMsg("Successfully reset your password");
+          logoutUser(user);
+          navigate("/");
         })
         .catch((error) => {
           throw new Error(error.message);
         });
-      } catch (e) {
-        setMsg("");
-        setErrMsg(e.message);
-      }
+    } catch (e) {
+      setMsg("");
+      setErrMsg(e.message);
+    }
   };
 
   //Icon trigger js
@@ -88,7 +87,7 @@ const EditUserPassword=()=>{
             Current password
             <input
               className="border rounded w-full py-3 px-3 mb-5"
-              type={pwStyle.type}
+              type="text"
               placeholder="Current password"
               onChange={(e) => {
                 setCurrentPassword(e.target.value);
@@ -156,6 +155,6 @@ const EditUserPassword=()=>{
       </div>
     </div>
   );
-}
+};
 
 export default EditUserPassword;
