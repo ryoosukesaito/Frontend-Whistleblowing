@@ -120,6 +120,7 @@ function App() {
             <>
               <Route path="/api/user/reports" element={<UserReportsPage />} />
               <Route path="/api/user/edit" element={<UserEditPassword />} />
+
               <Route path="/api/user/reports/:id" element={<UserReport />} />
               <Route path="/api/user/reports/new" element={<UserReportNew />} />
             </>
@@ -141,8 +142,11 @@ function App() {
           {admin && (
             <>
               <Route path="/api/admin/reports" element={<ReportsPage />} />
+
               <Route path="/api/admin/reports/:id" element={<Report />} />
+
               <Route path="/api/admin/all" element={<AdminAccounts />} />
+
               <Route path="/api/admin/users/all" element={<UserAccounts />} />
               <Route path="/api/admin/users/:id" element={<UserDetail />} />
               <Route path="/api/admin/category/all" element={<Categories />} />
