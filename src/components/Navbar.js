@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { BellIcon } from "@heroicons/react/24/solid";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const user = useSelector((state) => state.user);
-  const dataFetchedRef = useRef(false);
   const navigate = useNavigate();
   const [navbar, setNavbar] = useState(false);
   const [notification, setNotification] = useState(false);
@@ -18,8 +17,6 @@ function Navbar() {
 
   // 画面読み込み時にnoticesを取りに行く
   useEffect(() => {
-    // if (dataFetchedRef.current) return;
-    // dataFetchedRef.current = true;
     console.log("getnotice");
     getNotices();
   }, []);
@@ -124,11 +121,6 @@ function Navbar() {
                       ) : (
                         <></>
                       )}
-                      {/* <p className="text-lg mb-1 ">Report Subject</p> 
-                      <p className="text-sm mb-2">New Message From User!</p> 
-                      <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
-                      <p className="text-lg mb-1">Report Subject</p> 
-                      <p className="text-sm mb-2">New Message From User!</p>  */}
                     </div>
                   </div>
                 )}
@@ -152,7 +144,7 @@ function Navbar() {
                     className="text-gray-scale-1 text-center font-bold cursor-pointer"
                     onClick={() => {
                       setResetPasswordShow(!resetPasswordShow);
-                      navigate("/api/user/edit/");
+                      navigate("/api/user/edit");
                     }}
                   >
                     Change Password

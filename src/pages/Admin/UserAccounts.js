@@ -12,7 +12,7 @@ function UserAccounts() {
         <div className="h-full w-1/6">
           <SideBar />
         </div>
-        <div className="h-full w-5/6 flex flex-col justify-between mt px-3 py-4">
+        <div className="h-full w-5/6 flex flex-col justify-between px-3 py-4">
           <UserList />
         </div>
       </div>

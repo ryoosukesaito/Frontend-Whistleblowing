@@ -5,10 +5,9 @@ import { AppContext } from "../../context/appContext";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-
 function AdminList() {
   const [showInviteModal, setShowInviteModal] = useState(false);
-  const [inviteMailAdress, setInviteMailAdress] = useState("");
+  const [inviteMailAddress, setInviteMailAddress] = useState("");
   const [inviteRole, setInviteRole] = useState("superAdmin");
 
   const admin = useSelector((state) => state.admin);
@@ -71,14 +70,14 @@ function AdminList() {
   // Admin招待
   const inviteAdminUser = async (e) => {
     e.preventDefault();
-    console.log(inviteMailAdress);
+    console.log(inviteMailAddress);
     console.log(inviteRole);
 
     await fetch(`${SERVER_URL}/api/admin/invite`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email: inviteMailAdress,
+        email: inviteMailAddress,
         role: inviteRole,
       }),
     })
@@ -90,9 +89,9 @@ function AdminList() {
   return (
     <div>
       <div className="flex justify-between">
-      <div className="text-main-color-1 font-bold text-2xl pl-3">
-        Admin list
-      </div>
+        <div className="text-main-color-1 font-bold text-2xl pl-3">
+          Admin list
+        </div>
         {admin.role === "superAdmin" ? (
           <button
             className="flex rounded px-8 py-1 items-center bg-gray-scale-3 cursor-pointer mr-10 hover:bg-gray-scale-2 hover:text-white"
@@ -107,70 +106,75 @@ function AdminList() {
       {showInviteModal ? (
         <>
           <div
-            className={
-              (showInviteModal)
-            }
+            className={showInviteModal.toString()}
             onClick={onClickBackground}
           >
             <div className="z-50 absolute inset-0 bg-black bg-opacity-10 backdrop-blur-sm flex justify-center">
-            <div className="mt-20 w-2/4">
-              <div
-                id="modalDiv"
-                className="w-full"
-                onClick={onClickCard}
-              >
-              <div className="">
-              <div className="flex flex-col bg-white">
-              <div className="text-center text-3xl mx-10 mt-10">Invite New Admin/Staff</div>
-                <div className="text-center overflow-hidden mt-6 mb-10 mx-10">
-                  New Admin/Staff members who receive an email invitation must access the
-                  URL attached to the email and set a password.
-                </div>
-                <form className="" onSubmit={inviteAdminUser}>
-                  <div className="flex mb-6 mr-10 ml-20">
-                    <div className="flex flex-row">
-                      <div className="flex flex-col">
-                      <label
-                        className="text-lg my-5"
-                        htmlFor="inline-full-name"
-                      >
-                        New member's Email :
-                      </label>
-                      <label className="text-lg my-8" htmlFor="inline-password">
-                        Role :
-                      </label>
+              <div className="mt-20 w-2/4">
+                <div id="modalDiv" className="w-full" onClick={onClickCard}>
+                  <div className="">
+                    <div className="flex flex-col bg-white">
+                      <div className="text-center text-3xl mx-10 mt-10">
+                        Invite New Admin/Staff
                       </div>
-                    </div>
-                    <div className="flex flex-col">
-                      <input
-                        className="border border-black h-10 m-4 w-96" 
-                        type="text"
-                        value={inviteMailAdress}
-                        onChange={(e) => setInviteMailAdress(e.target.value)}
-                      />
-                      <select
-                        className="border border-black  h-10 m-4 w-96"
-                        onChange={(e) => setInviteRole(e.target.value)}
-                      >
-                        <option value="superAdmin">SuperAdmin</option>
-                        <option value="admin">Admin</option>
-                      </select>
+                      <div className="text-center overflow-hidden mt-6 mb-10 mx-10">
+                        New Admin/Staff members who receive an email invitation
+                        must access the URL attached to the email and set a
+                        password.
+                      </div>
+                      <form className="" onSubmit={inviteAdminUser}>
+                        <div className="flex mb-6 mr-10 ml-20">
+                          <div className="flex flex-row">
+                            <div className="flex flex-col">
+                              <label
+                                className="text-lg my-5"
+                                htmlFor="inline-full-name"
+                              >
+                                New member's Email :
+                              </label>
+                              <label
+                                className="text-lg my-8"
+                                htmlFor="inline-password"
+                              >
+                                Role :
+                              </label>
+                            </div>
+                          </div>
+                          <div className="flex flex-col">
+                            <input
+                              className="border border-black h-10 m-4 w-96"
+                              type="email"
+                              value={inviteMailAddress}
+                              onChange={(e) =>
+                                setInviteMailAddress(e.target.value)
+                              }
+                              required
+                            />
+                            <select
+                              className="border border-black  h-10 m-4 w-96"
+                              onChange={(e) => setInviteRole(e.target.value)}
+                            >
+                              <option value="superAdmin">SuperAdmin</option>
+                              <option value="admin">Admin</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <button
+                            className="w-40 h-10 text-lg bg-gray-scale-3 mb-2"
+                            type="submit"
+                          >
+                            Send
+                          </button>
+                          <button className="text-delete mb-10 cursor-pointer mt-2">
+                            Cancel
+                          </button>
+                        </div>
+                      </form>
                     </div>
                   </div>
-                  <div className="flex flex-col items-center">
-                      <button
-                        className="w-40 h-10 text-lg bg-gray-scale-3 mb-2"
-                        type="submit"
-                      >
-                        Send
-                      </button>
-                      <button className="text-delete mb-10 cursor-pointer mt-2">Cancel</button>
-                  </div>
-                </form>
                 </div>
               </div>
-            </div>
-            </div>
             </div>
           </div>
         </>

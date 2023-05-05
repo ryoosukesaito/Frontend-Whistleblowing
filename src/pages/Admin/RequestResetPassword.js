@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLoginAdminMutation } from "../../services/appAPI";
 
 import { SERVER_URL } from "../../constants/constants";
 
@@ -8,8 +6,6 @@ function RequestResetPassword() {
   const [email, setEmail] = useState("");
   const [msg, setMsg] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const navigate = useNavigate();
-  const [loginAdmin, { error }] = useLoginAdminMutation();
 
   const RequestSendHandler = async (e) => {
     e.preventDefault();
@@ -74,7 +70,6 @@ function RequestResetPassword() {
           <div className="text-center">
             <button
               className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1 disabled:bg-gray-300 disabled:text-gray-400"
-
               type="submit"
               disabled={msg}
             >

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { BellIcon } from "@heroicons/react/24/solid";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 
 function NavbarUser() {
   const admin = useSelector((state) => state.admin);
-  const dataFetchedRef = useRef(false);
   const navigate = useNavigate();
   const [navbar, setNavbar] = useState(false);
   const [notification, setNotification] = useState(false);
@@ -17,14 +16,7 @@ function NavbarUser() {
 
   // 画面読み込み時にnoticesを取りに行く
   useEffect(() => {
-    // if (dataFetchedRef.current) return;
-    // // dataFetchedRef.current = true;
-    // console.log(notices);
-    // if (notices.length == 0) {
     getNotices();
-    // } else {
-    //   return;
-    // }
   }, []);
 
   const getNotices = async () => {
@@ -119,20 +111,15 @@ function NavbarUser() {
                       ) : (
                         <></>
                       )}
-                      {/* <p className="text-lg mb-1 ">Report Subject</p> 
-                      <p className="text-sm mb-2">New Message From User!</p> 
-                      <hr class="h-px mb-2 bg-gray-scale-1 border-0"></hr>
-                      <p className="text-lg mb-1">Report Subject</p> 
-                      <p className="text-sm mb-2">New Message From User!</p> */}
                     </div>
                   </div>
                 )}
               </li>
               <li key="usericon" className="nav-item">
-                <a className="mr-12 px-3 py-2 flex items-center leading-snug">
+                <div className="mr-12 px-3 py-2 flex items-center leading-snug">
                   <UserCircleIcon className="h-8 w-8 mr-1.5" />
                   <p>{admin.name}</p>
-                </a>
+                </div>
               </li>
             </ul>
           </div>

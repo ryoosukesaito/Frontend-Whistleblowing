@@ -34,11 +34,7 @@ function HistoriesFooter() {
   async function handleSubmit(e) {
     e.preventDefault();
     const reportId = reportDetail._id;
-    const userId = user._id;
-    const adminId = reportDetail.adminId;
     const msg = message;
-    const name = reportDetail.userName;
-    const replierType = "user";
 
     if (!message) return;
     let fileValue = null;

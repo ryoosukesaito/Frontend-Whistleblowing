@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useUpdatePasswordUserMutation } from "../../services/appAPI";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useLogoutUserMutation } from "../../services/appAPI";
+import { SERVER_URL } from "../../constants/constants";
 
 const EditUserPassword = () => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -12,8 +11,6 @@ const EditUserPassword = () => {
   const [newPassword2, setNewPassword2] = useState("");
   const [msg, setMsg] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [logoutUser] = useLogoutUserMutation();
-  const [updatePasswordUser, { error }] = useUpdatePasswordUserMutation();
 
   const user = useSelector((state) => state.user);
   const [token, setToken] = useState("");
@@ -30,24 +27,28 @@ const EditUserPassword = () => {
   const handlePasswordReset = async (e) => {
     e.preventDefault();
     try {
-      if (newPassword !== newPassword2)
+      if (newPassword !== newPassword2) {
         throw new Error("Password doesn't match.");
-      await updatePasswordUser({
-        body: { currentPassword, newPassword },
-        token: token,
+      }
+
+      await fetch(`${SERVER_URL}/api/user/password`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify({
+          currentPassword,
+          newPassword,
+        }),
       })
-        .then(({ data }) => {
-          if (data) setMsg(data.message);
-          if (error) console.error(error);
-        })
-        .then(() => {
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status !== 200) {
+            throw new Error(data.msg);
+          }
           setErrMsg("");
-          setMsg("Successfully reset your password");
-          logoutUser(user);
-          navigate("/");
-        })
-        .catch((error) => {
-          throw new Error(error.message);
+          setMsg("Successfully updated your password!");
         });
     } catch (e) {
       setMsg("");
@@ -142,15 +143,13 @@ const EditUserPassword = () => {
           )}
           <div className="text-center">
             <button
-              className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1"
+              className="rounded px-8 py-2 mb-12 cursor-pointer bg-main-color-1 hover:bg-gray-scale-3 text-white hover:text-main-color-1 disabled:bg-gray-300 disabled:text-gray-400"
               type="submit"
+              disabled={msg}
             >
               Reset password
             </button>
           </div>
-          {/* <div className="text-main-color-1 text-center underline underline-offset-auto">
-            <a href="/">Login</a>
-          </div> */}
         </form>
       </div>
     </div>

@@ -4,12 +4,10 @@ import AdminRegist from "./pages/Admin/AdminRegist";
 import RequestResetPassword from "./pages/Admin/RequestResetPassword";
 
 import ResetPasswordAdmin from "./pages/Admin/ResetPasswordAdmin";
-import AdminAccountCreate from "./pages/Admin/AdminAccountCreate";
 import ReportsPage from "./pages/Admin/ReportsPage";
 import AdminAccounts from "./pages/Admin/AdminAccounts";
 import UserAccounts from "./pages/Admin/UserAccounts";
 import Categories from "./pages/Admin/Categories";
-import EditAdminAccount from "./components/Admin/EditAdminAccount";
 import Report from "./pages/Admin/Report";
 import AdminsDetail from "./pages/Admin/AdminDetail";
 import AdminsDelete from "./components/Admin/AdminsDelete";
@@ -140,8 +138,6 @@ function App() {
             element={<ResetPasswordAdmin />}
           />
 
-          {/* <Route path="/api/admin/signup" element={<AdminAccountCreate />} /> */}
-
           {/* admin route after logging in */}
           {admin && (
             <>
@@ -150,7 +146,6 @@ function App() {
               <Route path="/api/admin/reports/:id" element={<Report />} />
 
               <Route path="/api/admin/all" element={<AdminAccounts />} />
-              <Route path="/api/admin/edit" element={<EditAdminAccount />} />
 
               <Route path="/api/admin/users/all" element={<UserAccounts />} />
               <Route path="/api/admin/users/:id" element={<UserDetail />} />

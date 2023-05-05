@@ -7,8 +7,6 @@ import { SERVER_URL } from "../../constants/constants";
 import Histories from "./Histories";
 import HistoriesFooter from "./HistoriesFooter";
 import { useParams } from "react-router-dom";
-import AdminsDelete from "./AdminsDelete";
-// import { report } from "../../../../../Backend-whistleblowing/src/routes";
 
 function ReportDetails() {
   const admin = useSelector((state) => state.admin);
@@ -196,9 +194,7 @@ function ReportDetails() {
         <div className="text-lg border-b-2 border-gray-scale-1">
           Contact Record
         </div>
-        <div className="">
-          <Histories />
-        </div>
+        <div className="">{histories ? <Histories /> : <></>}</div>
         <HistoriesFooter />
       </div>
     </>

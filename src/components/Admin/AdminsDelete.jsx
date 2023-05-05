@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../context/appContext";
-import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { SERVER_URL } from "../../constants/constants";
 
 const AdminsDelete = () => {
-  const admin = useSelector((state) => state.admin);
   const { id } = useParams();
   const navigation = useNavigate();
   const { adminDetail, setAdminDetail } = useContext(AppContext);
@@ -40,13 +38,16 @@ const AdminsDelete = () => {
               <div>ID</div>: <div>{adminDetail._id}</div>
             </li>
             <li className="flex flex-row basis-2 m-4">
-              <div>Role</div><div>: {adminDetail.role}</div>
+              <div>Role</div>
+              <div>: {adminDetail.role}</div>
             </li>
             <li className="flex flex-row m-4">
-              <div>Name</div><div>: {adminDetail.name}</div>
+              <div>Name</div>
+              <div>: {adminDetail.name}</div>
             </li>
             <li className="flex flex-row m-4">
-              <div>Email</div><div>: {adminDetail.email}</div>
+              <div>Email</div>
+              <div>: {adminDetail.email}</div>
             </li>
           </ul>
         </div>
