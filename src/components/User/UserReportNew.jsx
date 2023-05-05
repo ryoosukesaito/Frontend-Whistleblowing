@@ -3,9 +3,6 @@ import { DocumentArrowDownIcon } from "@heroicons/react/24/outline";
 import { useSelector } from "react-redux";
 import { SERVER_URL } from "../../constants/constants";
 
-//data Examples
-// import { reportDetail } from "../../data/dataExample";
-
 // 各フィールド制御用のstate
 
 function UserReportDetails() {

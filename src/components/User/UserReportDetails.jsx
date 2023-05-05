@@ -8,9 +8,6 @@ import Histories from "./Histories";
 import HistoriesFooter from "./HistoriesFooter";
 import { useParams } from "react-router-dom";
 
-//data Examples
-// import { reportDetail } from "../../data/dataExample";
-
 function UserReportDetails() {
   const user = useSelector((state) => state.user);
   const { id } = useParams();
@@ -32,7 +29,6 @@ function UserReportDetails() {
 
       getReportDetail();
     }
-    // getHistoryByReportId();
   }, []);
 
   const getReportDetail = async () => {
@@ -46,13 +42,6 @@ function UserReportDetails() {
         setHistories(data.histories);
       });
   };
-
-  // function getHistoryByReportId() {
-  //   fetch(`${SERVER_URL}/api/admin/history/${id}`)
-  //     .then((res) => res.json())
-  //     .then((data) => setHistories(data.histories));
-  //   console.log("histories:   ", histories);
-  // }
 
   function downloadHandler(e) {
     e.preventDefault();
@@ -85,7 +74,10 @@ function UserReportDetails() {
 
   return (
     <>
-      <div>
+      <div className="">
+        <div className="text-gray-scale-2 font-bold text-xl mb-4">
+          Report detail
+        </div>
         <div key={reportDetail._id}>
           <div className="flex mb-3">
             <table className="w-1/2">
@@ -152,7 +144,6 @@ function UserReportDetails() {
                 </tr>
                 <tr>
                   <td>Your Agent</td>
-                  {/* <td>: {reportDetail.adminId.name}</td> */}
                   <td>
                     : {reportDetail.adminId ? reportDetail.adminId.name : <></>}
                   </td>
@@ -166,14 +157,13 @@ function UserReportDetails() {
             <div className="border p-2">{reportDetail.description}</div>
           </div>
         </div>
-
-        <div className="max-h-full border bg-gray-scale-4 p-2 overflow-auto">
-          <div className="text-lg border-b-2 border-gray-scale-1">
-            Contact Record
-          </div>
-          <div className="">{histories ? <Histories /> : <></>}</div>
-          <HistoriesFooter />
+      </div>
+      <div className="h-full border bg-gray-scale-4 p-2 overflow-auto ">
+        <div className="text-lg border-b-2 border-gray-scale-1">
+          Contact Record
         </div>
+        <div className="">{histories ? <Histories /> : <></>}</div>
+        <HistoriesFooter />
       </div>
     </>
   );

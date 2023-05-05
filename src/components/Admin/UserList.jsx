@@ -29,10 +29,10 @@ function UserList() {
   }
 
   return (
-    <div>
+    <div className="h-full">
       <div className="text-main-color-1 font-bold text-2xl pl-3">User list</div>
-      <div className="h-full mt-5 flex items-start justify-center">
-        <table className="w-full">
+      <div className="h-full mt-5 flex items-start justify-center overflow-y-auto">
+        <table className="w-full ">
           <thead className="text-lg">
             <tr>
               {usersTableHeaders.map((header, idx) => (

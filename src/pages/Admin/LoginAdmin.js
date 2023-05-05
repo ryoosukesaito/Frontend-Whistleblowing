@@ -15,7 +15,6 @@ function LoginAdmin() {
     loginAdmin({ email, password }).then(({ data }) => {
       if (data) {
         navigate("/api/admin/reports");
-        console.log(data);
       }
       if (error) {
         console.error(error.data.error);
@@ -92,9 +91,6 @@ function LoginAdmin() {
             >
               Login
             </button>
-          </div>
-          <div className="text-main-color-1 text-center underline underline-offset-auto hover:opacity-50">
-            {/* <a href="/api/admin/signup">Sign up</a> */}
           </div>
         </form>
       </div>
